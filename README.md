@@ -1170,6 +1170,7 @@ Discuss:
 * networking
 * CI/CD
 * monitoring
+* terraform/IaaC
 
 ## ML engineers
 
@@ -1390,7 +1391,7 @@ By the end of this development path, the target capability is to independently:
 * review development plans
 * assess technology choices
 * guide developers during implementation
-* troubleshoot and unblock teams
+* troubleshoot and unblock teamss
 * design observability strategies
 * define RAG and agent evaluation frameworks
 * define AI security-testing strategies
