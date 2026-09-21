@@ -36,7 +36,11 @@ def validate_registry() -> None:
     assert [lesson["step"] for lesson in lessons] == list(range(1, 13))
     assert len({lesson["id"] for lesson in lessons}) == 12
     ready = [lesson for lesson in lessons if lesson["status"] == "ready"]
-    assert [lesson["id"] for lesson in ready] == ["advanced-01", "advanced-02"]
+    assert [lesson["id"] for lesson in ready] == [
+        "advanced-01",
+        "advanced-02",
+        "advanced-03",
+    ]
     for lesson in lessons:
         assert lesson["status"] in {"ready", "planned"}
         assert len(lesson["outcomes"]) >= 3

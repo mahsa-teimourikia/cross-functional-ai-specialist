@@ -49,3 +49,7 @@ jobs:
       - name: Execute Course 2 canonical notebook
         working-directory: curriculum/advanced/02-cloud-distributed-ai-systems
         run: uv run --project ../../.. jupyter execute cloud_distributed_ai_systems.ipynb --inplace
+
+      - name: Execute Course 3 canonical notebook
+        working-directory: curriculum/advanced/03-enterprise-identity-agent-authorization
+        run: uv run --project ../../.. jupyter execute enterprise_identity_agent_authorization.ipynb --inplace

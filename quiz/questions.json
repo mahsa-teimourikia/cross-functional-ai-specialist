@@ -216,6 +216,114 @@
       "options": ["The event field alone", "The message ID", "Trusted workload identity plus application policy", "The retry count"],
       "answer": 2,
       "explanation": "Event data is untrusted input; workload identity and trusted policy establish whether the worker may perform the requested action."
+    },
+    {
+      "id": "q25",
+      "course": "03",
+      "category": "token-validation",
+      "prompt": "A JWT parses and contains role='admin'. What has parsing established?",
+      "options": ["Administrative authority", "Only decodable token-shaped data", "A valid signature", "The correct audience"],
+      "answer": 1,
+      "explanation": "Claims remain untrusted until issuer, key, signature, algorithm, token use, audience, and time are validated."
+    },
+    {
+      "id": "q26",
+      "course": "03",
+      "category": "identity",
+      "prompt": "What is the safer stable key for a federated user identity?",
+      "options": ["Email", "Display name", "Subject alone", "Issuer plus subject"],
+      "answer": 3,
+      "explanation": "OpenID Connect subjects are scoped to an issuer, so the pair prevents collisions across identity providers."
+    },
+    {
+      "id": "q27",
+      "course": "03",
+      "category": "oauth",
+      "prompt": "Why should an API reject an ID token presented as its authorization credential?",
+      "options": ["ID tokens are unsigned", "It is intended for the client rather than the resource server", "It contains a password", "APIs cannot read JWTs"],
+      "answer": 1,
+      "explanation": "The API needs an access token issued for its resource audience and use, not a client authentication assertion."
+    },
+    {
+      "id": "q28",
+      "course": "03",
+      "category": "workload-identity",
+      "prompt": "What does valid workload authentication prove by itself?",
+      "options": ["Which workload presented the credential", "Every customer record it may access", "Human approval", "Model correctness"],
+      "answer": 0,
+      "explanation": "Authentication identifies the process; application policy still decides tenant, subject, resource, action, and obligations."
+    },
+    {
+      "id": "q29",
+      "course": "03",
+      "category": "delegation",
+      "prompt": "Which child delegation is valid?",
+      "options": ["More actions with shorter expiry", "Fewer actions and resources with no later expiry", "Approval authority added", "A different tenant with the same role"],
+      "answer": 1,
+      "explanation": "A child capability must attenuate every bounded dimension and can never widen authority inherited from its parent."
+    },
+    {
+      "id": "q30",
+      "course": "03",
+      "category": "policy-enforcement",
+      "prompt": "What is the policy enforcement point responsible for?",
+      "options": ["Only authoring policy", "Protecting the real action and enforcing decisions and obligations", "Issuing every token", "Generating hidden reasoning"],
+      "answer": 1,
+      "explanation": "The enforcement point intercepts the operation, obtains a decision, satisfies obligations, and records the actual outcome."
+    },
+    {
+      "id": "q31",
+      "course": "03",
+      "category": "confused-deputy",
+      "prompt": "Why must a broadly privileged service also check delegated user authority?",
+      "options": ["Services have no identity", "Technical reach does not authorize using it for every caller", "Users always have more access", "Databases cannot apply policy"],
+      "answer": 1,
+      "explanation": "Intersecting actor and subject authority prevents a caller from coercing the service into becoming a confused deputy."
+    },
+    {
+      "id": "q32",
+      "course": "03",
+      "category": "approval-binding",
+      "prompt": "Which change must invalidate an approval receipt for a proposed exception?",
+      "options": ["A UI color", "The proposed limit", "A read-only page view", "An audit viewer"],
+      "answer": 1,
+      "explanation": "Changing a consequential parameter changes the canonical proposal digest and requires a new independent review."
+    },
+    {
+      "id": "q33",
+      "course": "03",
+      "category": "idempotency",
+      "prompt": "How should an exact retry behave after approval and execution commit atomically?",
+      "options": ["Create another effect", "Return the recorded result without authorizing new work", "Ask the model", "Delete audit evidence"],
+      "answer": 1,
+      "explanation": "Stable operation identity permits safe reconciliation while the consumed approval remains unavailable to other work."
+    },
+    {
+      "id": "q34",
+      "course": "03",
+      "category": "authorization-models",
+      "prompt": "Which model best represents nested sharing such as organization members viewing documents?",
+      "options": ["Password hashing", "Relationship-based authorization", "Token encryption", "Prompt roles"],
+      "answer": 1,
+      "explanation": "Relationship-based systems model subject-relation-object tuples and derive access through a defined relationship graph."
+    },
+    {
+      "id": "q35",
+      "course": "03",
+      "category": "lifecycle",
+      "prompt": "A user's entitlements change after a delegation was issued. What should the gateway do?",
+      "options": ["Trust the old role", "Detect staleness or re-evaluate current authority", "Let the agent choose", "Accept any parseable token"],
+      "answer": 1,
+      "explanation": "Authorization is lifecycle-sensitive, so current policy data or versions must invalidate stale delegated authority."
+    },
+    {
+      "id": "q36",
+      "course": "03",
+      "category": "metrics",
+      "prompt": "Why report forbidden outcomes separately from valid work blocked?",
+      "options": ["They measure different safety and usability populations", "They always share a denominator", "False denial is a security success", "It removes test cases"],
+      "answer": 0,
+      "explanation": "Unauthorized effects and false denials are different failures with different denominators, owners, and consequences."
     }
   ]
 }
