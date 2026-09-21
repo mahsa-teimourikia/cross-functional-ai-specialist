@@ -53,3 +53,7 @@ jobs:
       - name: Execute Course 3 canonical notebook
         working-directory: curriculum/advanced/03-enterprise-identity-agent-authorization
         run: uv run --project ../../.. jupyter execute enterprise_identity_agent_authorization.ipynb --inplace
+
+      - name: Execute Course 4 canonical notebook
+        working-directory: curriculum/advanced/04-production-rag-knowledge-systems
+        run: uv run --project ../../.. jupyter execute production_rag_knowledge_systems.ipynb --inplace

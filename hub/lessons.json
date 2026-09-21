@@ -42,7 +42,18 @@
     "checkpoint": "../curriculum/advanced/03-enterprise-identity-agent-authorization/checkpoint.json"
   },
   {
-    "id": "advanced-04", "level": "advanced", "step": 4, "phase": "Knowledge", "title": "Production RAG and Knowledge Systems", "summary": "Build secure, versioned, evaluated retrieval and ingestion systems.", "outcomes": ["Compare sparse/dense/hybrid", "Enforce ACLs before rank", "Evaluate retrieval and citations"], "status": "planned", "readme": "../COURSE_PLAN.md#course-4--production-rag-and-knowledge-systems", "notebook": null, "lab": null, "checkpoint": null
+    "id": "advanced-04",
+    "level": "advanced",
+    "step": 4,
+    "phase": "Knowledge",
+    "title": "Production RAG and Knowledge Systems",
+    "summary": "Build a versioned knowledge lifecycle with authorization-before-ranking, hybrid retrieval, provenance-bound citations, and measurable freshness and safety.",
+    "outcomes": ["Design idempotent ingestion, provenance, versioning, deletion, and poison recovery", "Compare sparse, dense, hybrid, and reranked retrieval on labelled access-aware cases", "Prove citation support and measure retrieval quality, forbidden outcomes, and stale exposure"],
+    "status": "ready",
+    "readme": "../curriculum/advanced/04-production-rag-knowledge-systems/README.md",
+    "notebook": "../curriculum/advanced/04-production-rag-knowledge-systems/production_rag_knowledge_systems.ipynb",
+    "lab": "../curriculum/advanced/04-production-rag-knowledge-systems/lab.py",
+    "checkpoint": "../curriculum/advanced/04-production-rag-knowledge-systems/checkpoint.json"
   },
   {
     "id": "advanced-05", "level": "advanced", "step": 5, "phase": "Agents", "title": "Agentic AI Architecture and AgentCore", "summary": "Compare workflows and bounded agents under failure, authority, and cost constraints.", "outcomes": ["Choose autonomy deliberately", "Bound tools and state", "Recover from restart and duplicates"], "status": "planned", "readme": "../COURSE_PLAN.md#course-5--agentic-ai-architecture-and-agentcore", "notebook": null, "lab": null, "checkpoint": null

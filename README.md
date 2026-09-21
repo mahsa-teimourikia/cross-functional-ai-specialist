@@ -35,7 +35,8 @@ technical strategy and organizational influence
 | 01 — Production AI Development in Python | **Ready in repository** | [Course chapter](curriculum/advanced/01-production-ai-development/README.md) | [Notebook](curriculum/advanced/01-production-ai-development/production_ai_development.ipynb) · [Lab](curriculum/advanced/01-production-ai-development/lab.py) |
 | 02 — Cloud and Distributed AI Systems | **Ready in repository** | [Course chapter](curriculum/advanced/02-cloud-distributed-ai-systems/README.md) | [Notebook](curriculum/advanced/02-cloud-distributed-ai-systems/cloud_distributed_ai_systems.ipynb) · [Lab](curriculum/advanced/02-cloud-distributed-ai-systems/lab.py) |
 | 03 — Enterprise Identity and Agent Authorization | **Ready in repository** | [Course chapter](curriculum/advanced/03-enterprise-identity-agent-authorization/README.md) | [Notebook](curriculum/advanced/03-enterprise-identity-agent-authorization/enterprise_identity_agent_authorization.ipynb) · [Lab](curriculum/advanced/03-enterprise-identity-agent-authorization/lab.py) |
-| 04–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
+| 04 — Production RAG and Knowledge Systems | **Ready in repository** | [Course chapter](curriculum/advanced/04-production-rag-knowledge-systems/README.md) | [Notebook](curriculum/advanced/04-production-rag-knowledge-systems/production_rag_knowledge_systems.ipynb) · [Lab](curriculum/advanced/04-production-rag-knowledge-systems/lab.py) |
+| 05–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
 
 “Planned” is deliberate: a title in a roadmap is not presented as completed training.
 
@@ -72,6 +73,9 @@ uv run jupyter execute \
 uv run jupyter execute \
   curriculum/advanced/03-enterprise-identity-agent-authorization/enterprise_identity_agent_authorization.ipynb \
   --inplace
+uv run jupyter execute \
+  curriculum/advanced/04-production-rag-knowledge-systems/production_rag_knowledge_systems.ipynb \
+  --inplace
 ```
 
 The notebook and lab use deterministic local adapters. No cloud account, API key, or paid model
@@ -90,6 +94,7 @@ uv run python -m http.server 8000
 - [Course 1 checkpoint](curriculum/advanced/01-production-ai-development/checkpoint.json)
 - [Course 2 checkpoint](curriculum/advanced/02-cloud-distributed-ai-systems/checkpoint.json)
 - [Course 3 checkpoint](curriculum/advanced/03-enterprise-identity-agent-authorization/checkpoint.json)
+- [Course 4 checkpoint](curriculum/advanced/04-production-rag-knowledge-systems/checkpoint.json)
 - [Full knowledge check](quiz/index.html)
 - [Contribution and course quality standard](CONTRIBUTING.md)
 
