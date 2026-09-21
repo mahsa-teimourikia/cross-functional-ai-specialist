@@ -1,7 +1,7 @@
 # `pyproject.toml` and Modern Python Packaging
 
-**Course:** Production AI Development in Python  
-**Context:** Production Python services for RAG, AI agents, APIs, and AWS workloads  
+**Course:** Production AI Development in Python
+**Context:** Production Python services for RAG, AI agents, APIs, and AWS workloads
 **Last reviewed:** August 2026
 
 ## 1. Why packaging matters

@@ -1,0 +1,47 @@
+name: Course quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install uv and Python
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          version: "latest-known"
+
+      - name: Sync locked environment
+        run: uv sync --locked
+
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Type check
+        run: uv run mypy
+
+      - name: Test invariants
+        run: uv run pytest
+
+      - name: Validate curriculum
+        run: uv run python scripts/validate_repo.py
+
+      - name: Execute canonical notebook
+        working-directory: curriculum/advanced/01-production-ai-development
+        run: uv run --project ../../.. jupyter execute production_ai_development.ipynb --inplace

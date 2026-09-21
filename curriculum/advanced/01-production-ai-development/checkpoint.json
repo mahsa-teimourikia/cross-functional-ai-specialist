@@ -1,0 +1,137 @@
+{
+  "course_id": "advanced-01",
+  "title": "Production AI Development Checkpoint",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c1-01",
+      "category": "trust-boundary",
+      "prompt": "Why are tenant and group fields absent from AskPayload?",
+      "options": [
+        "Pydantic cannot validate sets",
+        "Identity and authorization scope must come from authenticated application state",
+        "They would make the payload too large",
+        "The generator should infer them from the question"
+      ],
+      "answer": 1,
+      "explanation": "Schema-valid caller input is still caller-controlled. Authentication middleware or another trusted application boundary must establish identity and scope."
+    },
+    {
+      "id": "c1-02",
+      "category": "authorization",
+      "prompt": "What is the strongest reason to authorize documents before ranking?",
+      "options": [
+        "It always improves semantic relevance",
+        "It makes embeddings deterministic",
+        "Unauthorized material can otherwise leak through scores, timing, caches, logs, or context",
+        "It removes the need for tenant IDs"
+      ],
+      "answer": 2,
+      "explanation": "Late filtering may protect the final list but still expose unauthorized material to ranking and downstream side channels."
+    },
+    {
+      "id": "c1-03",
+      "category": "validation",
+      "prompt": "A generator returns a schema-valid citation ID that was not retrieved. What should happen?",
+      "options": [
+        "Accept it because the schema is valid",
+        "Ask the generator whether it is confident",
+        "Reject it against the trusted authorized evidence set",
+        "Log it and return the answer"
+      ],
+      "answer": 2,
+      "explanation": "Typed structure does not establish provenance or authorization. The trusted application verifies evidence IDs."
+    },
+    {
+      "id": "c1-04",
+      "category": "async",
+      "prompt": "Which design best enforces a five-second user-visible SLA across retrieval and generation?",
+      "options": [
+        "Give each dependency a five-second timeout",
+        "Use one end-to-end deadline and allocate/propagate the remaining budget",
+        "Retry every exception until one call succeeds",
+        "Run both stages in background tasks after returning success"
+      ],
+      "answer": 1,
+      "explanation": "Independent full-length timeouts can exceed the total SLA. The operation needs a shared deadline and cancellation."
+    },
+    {
+      "id": "c1-05",
+      "category": "testing",
+      "prompt": "What does the deterministic generator primarily enable?",
+      "options": [
+        "Proof that production model quality is high",
+        "Fast repeatable tests of orchestration and policy invariants",
+        "Removal of all live-model evaluation",
+        "Automatic authorization of generated citations"
+      ],
+      "answer": 1,
+      "explanation": "A mock isolates software behavior. It cannot measure a live model's quality, robustness, safety, or latency."
+    },
+    {
+      "id": "c1-06",
+      "category": "metrics",
+      "prompt": "Which denominator best supports cost per successful compliant task?",
+      "options": [
+        "All requests",
+        "Only successful answers, including policy violations",
+        "Successful answers whose citations remain within authorized evidence",
+        "Only refused requests"
+      ],
+      "answer": 2,
+      "explanation": "The numerator should include all work, while the denominator counts outcomes that both succeed and satisfy the compliance invariant."
+    },
+    {
+      "id": "c1-07",
+      "category": "architecture",
+      "prompt": "When is a Retriever Protocol most justified?",
+      "options": [
+        "For every one-line helper",
+        "When it protects a meaningful provider/data boundary and improves independent testing",
+        "Only when using FastAPI dependency injection",
+        "When the concrete retriever can never change"
+      ],
+      "answer": 1,
+      "explanation": "Ports have carrying cost. They earn it at meaningful volatility, trust, and test boundaries."
+    },
+    {
+      "id": "c1-08",
+      "category": "packaging",
+      "prompt": "What is the relationship between pyproject.toml and an application lockfile?",
+      "options": [
+        "Both should contain only exact pins",
+        "The manifest declares acceptable requirements; the lock records a tested resolution",
+        "The lock replaces project metadata",
+        "The manifest records every transitive package from pip freeze"
+      ],
+      "answer": 1,
+      "explanation": "The manifest expresses direct dependencies and compatibility; the application lock makes a concrete environment reproducible."
+    },
+    {
+      "id": "c1-09",
+      "category": "failure",
+      "prompt": "Which failure is normally terminal rather than retryable?",
+      "options": [
+        "A transient network reset before any effect",
+        "A provider 503 within remaining budget",
+        "An authorization denial",
+        "A rate limit with a short Retry-After"
+      ],
+      "answer": 2,
+      "explanation": "Retrying cannot turn a policy denial into authorization and may become an evasion attempt."
+    },
+    {
+      "id": "c1-10",
+      "category": "observability",
+      "prompt": "Which telemetry is most appropriate for this service?",
+      "options": [
+        "Full prompts, documents, credentials, and hidden reasoning",
+        "Only a final success boolean",
+        "Request IDs, evidence IDs, policy reason codes, versions, budgets, latency, and terminal state",
+        "No telemetry because AI content may be sensitive"
+      ],
+      "answer": 2,
+      "explanation": "Operationally useful metadata can be captured while minimizing sensitive content and excluding secrets/private reasoning."
+    }
+  ]
+}
