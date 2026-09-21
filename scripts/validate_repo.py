@@ -36,7 +36,7 @@ def validate_registry() -> None:
     assert [lesson["step"] for lesson in lessons] == list(range(1, 13))
     assert len({lesson["id"] for lesson in lessons}) == 12
     ready = [lesson for lesson in lessons if lesson["status"] == "ready"]
-    assert [lesson["id"] for lesson in ready] == ["advanced-01"]
+    assert [lesson["id"] for lesson in ready] == ["advanced-01", "advanced-02"]
     for lesson in lessons:
         assert lesson["status"] in {"ready", "planned"}
         assert len(lesson["outcomes"]) >= 3
@@ -49,27 +49,40 @@ def validate_registry() -> None:
 
 
 def validate_assessments() -> None:
-    checkpoint_path = (
-        ROOT
-        / "curriculum"
-        / "advanced"
-        / "01-production-ai-development"
-        / "checkpoint.json"
-    )
-    checkpoint = load_json(checkpoint_path)
-    assert checkpoint["passing_score"] == 80
-    assert len(checkpoint["questions"]) >= 8
-    validate_question_set(checkpoint_path, checkpoint["questions"])
+    lessons = load_json(ROOT / "hub" / "lessons.json")
+    for lesson in lessons:
+        if lesson["status"] != "ready":
+            continue
+        checkpoint_path = (ROOT / "hub" / lesson["checkpoint"]).resolve()
+        checkpoint = load_json(checkpoint_path)
+        assert checkpoint["passing_score"] == 80
+        assert len(checkpoint["questions"]) >= 8
+        validate_question_set(checkpoint_path, checkpoint["questions"])
 
     quiz_path = ROOT / "quiz" / "questions.json"
     quiz = load_json(quiz_path)
     assert len(quiz["questions"]) >= 12
     validate_question_set(quiz_path, quiz["questions"])
+    ready_course_numbers = {
+        lesson["id"].removeprefix("advanced-")
+        for lesson in lessons
+        if lesson["status"] == "ready"
+    }
+    quiz_course_numbers = {question["course"] for question in quiz["questions"]}
+    assert ready_course_numbers <= quiz_course_numbers, "full quiz must cover every ready course"
 
 
 def validate_notebooks() -> None:
+    lessons = load_json(ROOT / "hub" / "lessons.json")
+    expected = {
+        (ROOT / "hub" / lesson["notebook"]).resolve()
+        for lesson in lessons
+        if lesson["status"] == "ready"
+    }
     notebooks = list((ROOT / "curriculum").rglob("*.ipynb"))
-    assert len(notebooks) == 1, "each ready course should have one canonical notebook"
+    assert {path.resolve() for path in notebooks} == expected, (
+        "each ready course should have exactly one registered canonical notebook"
+    )
     for path in notebooks:
         notebook = load_json(path)
         assert notebook["nbformat"] == 4
@@ -122,7 +135,7 @@ def main() -> None:
     validate_notebooks()
     validate_markdown_links()
     validate_web_assets()
-    print("Curriculum validation passed: registry, assessments, notebook, links, and Hub assets.")
+    print("Curriculum validation passed: registry, assessments, notebooks, links, and Hub assets.")
 
 
 if __name__ == "__main__":

@@ -10,9 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Course 1 is the current
-complete vertical slice; Courses 2–12 define
-the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–2 are complete
+vertical slices; Courses 3–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -44,7 +43,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | # | Course | Weeks | Status | Evidence produced |
 |---:|---|---:|---|---|
 | 1 | Production AI Development in Python | 3 | **Ready** | Tested service core, review memo, packaging decision |
-| 2 | Cloud and Distributed AI Systems | 3 | Planned | AWS deployment architecture, load/failure model, ADR |
+| 2 | Cloud and Distributed AI Systems | 3 | **Ready** | AWS deployment architecture, load/failure model, ADR |
 | 3 | Enterprise Identity and Agent Authorization | 2 | Planned | Threat-aware auth design, delegated capability tests |
 | 4 | Production RAG and Knowledge Systems | 3 | Planned | Secure ingestion/retrieval pipeline and retrieval eval |
 | 5 | Agentic AI Architecture and AgentCore | 3 | Planned | Bounded workflow/agent comparison and recovery plan |
@@ -79,7 +78,7 @@ evaluation report with correct denominators.
 
 ## Course 2 — Cloud and Distributed AI Systems
 
-**Status:** Planned · **Prerequisite:** Course 1
+**Status:** Ready in repository · **Prerequisite:** Course 1
 **Thesis:** choose deployment, state, and messaging patterns from workload and failure requirements,
 not a memorized list of cloud products.
 
@@ -91,9 +90,11 @@ not a memorized list of cloud products.
   and Step Functions; S3, DynamoDB, Aurora/RDS, OpenSearch, and Redis.
 - Capacity, tail latency, concurrency, availability, recovery, work amplification, and cost.
 
-The lab compares synchronous and event-driven document analysis under duplicates, out-of-order
-events, throttling, and an uncertain write. Evidence: AWS ADR, failure model, load experiment, and
-cost/operability comparison.
+The deterministic lab compares synchronous and queued document analysis under duplicate delivery,
+out-of-order versions, transient and persistent throttling, an uncertain write, and sustained
+overload. It proves stable logical operation identity, payload-digest conflicts, reconciliation,
+conditional version writes, bounded retry, and DLQ behavior. Evidence: AWS ADR, failure model, load
+experiment, and cost/operability comparison.
 
 ## Course 3 — Enterprise Identity and Agent Authorization
 

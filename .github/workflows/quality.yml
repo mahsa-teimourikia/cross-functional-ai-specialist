@@ -34,7 +34,7 @@ jobs:
         run: uv run ruff check .
 
       - name: Type check
-        run: uv run mypy
+        run: uv run python scripts/typecheck_labs.py
 
       - name: Test invariants
         run: uv run pytest
@@ -45,3 +45,7 @@ jobs:
       - name: Execute canonical notebook
         working-directory: curriculum/advanced/01-production-ai-development
         run: uv run --project ../../.. jupyter execute production_ai_development.ipynb --inplace
+
+      - name: Execute Course 2 canonical notebook
+        working-directory: curriculum/advanced/02-cloud-distributed-ai-systems
+        run: uv run --project ../../.. jupyter execute cloud_distributed_ai_systems.ipynb --inplace

@@ -27,7 +27,7 @@ failures → production upgrade → exercises → references.
 ```bash
 uv sync --locked
 uv run ruff check .
-uv run mypy
+uv run python scripts/typecheck_labs.py
 uv run pytest
 uv run python scripts/validate_repo.py
 uv run jupyter execute <course-notebook> --inplace
