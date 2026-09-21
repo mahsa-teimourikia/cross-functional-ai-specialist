@@ -1,0 +1,113 @@
+{
+  "title": "Cross-Functional AI Specialist Knowledge Check",
+  "questions": [
+    {
+      "id": "q01",
+      "course": "01",
+      "category": "trust-boundary",
+      "prompt": "A tool call includes tenant_id='northstar'. What establishes the tenant?",
+      "options": ["The tool argument", "The prompt's system role", "Authenticated application state", "The model's confidence"],
+      "answer": 2,
+      "explanation": "Tool arguments and prompts are untrusted input. Tenant scope comes from authenticated state and policy."
+    },
+    {
+      "id": "q02",
+      "course": "01",
+      "category": "architecture",
+      "prompt": "Which responsibility belongs in a provider adapter?",
+      "options": ["Business approval policy", "Boto3 request/response translation", "User role assignment", "Product success criteria"],
+      "answer": 1,
+      "explanation": "Adapters contain provider mechanics; application policy stays provider-independent."
+    },
+    {
+      "id": "q03",
+      "course": "01",
+      "category": "testing",
+      "prompt": "A mock generator passes all unit tests. What remains unproven?",
+      "options": ["Application branch behavior", "Live-model quality and robustness", "Citation-set validation", "Timeout translation"],
+      "answer": 1,
+      "explanation": "Deterministic mocks prove application behavior, not a live model's behavior."
+    },
+    {
+      "id": "q04",
+      "course": "01",
+      "category": "authorization",
+      "prompt": "Which retrieval order is safest?",
+      "options": ["Rank → log → authorize", "Embed → cache globally → authorize", "Authorize scope → rank authorized candidates", "Generate → remove forbidden citations"],
+      "answer": 2,
+      "explanation": "Scope filtering must precede ranking and downstream exposure."
+    },
+    {
+      "id": "q05",
+      "course": "01",
+      "category": "async",
+      "prompt": "What is the main benefit of async in this course?",
+      "options": ["Faster CPU tokenization", "Efficient waiting on I/O with cancellation/deadlines", "Automatic retries", "Data validation"],
+      "answer": 1,
+      "explanation": "Async primarily helps I/O-bound concurrency; it requires explicit budget and cancellation discipline."
+    },
+    {
+      "id": "q06",
+      "course": "01",
+      "category": "packaging",
+      "prompt": "Which dependency belongs in a development group rather than runtime dependencies?",
+      "options": ["A library imported by the service", "The HTTP client used at runtime", "pytest", "The validation library used for requests"],
+      "answer": 2,
+      "explanation": "Test tooling should not become a production runtime requirement."
+    },
+    {
+      "id": "q07",
+      "course": "01",
+      "category": "metrics",
+      "prompt": "Why report forbidden outcomes separately from blocked attempts?",
+      "options": ["They have different denominators and operational meaning", "Blocked attempts are always successes", "Forbidden outcomes are harmless", "It reduces test count"],
+      "answer": 0,
+      "explanation": "An attempted attack, a prevented violation, an actual violation, and valid work blocked are distinct populations."
+    },
+    {
+      "id": "q08",
+      "course": "01",
+      "category": "validation",
+      "prompt": "What must happen after structured generation?",
+      "options": ["Trust every parsed field", "Validate business, authorization, and evidence invariants", "Convert all fields to strings", "Ask the same model to approve itself"],
+      "answer": 1,
+      "explanation": "Schema validity is only one boundary; semantic and policy validation use trusted state."
+    },
+    {
+      "id": "q09",
+      "course": "01",
+      "category": "failure",
+      "prompt": "The model call times out after the request deadline. What is the correct default?",
+      "options": ["Return a fabricated fallback as success", "Continue in the background without ownership", "Stop work and return/record a timeout failure", "Retry forever"],
+      "answer": 2,
+      "explanation": "Cancellation and explicit terminal state protect the user SLA and resource budget."
+    },
+    {
+      "id": "q10",
+      "course": "01",
+      "category": "architecture",
+      "prompt": "When should a direct one-function design be preferred?",
+      "options": ["Never", "For a disposable bounded exploration where added boundaries do not earn their cost", "For every production agent", "Whenever multiple providers are required"],
+      "answer": 1,
+      "explanation": "Architecture should be proportional; abstractions have carrying cost."
+    },
+    {
+      "id": "q11",
+      "course": "01",
+      "category": "observability",
+      "prompt": "Which item should normally be excluded from telemetry?",
+      "options": ["Request ID", "Policy reason code", "Private model chain-of-thought", "Evidence ID"],
+      "answer": 2,
+      "explanation": "Record observable decisions and identifiers, not private reasoning."
+    },
+    {
+      "id": "q12",
+      "course": "01",
+      "category": "state-of-the-art",
+      "prompt": "What is the best definition of state of the art for a production decision?",
+      "options": ["The newest framework", "The tool with the most stars", "The best evidenced fit for actual constraints", "The largest model"],
+      "answer": 2,
+      "explanation": "Maturity, fit, safety, operations, cost, portability, and evidence matter more than novelty."
+    }
+  ]
+}

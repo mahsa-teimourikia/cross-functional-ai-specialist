@@ -1,8 +1,8 @@
 # Python Build Systems and Build Backends — Deep Practical Guide
 
-**Track:** Production AI Development / Staff AI Scientist / AI Architect  
-**Scope:** Modern Python packaging and build backends  
-**Context:** Pure-Python AI services, reusable internal libraries, and native-extension packages  
+**Track:** Production AI Development / Staff AI Scientist / AI Architect
+**Scope:** Modern Python packaging and build backends
+**Context:** Pure-Python AI services, reusable internal libraries, and native-extension packages
 **Reviewed:** August 2026
 
 ---
@@ -2015,67 +2015,67 @@ Use current primary documentation because packaging tooling changes quickly.
 
 ## Python packaging standards
 
-Python Packaging User Guide  
+Python Packaging User Guide
 https://packaging.python.org/
 
-Writing `pyproject.toml`  
+Writing `pyproject.toml`
 https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
 
-Packaging flow  
+Packaging flow
 https://packaging.python.org/en/latest/flow/
 
 ## uv / uv_build
 
-uv build backend  
+uv build backend
 https://docs.astral.sh/uv/configuration/build-backend/
 
-Building distributions  
+Building distributions
 https://docs.astral.sh/uv/concepts/projects/build/
 
-Project build configuration  
+Project build configuration
 https://docs.astral.sh/uv/concepts/projects/config/
 
 ## Hatchling
 
-Hatch build configuration  
+Hatch build configuration
 https://hatch.pypa.io/latest/config/build/
 
-Hatch build workflow  
+Hatch build workflow
 https://hatch.pypa.io/latest/build/
 
 ## setuptools
 
-setuptools  
+setuptools
 https://setuptools.pypa.io/
 
-Build system support  
+Build system support
 https://setuptools.pypa.io/en/stable/build_meta.html
 
-`pyproject.toml` configuration  
+`pyproject.toml` configuration
 https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
 
 ## Flit
 
-Flit  
+Flit
 https://flit.pypa.io/
 
-`pyproject.toml`  
+`pyproject.toml`
 https://flit.pypa.io/en/stable/pyproject_toml.html
 
 ## PDM-Backend
 
-PDM-Backend  
+PDM-Backend
 https://backend.pdm-project.org/
 
-Build configuration  
+Build configuration
 https://backend.pdm-project.org/build_config/
 
 ## Poetry
 
-Poetry  
+Poetry
 https://python-poetry.org/
 
-Poetry project repository/documentation  
+Poetry project repository/documentation
 https://github.com/python-poetry/poetry
 
 ## scikit-build-core

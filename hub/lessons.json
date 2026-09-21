@@ -1,0 +1,49 @@
+[
+  {
+    "id": "advanced-01",
+    "level": "advanced",
+    "step": 1,
+    "phase": "Engineering foundation",
+    "title": "Production AI Development in Python",
+    "summary": "Turn a notebook prototype into a typed, testable, bounded application core.",
+    "outcomes": ["Define trust and adapter boundaries", "Enforce authorization and deadlines", "Evaluate deterministic invariants"],
+    "status": "ready",
+    "readme": "../curriculum/advanced/01-production-ai-development/README.md",
+    "notebook": "../curriculum/advanced/01-production-ai-development/production_ai_development.ipynb",
+    "lab": "../curriculum/advanced/01-production-ai-development/lab.py",
+    "checkpoint": "../curriculum/advanced/01-production-ai-development/checkpoint.json"
+  },
+  {
+    "id": "advanced-02", "level": "advanced", "step": 2, "phase": "Systems", "title": "Cloud and Distributed AI Systems", "summary": "Choose compute, state, messaging, and recovery patterns from requirements.", "outcomes": ["Model distributed failure", "Design idempotent delivery", "Compare AWS deployment options"], "status": "planned", "readme": "../COURSE_PLAN.md#course-2--cloud-and-distributed-ai-systems", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-03", "level": "advanced", "step": 3, "phase": "Trust", "title": "Enterprise Identity and Agent Authorization", "summary": "Design authentication, authorization, delegation, and tenant isolation.", "outcomes": ["Validate identity boundaries", "Attenuate delegated authority", "Test approval replay and scope"], "status": "planned", "readme": "../COURSE_PLAN.md#course-3--enterprise-identity-and-agent-authorization", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-04", "level": "advanced", "step": 4, "phase": "Knowledge", "title": "Production RAG and Knowledge Systems", "summary": "Build secure, versioned, evaluated retrieval and ingestion systems.", "outcomes": ["Compare sparse/dense/hybrid", "Enforce ACLs before rank", "Evaluate retrieval and citations"], "status": "planned", "readme": "../COURSE_PLAN.md#course-4--production-rag-and-knowledge-systems", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-05", "level": "advanced", "step": 5, "phase": "Agents", "title": "Agentic AI Architecture and AgentCore", "summary": "Compare workflows and bounded agents under failure, authority, and cost constraints.", "outcomes": ["Choose autonomy deliberately", "Bound tools and state", "Recover from restart and duplicates"], "status": "planned", "readme": "../COURSE_PLAN.md#course-5--agentic-ai-architecture-and-agentcore", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-06", "level": "advanced", "step": 6, "phase": "Inference", "title": "Model Gateways and Inference Economics", "summary": "Route models and fallbacks using quality, latency, reliability, policy, and cost evidence.", "outcomes": ["Design provider contracts", "Measure routing frontiers", "Calculate compliant-task economics"], "status": "planned", "readme": "../COURSE_PLAN.md#course-6--model-gateways-and-inference-economics", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-07", "level": "advanced", "step": 7, "phase": "Operations", "title": "AI Observability and Reliability Engineering", "summary": "Define telemetry, SLOs, resilience, and incident practices for AI systems.", "outcomes": ["Correlate AI traces", "Set user-facing SLOs", "Run failure game days"], "status": "planned", "readme": "../COURSE_PLAN.md#course-7--ai-observability-and-reliability-engineering", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-08", "level": "advanced", "step": 8, "phase": "Evidence", "title": "AI Evaluation, Experimentation, and Causal Impact", "summary": "Build release evidence and causal product experiments with valid metrics.", "outcomes": ["Calibrate judges", "Design representative slices", "Estimate causal impact"], "status": "planned", "readme": "../COURSE_PLAN.md#course-8--ai-evaluation-experimentation-and-causal-impact", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-09", "level": "advanced", "step": 9, "phase": "Assurance", "title": "AI Security, Red Teaming, and Governance", "summary": "Threat-model, attack, govern, and continuously verify the full AI system.", "outcomes": ["Build adversarial suites", "Separate attempt and outcome metrics", "Map risk to controls"], "status": "planned", "readme": "../COURSE_PLAN.md#course-9--ai-security-red-teaming-and-governance", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-10", "level": "advanced", "step": 10, "phase": "Delivery", "title": "CI/CD, Infrastructure, and AI DevOps", "summary": "Promote versioned AI artifacts through evidence gates with rollback and provenance.", "outcomes": ["Design AI-aware CI/CD", "Review infrastructure as code", "Prove rollback"], "status": "planned", "readme": "../COURSE_PLAN.md#course-10--cicd-infrastructure-and-ai-devops", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-11", "level": "advanced", "step": 11, "phase": "Strategy", "title": "Solution Architecture and Technical Strategy", "summary": "Turn constraints into options, decisions, target architecture, and migration strategy.", "outcomes": ["Write defensible ADRs", "Evaluate build versus buy", "Communicate trade-offs"], "status": "planned", "readme": "../COURSE_PLAN.md#course-11--solution-architecture-and-technical-strategy", "notebook": null, "lab": null, "checkpoint": null
+  },
+  {
+    "id": "advanced-12", "level": "advanced", "step": 12, "phase": "Leadership", "title": "Enterprise AI Operating Model and Leadership", "summary": "Create the standards, portfolio, team interactions, and narrative that scale AI delivery.", "outcomes": ["Design decision rights", "Prioritize an AI portfolio", "Lead without direct authority"], "status": "planned", "readme": "../COURSE_PLAN.md#course-12--enterprise-ai-operating-model-and-leadership", "notebook": null, "lab": null, "checkpoint": null
+  }
+]

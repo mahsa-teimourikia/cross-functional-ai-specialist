@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Advanced Cross-Functional AI Specialist Learning Hub" />
+    <title>Cross-Functional AI Specialist Learning Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <a class="brand" href="https://oneplusi.io" aria-label="Visit One plus i">One<span>+</span>i</a>
+      <div>
+        <p class="eyebrow">Advanced professional program</p>
+        <h1>Cross-Functional AI Specialist</h1>
+        <p class="lede">Build the judgment and evidence to architect, evaluate, secure, operate, and lead enterprise AI systems.</p>
+      </div>
+      <a class="quiz-link" href="../quiz/index.html">Full knowledge check</a>
+    </header>
+
+    <main>
+      <section class="progress-panel" aria-labelledby="progress-title">
+        <div>
+          <p class="eyebrow" id="progress-title">Ready-course progress</p>
+          <p id="progress-copy">0 of 1 complete</p>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="progress-bar"></span>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside aria-label="Course roadmap">
+          <div class="filters" role="group" aria-label="Filter courses">
+            <button class="filter active" data-filter="all">All</button>
+            <button class="filter" data-filter="ready">Ready</button>
+            <button class="filter" data-filter="planned">Planned</button>
+          </div>
+          <ol id="lesson-list" class="lesson-list"></ol>
+        </aside>
+
+        <article id="lesson-detail" class="lesson-detail" aria-live="polite">
+          <p>Loading curriculum…</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>Courses become ready one complete vertical slice at a time. Planned titles are not represented as finished training.</p>
+      <a href="../COURSE_PLAN.md">Read the complete sequential plan</a>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
