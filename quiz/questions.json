@@ -108,6 +108,114 @@
       "options": ["The newest framework", "The tool with the most stars", "The best evidenced fit for actual constraints", "The largest model"],
       "answer": 2,
       "explanation": "Maturity, fit, safety, operations, cost, portability, and evidence matter more than novelty."
+    },
+    {
+      "id": "q13",
+      "course": "02",
+      "category": "idempotency",
+      "prompt": "Which value should represent one intended business effect across client and worker retries?",
+      "options": ["Worker process ID", "Stable logical operation ID", "Queue receive count", "A fresh UUID per attempt"],
+      "answer": 1,
+      "explanation": "A stable logical operation ID lets durable state associate repeated delivery attempts with one intended effect."
+    },
+    {
+      "id": "q14",
+      "course": "02",
+      "category": "failure",
+      "prompt": "A write timed out after it may have committed. What should a retrying worker do first?",
+      "options": ["Write again", "Reconcile authoritative state", "Delete the operation record", "Assume failure"],
+      "answer": 1,
+      "explanation": "The outcome is unknown, so authoritative state must be checked before another side effect can be attempted safely."
+    },
+    {
+      "id": "q15",
+      "course": "02",
+      "category": "delivery",
+      "prompt": "Why does an SQS visibility timeout not prove exactly-once application behavior?",
+      "options": ["It encrypts messages", "Duplicate delivery and external side effects remain possible", "It disables workers", "It orders all messages globally"],
+      "answer": 1,
+      "explanation": "Visibility temporarily hides a received message, but redelivery and effects outside the broker still require application safeguards."
+    },
+    {
+      "id": "q16",
+      "course": "02",
+      "category": "ordering",
+      "prompt": "What is the safest default when version 1 arrives after version 2 was committed?",
+      "options": ["Overwrite version 2", "Use worker clock time", "Reject or record version 1 as stale", "Retry version 1 forever"],
+      "answer": 2,
+      "explanation": "A domain-version condition preserves the newer projection despite transport reordering or delayed retry."
+    },
+    {
+      "id": "q17",
+      "course": "02",
+      "category": "retry",
+      "prompt": "Three layers each retry a call up to three times. What risk should the design review expose?",
+      "options": ["Up to 27 attempts for one operation", "Exactly three attempts", "Automatic capacity growth", "Guaranteed recovery"],
+      "answer": 0,
+      "explanation": "Nested retry policies multiply work and can overload a degraded dependency, so retry ownership and budgets must be explicit."
+    },
+    {
+      "id": "q18",
+      "course": "02",
+      "category": "capacity",
+      "prompt": "Which signal is more useful than queue depth alone for an asynchronous completion SLO?",
+      "options": ["Repository size", "Oldest eligible message age", "Programming language", "Number of AWS regions in a slide"],
+      "answer": 1,
+      "explanation": "Oldest-message age reveals how long accepted work waits and directly connects backlog to a user-visible completion objective."
+    },
+    {
+      "id": "q19",
+      "course": "02",
+      "category": "dead-letter",
+      "prompt": "Which statement describes a production-ready dead-letter process?",
+      "options": ["Ignore records until retention expires", "Automatically replay everything", "Alert, inspect, repair, and redrive at a controlled rate", "Store no failure reason"],
+      "answer": 2,
+      "explanation": "Dead-letter quarantine needs ownership, safe diagnostic context, a repair decision, and idempotent rate-limited redrive."
+    },
+    {
+      "id": "q20",
+      "course": "02",
+      "category": "aws-selection",
+      "prompt": "When does a work queue fit better than a pub/sub topic?",
+      "options": ["Every subscriber must receive the event", "One consumer group should own each independent job", "No durability is needed", "Global transaction order is required"],
+      "answer": 1,
+      "explanation": "A queue distributes independently owned work, while pub/sub is intended to deliver a notification to multiple subscribers."
+    },
+    {
+      "id": "q21",
+      "course": "02",
+      "category": "consistency",
+      "prompt": "What does a conditional version write prevent?",
+      "options": ["Every network partition", "A stale or conflicting update silently replacing current state", "All queue duplicates", "Every model error"],
+      "answer": 1,
+      "explanation": "Compare-and-set or optimistic version checks make stale and concurrent conflicts observable instead of accepting last writer wins."
+    },
+    {
+      "id": "q22",
+      "course": "02",
+      "category": "metrics",
+      "prompt": "What does delivery attempts divided by successful logical operations measure?",
+      "options": ["Model accuracy", "Work amplification", "Tenant count", "Recovery point objective"],
+      "answer": 1,
+      "explanation": "Work amplification exposes retry and duplicate overhead per successful business outcome and helps detect retry storms."
+    },
+    {
+      "id": "q23",
+      "course": "02",
+      "category": "architecture",
+      "prompt": "What does a 202 Accepted response from an asynchronous API establish?",
+      "options": ["Business processing succeeded", "The model output is correct", "The system accepted ownership under its documented durability contract", "The DLQ is empty"],
+      "answer": 2,
+      "explanation": "Acceptance and business completion are separate states; the client must observe the operation resource for a terminal outcome."
+    },
+    {
+      "id": "q24",
+      "course": "02",
+      "category": "authorization",
+      "prompt": "An event contains tenant_id='northstar'. What authorizes the worker to access Northstar data?",
+      "options": ["The event field alone", "The message ID", "Trusted workload identity plus application policy", "The retry count"],
+      "answer": 2,
+      "explanation": "Event data is untrusted input; workload identity and trusted policy establish whether the worker may perform the requested action."
     }
   ]
 }

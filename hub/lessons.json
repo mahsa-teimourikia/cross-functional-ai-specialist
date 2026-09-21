@@ -14,7 +14,18 @@
     "checkpoint": "../curriculum/advanced/01-production-ai-development/checkpoint.json"
   },
   {
-    "id": "advanced-02", "level": "advanced", "step": 2, "phase": "Systems", "title": "Cloud and Distributed AI Systems", "summary": "Choose compute, state, messaging, and recovery patterns from requirements.", "outcomes": ["Model distributed failure", "Design idempotent delivery", "Compare AWS deployment options"], "status": "planned", "readme": "../COURSE_PLAN.md#course-2--cloud-and-distributed-ai-systems", "notebook": null, "lab": null, "checkpoint": null
+    "id": "advanced-02",
+    "level": "advanced",
+    "step": 2,
+    "phase": "Systems",
+    "title": "Cloud and Distributed AI Systems",
+    "summary": "Design idempotent asynchronous AI workloads and choose AWS compute, messaging, state, and recovery patterns from evidence.",
+    "outcomes": ["Model partial failure and unknown outcomes", "Prove idempotency, bounded retry, and version safety", "Compare AWS deployment options with capacity and operability evidence"],
+    "status": "ready",
+    "readme": "../curriculum/advanced/02-cloud-distributed-ai-systems/README.md",
+    "notebook": "../curriculum/advanced/02-cloud-distributed-ai-systems/cloud_distributed_ai_systems.ipynb",
+    "lab": "../curriculum/advanced/02-cloud-distributed-ai-systems/lab.py",
+    "checkpoint": "../curriculum/advanced/02-cloud-distributed-ai-systems/checkpoint.json"
   },
   {
     "id": "advanced-03", "level": "advanced", "step": 3, "phase": "Trust", "title": "Enterprise Identity and Agent Authorization", "summary": "Design authentication, authorization, delegation, and tenant isolation.", "outcomes": ["Validate identity boundaries", "Attenuate delegated authority", "Test approval replay and scope"], "status": "planned", "readme": "../COURSE_PLAN.md#course-3--enterprise-identity-and-agent-authorization", "notebook": null, "lab": null, "checkpoint": null

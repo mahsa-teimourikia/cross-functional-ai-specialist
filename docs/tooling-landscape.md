@@ -80,6 +80,28 @@ Sources: [Python task groups](https://docs.python.org/3/library/asyncio-task.htm
 [AWS Step Functions](https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html), and
 [Temporal](https://docs.temporal.io/).
 
+## Cloud compute, messaging, and state
+
+Choose the interaction pattern before the service. Synchronous APIs fit bounded work inside a user
+deadline; SQS-style queues fit independently processed bursty work; EventBridge/SNS fit routed or
+fan-out notifications; Kinesis-style logs fit partitioned replay; Step Functions/Temporal fit
+durable multi-step state. At-least-once delivery requires application idempotency, conditional
+writes, bounded retry, and owned dead-letter recovery.
+
+On AWS, Lambda is a strong event-driven option, ECS/Fargate adds container/runtime control without
+node ownership, EKS earns its overhead when Kubernetes capability is an organizational requirement,
+and EC2/AWS Batch fit specialized or batch compute. Bedrock and SageMaker AI overlap at some AI
+workload boundaries but differ in model access, customization, hosting control, and operating
+model. Select state from access patterns and consistency needs: S3 for objects/manifests, DynamoDB
+for key-value/conditional state, Aurora/RDS for relational transactions, OpenSearch for search
+projections, and Redis for bounded ephemeral state. A cache or search index should not silently
+become the source of truth.
+
+Sources: [AWS compute decision guide](https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-compute-service.html),
+[AWS messaging decision guide](https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html),
+[AWS application integration guide](https://docs.aws.amazon.com/decision-guides/latest/decision-guides/application-integration-on-aws-how-to-choose.html),
+and [Course 2's distributed-systems chapter](../curriculum/advanced/02-cloud-distributed-ai-systems/README.md).
+
 ## Testing and evaluation
 
 Use pytest for deterministic invariants and Hypothesis where generated cases explore meaningful

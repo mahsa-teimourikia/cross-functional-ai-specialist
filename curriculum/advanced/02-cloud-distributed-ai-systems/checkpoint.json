@@ -1,0 +1,103 @@
+{
+  "course": "02-cloud-distributed-ai-systems",
+  "title": "Course 2 Checkpoint",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c02-01",
+      "category": "identity",
+      "prompt": "A client times out and retries the same intended document analysis. Which identifier must stay stable?",
+      "options": ["Delivery-attempt ID", "Queue message ID", "Logical operation ID", "Worker process ID"],
+      "answer": 2,
+      "explanation": "The operation ID represents one intended business effect and lets the server reconcile a retry with previously recorded state."
+    },
+    {
+      "id": "c02-02",
+      "category": "idempotency",
+      "prompt": "The idempotency store finds the same operation ID with a different payload digest. What should happen?",
+      "options": ["Overwrite the old record", "Treat it as a normal retry", "Return a terminal conflict", "Generate a new digest silently"],
+      "answer": 2,
+      "explanation": "One operation key cannot safely represent two intents; a conflict prevents accidental deduplication or overwrite of changed input."
+    },
+    {
+      "id": "c02-03",
+      "category": "failure",
+      "prompt": "A database commit may have succeeded, but the worker lost the acknowledgement. What is the safest next action?",
+      "options": ["Repeat the write immediately", "Reconcile authoritative state by operation ID", "Mark success without checking", "Retry forever"],
+      "answer": 1,
+      "explanation": "An unknown outcome may already contain the effect, so the worker checks durable state before attempting another externally visible write."
+    },
+    {
+      "id": "c02-04",
+      "category": "delivery",
+      "prompt": "What does at-least-once queue delivery require from a mutating consumer?",
+      "options": ["No retry policy", "Application-level idempotency", "One worker only", "Globally ordered messages"],
+      "answer": 1,
+      "explanation": "At-least-once delivery deliberately permits duplicates, so the application must make repeated logical operations safe."
+    },
+    {
+      "id": "c02-05",
+      "category": "ordering",
+      "prompt": "Document version 2 is committed before a delayed version 1 event arrives. What protects the projection?",
+      "options": ["Worker wall-clock time", "Last writer wins", "Conditional domain-version check", "A longer visibility timeout"],
+      "answer": 2,
+      "explanation": "A conditional domain-version rule rejects stale events without relying on arrival order or unsynchronized worker clocks."
+    },
+    {
+      "id": "c02-06",
+      "category": "retry",
+      "prompt": "Which failure should normally be terminal rather than retried?",
+      "options": ["Brief dependency throttle", "Selected network timeout", "Authorization denial", "Temporary capacity exhaustion"],
+      "answer": 2,
+      "explanation": "Authorization denial will not improve with time, and retrying it wastes capacity while obscuring a policy decision."
+    },
+    {
+      "id": "c02-07",
+      "category": "capacity",
+      "prompt": "A system receives 50 jobs/second and can sustainably complete 40. What happens under sustained load?",
+      "options": ["Backlog grows", "Latency becomes zero", "Retries restore capacity", "Little's Law guarantees stability"],
+      "answer": 0,
+      "explanation": "Sustained arrival above service capacity accumulates unfinished work; retries can further amplify demand rather than create capacity."
+    },
+    {
+      "id": "c02-08",
+      "category": "observability",
+      "prompt": "Which pair best exposes whether an asynchronous queue is failing its user-facing objective?",
+      "options": ["Queue name and region", "Oldest-message age and terminal completion latency", "Worker language and package count", "Average payload size alone"],
+      "answer": 1,
+      "explanation": "Age and end-to-end terminal latency reveal how long accepted work waits and whether users receive outcomes on time."
+    },
+    {
+      "id": "c02-09",
+      "category": "dead-letter",
+      "prompt": "What is a dead-letter queue's operational role?",
+      "options": ["Permanent unobserved disposal", "Quarantine with owned inspection and controlled redrive", "Automatic proof of correctness", "A replacement for validation"],
+      "answer": 1,
+      "explanation": "Dead-letter records require an owner, alert, diagnosis, repair, retention, and rate-limited idempotent redrive procedure."
+    },
+    {
+      "id": "c02-10",
+      "category": "aws-selection",
+      "prompt": "Which AWS pattern most directly fits independently processed work that must absorb bursts?",
+      "options": ["SQS work queue with bounded consumers", "SNS alone as durable work ownership", "A global Redis cache", "An unbounded synchronous Lambda chain"],
+      "answer": 0,
+      "explanation": "A work queue buffers bursty independent items and lets consumers scale within downstream concurrency and retry limits."
+    },
+    {
+      "id": "c02-11",
+      "category": "semantics",
+      "prompt": "A workflow service documents exactly-once execution. What remains unproven?",
+      "options": ["The workflow can start", "Every arbitrary downstream side effect occurs exactly once", "The service has documentation", "The workflow has a name"],
+      "answer": 1,
+      "explanation": "Workflow execution semantics do not create one atomic transaction across databases, emails, APIs, and other external effects."
+    },
+    {
+      "id": "c02-12",
+      "category": "metrics",
+      "prompt": "Why report delivery attempts per successful logical operation?",
+      "options": ["To hide failures", "To measure work amplification and retry cost", "To replace latency metrics", "To count unique users"],
+      "answer": 1,
+      "explanation": "The ratio shows how much transport and dependency work each successful business outcome consumes, exposing retry storms."
+    }
+  ]
+}
