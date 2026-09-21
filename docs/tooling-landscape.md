@@ -1,6 +1,6 @@
 # Tooling and State-of-the-Art Review
 
-**Reviewed:** 2026-09-20
+**Reviewed:** 2026-09-21
 **Purpose:** decision guidance for the full program, not a mandatory shopping list.
 
 Tooling changes faster than architecture fundamentals. Verify maintenance, licensing, security,
@@ -101,6 +101,55 @@ Sources: [AWS compute decision guide](https://docs.aws.amazon.com/decision-guide
 [AWS messaging decision guide](https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html),
 [AWS application integration guide](https://docs.aws.amazon.com/decision-guides/latest/decision-guides/application-integration-on-aws-how-to-choose.html),
 and [Course 2's distributed-systems chapter](../curriculum/advanced/02-cloud-distributed-ai-systems/README.md).
+
+## Identity, delegation, and policy engines
+
+OAuth 2.0 and OpenID Connect establish interoperable authorization and authentication protocols;
+they do not make every parsed JWT trustworthy. Resource servers must pin trusted issuers, verify
+signatures and allowed algorithms, require the intended token use and audience, validate time, and
+apply application authorization. Use issuer plus subject as the federated identity key. OAuth's
+current security best practice discourages implicit and resource-owner-password flows, requires
+exact redirect matching, and recommends sender-constrained tokens where bearer replay risk warrants
+the added lifecycle cost. Token exchange can represent delegation, but issuance policy still has to
+prevent scope, resource, audience, tenant, or actor widening.
+
+| Option | Maturity | Strong fit | Selection concern |
+|---|---|---|---|
+| Embedded application policy | Established pattern | One bounded service and close transactional data | Duplication, review, and rollout as the estate grows |
+| Cedar / Amazon Verified Permissions | Current production option | Typed principal-action-resource authorization | Entity ownership, schema evolution, latency, and outage mode |
+| OPA/Rego | Current production option | General policy over structured data across stacks | Flexible policy/data require disciplined governance |
+| OpenFGA | Current production option | Relationship-based and nested sharing decisions | Tuple lifecycle, consistency, and model complexity |
+| Cloud IAM / Entra workload identity | Established platform capability | Workload-to-platform and service access | Does not replace application-object authorization |
+| SPIFFE/SPIRE | Current production option | Federated workload identity across heterogeneous runtime estates | Trust-domain and control-plane operations |
+| AuthZEN Authorization API | Emerging interoperability standard | PDP/PEP protocol portability | Profile coverage and vendor maturity |
+| Agent-specific identity profiles | Emerging / pre-standard | Research and bounded pilots | Do not treat drafts as settled security architecture |
+
+Choose the authorization model from the domain: RBAC for stable job functions, ABAC for contextual
+attributes, relationship-based authorization for sharing graphs, and attenuated capabilities for
+narrow delegation. Most real systems combine them. Keep policy administration, information,
+decision, and enforcement responsibilities explicit; default deny; enforce at the component that
+controls the real effect; version policy and entitlements; and define cache freshness, emergency
+deny, fail-closed/degraded behavior, review, rollback, and audit ownership.
+
+For AI tools, authenticate both the human subject and executing workload actor, then intersect their
+authority. Keep credentials outside model context. Treat tool arguments, prompt roles, agent names,
+and retrieved text as untrusted requests—not identity. Consequential approvals should bind the
+canonical principal, actor, action, resource, parameters or digest, policy version, expiry, and
+logical operation; separation of duties and atomic single-use consumption prevent self-approval,
+alteration, replay, and duplicate effects.
+
+Primary sources: [OpenID Connect Core](https://openid.net/specs/openid-connect-core-1_0-errata2.html),
+[OAuth 2.0 Security Best Current Practice](https://www.rfc-editor.org/rfc/rfc9700.html),
+[JWT access-token profile](https://www.rfc-editor.org/rfc/rfc9068.html),
+[JWT best current practice](https://www.rfc-editor.org/rfc/rfc8725.html),
+[DPoP](https://www.rfc-editor.org/rfc/rfc9449.html),
+[OAuth token exchange](https://www.rfc-editor.org/rfc/rfc8693.html),
+[NIST ABAC](https://csrc.nist.gov/pubs/sp/800/162/upd2/final),
+[NIST zero trust](https://csrc.nist.gov/pubs/sp/800/207/final),
+[Cedar authorization](https://docs.cedarpolicy.com/auth/authorization.html),
+[OPA](https://www.openpolicyagent.org/docs), [OpenFGA](https://openfga.dev/docs/concepts),
+[SPIFFE](https://spiffe.io/docs/latest/spiffe-specs/), and
+[AuthZEN Authorization API](https://openid.net/specs/authorization-api-1_0.html).
 
 ## Testing and evaluation
 

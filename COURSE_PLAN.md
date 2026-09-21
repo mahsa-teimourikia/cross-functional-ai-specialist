@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–2 are complete
-vertical slices; Courses 3–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–3 are complete
+vertical slices; Courses 4–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -44,7 +44,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 |---:|---|---:|---|---|
 | 1 | Production AI Development in Python | 3 | **Ready** | Tested service core, review memo, packaging decision |
 | 2 | Cloud and Distributed AI Systems | 3 | **Ready** | AWS deployment architecture, load/failure model, ADR |
-| 3 | Enterprise Identity and Agent Authorization | 2 | Planned | Threat-aware auth design, delegated capability tests |
+| 3 | Enterprise Identity and Agent Authorization | 2 | **Ready** | Threat-aware auth design, delegated capability tests |
 | 4 | Production RAG and Knowledge Systems | 3 | Planned | Secure ingestion/retrieval pipeline and retrieval eval |
 | 5 | Agentic AI Architecture and AgentCore | 3 | Planned | Bounded workflow/agent comparison and recovery plan |
 | 6 | Model Gateways and Inference Economics | 2 | Planned | Routing policy, fallback experiment, unit economics |
@@ -98,7 +98,7 @@ experiment, and cost/operability comparison.
 
 ## Course 3 — Enterprise Identity and Agent Authorization
 
-**Status:** Planned · **Prerequisite:** Course 2
+**Status:** Ready in repository · **Prerequisite:** Course 2
 **Thesis:** identity, delegation, and policy are trusted application capabilities; role text, tool
 arguments, and agent names never create authority.
 
@@ -110,8 +110,13 @@ arguments, and agent names never create authority.
   single-use approvals bound to principal, action, target, digest, policy version, and expiry.
 - Confused deputy, wrong audience, cross-tenant, replay, stale policy, and altered-approval tests.
 
-The lab builds a deterministic policy decision point and narrow tool gateway. Evidence: identity
-sequence, authorization matrix, negative tests, and delegated-action ADR.
+The lab builds a deterministic token-verification boundary, authoritative identity registry,
+default-deny policy decision point, attenuated delegation service, and narrow tool gateway. It
+separates user subject from workload actor; binds approvals to the exact proposal; consumes them
+atomically with the effect; and measures both forbidden outcomes and valid work blocked. Failure
+injection covers wrong audience/token use/signature, cross-tenant access, role injection, scope
+widening, self-approval, altered parameters, receipt replay, stale policy, and stale entitlements.
+Evidence: identity sequence, authorization matrix, negative tests, and delegated-action ADR.
 
 ## Course 4 — Production RAG and Knowledge Systems
 

@@ -1,0 +1,103 @@
+{
+  "course": "03-enterprise-identity-agent-authorization",
+  "title": "Course 3 Checkpoint",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c03-01",
+      "category": "token-validation",
+      "prompt": "A JWT parses successfully and contains role='admin'. What has parsing established?",
+      "options": ["The caller is an administrator", "Only that the token-shaped data can be decoded", "The signature is valid", "The audience is correct"],
+      "answer": 1,
+      "explanation": "Decoded claims remain untrusted until issuer configuration, signature, algorithm, token use, audience, and time are validated."
+    },
+    {
+      "id": "c03-02",
+      "category": "identity",
+      "prompt": "Which value is the safer stable identity key for a federated subject?",
+      "options": ["Email address", "Display name", "Subject alone", "Issuer plus subject"],
+      "answer": 3,
+      "explanation": "OpenID Connect subjects are locally unique within an issuer, so issuer and subject together distinguish lookalikes across providers."
+    },
+    {
+      "id": "c03-03",
+      "category": "oauth",
+      "prompt": "Why should an API reject an ID token presented as an access token?",
+      "options": ["ID tokens never have signatures", "ID tokens authenticate a client session and are not the API authorization credential", "Access tokens contain passwords", "APIs cannot parse JWTs"],
+      "answer": 1,
+      "explanation": "An ID token is intended for the relying client; the resource server needs an access token issued for its own audience and use."
+    },
+    {
+      "id": "c03-04",
+      "category": "workload-identity",
+      "prompt": "What does a valid workload identity prove by itself?",
+      "options": ["Which workload presented the credential", "Which customer data every call may access", "That a human approved the action", "That the model output is correct"],
+      "answer": 0,
+      "explanation": "Workload authentication identifies the process; application policy must still authorize subject, tenant, resource, action, and obligations."
+    },
+    {
+      "id": "c03-05",
+      "category": "delegation",
+      "prompt": "Which child delegation is valid?",
+      "options": ["More actions and a shorter expiry", "Fewer actions, fewer resources, and no later expiry", "Same resources with approval authority added", "Another tenant with the same role name"],
+      "answer": 1,
+      "explanation": "Delegation must attenuate authority across actions, resources, tenant, time, depth, and any other bounded capability dimension."
+    },
+    {
+      "id": "c03-06",
+      "category": "policy",
+      "prompt": "What is the policy enforcement point responsible for?",
+      "options": ["Only authoring policy text", "Intercepting the real action and enforcing the decision and obligations", "Issuing every user token", "Generating model reasoning"],
+      "answer": 1,
+      "explanation": "The enforcement point protects the operation, obtains a policy decision, validates obligations, executes, verifies, and records the outcome."
+    },
+    {
+      "id": "c03-07",
+      "category": "confused-deputy",
+      "prompt": "A service has broad database access. Why must it still check delegated user authority?",
+      "options": ["Service credentials automatically expire", "Technical service reach does not authorize using that reach for every caller", "Users always have more permission", "Databases cannot enforce policy"],
+      "answer": 1,
+      "explanation": "Without intersecting actor and subject authority, a caller can coerce the privileged service into becoming a confused deputy."
+    },
+    {
+      "id": "c03-08",
+      "category": "approval",
+      "prompt": "Which change must invalidate an existing approval receipt?",
+      "options": ["A different display color", "A different proposed limit", "A repeated read-only page view", "A new audit viewer"],
+      "answer": 1,
+      "explanation": "Approval binds the canonical consequential proposal; changing an execution parameter changes the proposal digest and requires review again."
+    },
+    {
+      "id": "c03-09",
+      "category": "approval",
+      "prompt": "How should an exact retry behave after approval and execution committed atomically?",
+      "options": ["Create a second effect", "Return the recorded operation result without reusing the receipt for new work", "Ask the model whether it succeeded", "Delete the audit event"],
+      "answer": 1,
+      "explanation": "A stable operation ID permits idempotent reconciliation, while the consumed receipt remains unavailable to a different operation."
+    },
+    {
+      "id": "c03-10",
+      "category": "authorization-models",
+      "prompt": "Which model is particularly useful for nested sharing relationships such as organization members viewing documents?",
+      "options": ["Password hashing", "Relationship-based authorization", "Token encryption alone", "Prompt-based roles"],
+      "answer": 1,
+      "explanation": "Relationship-based systems explicitly model user–relation–object tuples and derive permissions through configured relationship graphs."
+    },
+    {
+      "id": "c03-11",
+      "category": "lifecycle",
+      "prompt": "A user's group membership changed after a delegation was issued. What should the gateway do?",
+      "options": ["Trust the old role forever", "Detect stale entitlements or re-evaluate current authority", "Let the agent choose", "Accept if the token is parseable"],
+      "answer": 1,
+      "explanation": "Authorization is lifecycle-sensitive; short credentials, entitlement versions, introspection, or current policy data must invalidate stale grants."
+    },
+    {
+      "id": "c03-12",
+      "category": "metrics",
+      "prompt": "Why report forbidden outcomes separately from valid work blocked?",
+      "options": ["They measure different safety and usability populations", "Both always have the same denominator", "Blocked valid work is a security success", "It removes the need for test cases"],
+      "answer": 0,
+      "explanation": "Unauthorized effects and false denials are different failure types with different denominators, owners, and production consequences."
+    }
+  ]
+}

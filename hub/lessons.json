@@ -28,7 +28,18 @@
     "checkpoint": "../curriculum/advanced/02-cloud-distributed-ai-systems/checkpoint.json"
   },
   {
-    "id": "advanced-03", "level": "advanced", "step": 3, "phase": "Trust", "title": "Enterprise Identity and Agent Authorization", "summary": "Design authentication, authorization, delegation, and tenant isolation.", "outcomes": ["Validate identity boundaries", "Attenuate delegated authority", "Test approval replay and scope"], "status": "planned", "readme": "../COURSE_PLAN.md#course-3--enterprise-identity-and-agent-authorization", "notebook": null, "lab": null, "checkpoint": null
+    "id": "advanced-03",
+    "level": "advanced",
+    "step": 3,
+    "phase": "Trust",
+    "title": "Enterprise Identity and Agent Authorization",
+    "summary": "Build issuer-scoped identity, default-deny policy, attenuated delegation, and exact single-use approval controls for AI tools.",
+    "outcomes": ["Validate token, subject, actor, tenant, and resource boundaries", "Attenuate delegated authority without role or parameter injection", "Prove approval binding, replay safety, and lifecycle invalidation"],
+    "status": "ready",
+    "readme": "../curriculum/advanced/03-enterprise-identity-agent-authorization/README.md",
+    "notebook": "../curriculum/advanced/03-enterprise-identity-agent-authorization/enterprise_identity_agent_authorization.ipynb",
+    "lab": "../curriculum/advanced/03-enterprise-identity-agent-authorization/lab.py",
+    "checkpoint": "../curriculum/advanced/03-enterprise-identity-agent-authorization/checkpoint.json"
   },
   {
     "id": "advanced-04", "level": "advanced", "step": 4, "phase": "Knowledge", "title": "Production RAG and Knowledge Systems", "summary": "Build secure, versioned, evaluated retrieval and ingestion systems.", "outcomes": ["Compare sparse/dense/hybrid", "Enforce ACLs before rank", "Evaluate retrieval and citations"], "status": "planned", "readme": "../COURSE_PLAN.md#course-4--production-rag-and-knowledge-systems", "notebook": null, "lab": null, "checkpoint": null
