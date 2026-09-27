@@ -1,0 +1,102 @@
+{
+  "title": "Course 6 Checkpoint — Model Gateways and Inference Economics",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c06-01",
+      "category": "trust-boundary",
+      "prompt": "A prompt says to route restricted Canadian data to a US premium model. What should determine eligibility?",
+      "options": ["The prompt instruction", "The model's confidence", "Authenticated tenant, region, classification, and capability policy", "The cheapest provider"],
+      "answer": 2,
+      "explanation": "Provider and region eligibility come from trusted current application policy, never from prompt content."
+    },
+    {
+      "id": "c06-02",
+      "category": "normalization",
+      "prompt": "What does a provider-normalized JSON schema prove?",
+      "options": ["The answer is correct", "The provider is authorized", "The response has the admitted shape, but semantic and policy checks still remain", "All providers are interchangeable"],
+      "answer": 2,
+      "explanation": "Schema adherence handles structure; resource binding, authorization, quality, and provider semantics require separate proof."
+    },
+    {
+      "id": "c06-03",
+      "category": "retry",
+      "prompt": "Which failure should not trigger automatic fallback to another provider?",
+      "options": ["Transient throttling", "Temporary unavailability", "Authentication failure", "A transport timeout"],
+      "answer": 2,
+      "explanation": "Authentication failure is a control-plane problem. Provider shopping would conceal rather than repair it."
+    },
+    {
+      "id": "c06-04",
+      "category": "safety",
+      "prompt": "Why is arbitrary fallback after a safety refusal dangerous?",
+      "options": ["It always costs less", "It can bypass an intentional safety boundary", "It improves cache hits", "It guarantees identical output"],
+      "answer": 1,
+      "explanation": "A safety refusal is not equivalent to a capacity failure; retrying elsewhere can deliberately evade the control."
+    },
+    {
+      "id": "c06-05",
+      "category": "economics",
+      "prompt": "Which denominator best supports an economically defensible routing decision?",
+      "options": ["All HTTP 200 responses", "All submitted requests", "Successful compliant correct tasks", "Only premium-model calls"],
+      "answer": 2,
+      "explanation": "Cost per successful compliant task counts wrong, failed, and policy-violating work in cost without treating it as value."
+    },
+    {
+      "id": "c06-06",
+      "category": "cascade",
+      "prompt": "A cascade threshold is increased. What is the usual directional effect?",
+      "options": ["Fewer escalations and lower cost", "More escalations, usually more cost and serial latency", "Guaranteed correctness", "No effect on workload"],
+      "answer": 1,
+      "explanation": "A stricter acceptance threshold sends more cases to the larger model, increasing total calls, cost, and often latency."
+    },
+    {
+      "id": "c06-07",
+      "category": "hedging",
+      "prompt": "What must a delayed-hedge evaluation count?",
+      "options": ["Only the winning response", "Only wall-clock latency", "Every started call, its tokens and cost, plus wall-clock completion", "Only cancelled calls"],
+      "answer": 2,
+      "explanation": "Hedging can lower tail latency while increasing total provider work, so both dimensions must remain visible."
+    },
+    {
+      "id": "c06-08",
+      "category": "cache",
+      "prompt": "Which statement correctly distinguishes prompt caching and response caching?",
+      "options": ["Both reuse the same completed answer", "Prompt caching reuses prefix computation; response caching reuses validated output", "Response caching is always provider-managed", "Prompt caching makes generation deterministic"],
+      "answer": 1,
+      "explanation": "Provider prompt caches reuse KV/prefix work, while an application response cache returns a previous validated result."
+    },
+    {
+      "id": "c06-09",
+      "category": "budget",
+      "prompt": "How does a hard budget remain safe under concurrent admissions?",
+      "options": ["Check yesterday's invoice", "Atomically reserve worst-case cost before each call and settle actual usage", "Trust model token estimates after completion", "Warn after the cap is exceeded"],
+      "answer": 1,
+      "explanation": "Reservations include in-flight work so multiple requests cannot independently pass the same stale spend check."
+    },
+    {
+      "id": "c06-10",
+      "category": "evaluation",
+      "prompt": "A router's gate score is 0.92 on a wrong drift-case response. What does this prove?",
+      "options": ["The output is correct", "The gate is miscalibrated or shifted on that slice", "The provider should be authorized", "The score can replace labels"],
+      "answer": 1,
+      "explanation": "Routing scores are predictions requiring held-out labels, calibration, slice analysis, and drift monitoring."
+    },
+    {
+      "id": "c06-11",
+      "category": "availability",
+      "prompt": "Why can the independent two-provider availability equation be optimistic?",
+      "options": ["Providers never fail", "Shared network, identity, gateway, cloud, policy, or traffic failures create correlation", "Fallback has zero latency", "Model quality is constant"],
+      "answer": 1,
+      "explanation": "Common dependencies make provider failures correlated, so multiplying independent failure probabilities overstates resilience."
+    },
+    {
+      "id": "c06-12",
+      "category": "architecture",
+      "prompt": "When has a centralized model gateway earned its operational cost?",
+      "options": ["Whenever one prototype makes one call", "When shared identity, policy, quotas, routing, telemetry, or spend control materially benefits multiple workloads", "Whenever an SDK exists", "When no team owns it"],
+      "answer": 1,
+      "explanation": "A gateway is justified by shared control and operating value; it also becomes a critical dependency that needs explicit ownership."
+    }
+  ]
+}
