@@ -77,3 +77,7 @@ jobs:
       - name: Execute Course 9 canonical notebook
         working-directory: curriculum/advanced/09-ai-security-red-teaming-governance
         run: uv run --project ../../.. jupyter execute ai_security_red_teaming_governance.ipynb --inplace
+
+      - name: Execute Course 10 canonical notebook
+        working-directory: curriculum/advanced/10-ci-cd-infrastructure-ai-devops
+        run: uv run --project ../../.. jupyter execute ai_devops.ipynb --inplace

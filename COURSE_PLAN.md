@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–9 are complete
-vertical slices; Courses 10–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–10 are complete
+vertical slices; Courses 11–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -51,7 +51,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 7 | AI Observability and Reliability Engineering | 2 | **Ready** | OpenTelemetry traces, SLOs, runbook, game day |
 | 8 | AI Evaluation, Experimentation, and Causal Impact | 3 | **Ready** | Release gate, human-eval protocol, causal experiment |
 | 9 | AI Security, Red Teaming, and Governance | 3 | **Ready** | Threat model, adversarial suite, governance controls |
-| 10 | CI/CD, Infrastructure, and AI DevOps | 2 | Planned | Promotion pipeline, IaC plan, rollback evidence |
+| 10 | CI/CD, Infrastructure, and AI DevOps | 2 | **Ready** | Promotion pipeline, IaC plan, rollback evidence |
 | 11 | Solution Architecture and Technical Strategy | 2 | Planned | Options paper, target architecture, migration roadmap |
 | 12 | Enterprise AI Operating Model and Leadership | 2 | Planned | Portfolio strategy, standards, executive narrative |
 
@@ -270,7 +270,7 @@ decision.
 
 ## Course 10 — CI/CD, Infrastructure, and AI DevOps
 
-**Status:** Planned · **Prerequisites:** Courses 2 and 7–9
+**Status:** Ready in repository · **Prerequisites:** Courses 2 and 7–9
 **Thesis:** promote immutable application, infrastructure, prompt, model, policy, and evaluation
 artifacts through evidence-based gates with provenance and rollback.
 

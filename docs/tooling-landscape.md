@@ -634,6 +634,75 @@ Sources: [OWASP GenAI LLM Top 10 2026](https://genai.owasp.org/resource/owasp-ge
 [SLSA](https://slsa.dev/spec/v1.1/), [Sigstore](https://docs.sigstore.dev/), and
 [CycloneDX ML-BOM](https://cyclonedx.org/capabilities/mlbom/).
 
+## AI delivery, infrastructure, and supply chain
+
+Treat an AI release as one compatible graph of application, container, model, adapter/tokenizer,
+prompt, tool, policy, data/index, evaluation, infrastructure, configuration, and telemetry
+artifacts. Build once and promote exact digests. Bind provenance, SBOMs, scans, evaluations,
+approvals, plans, deployment records, and rollback targets to the full release-manifest digest.
+A tag, green badge, scanner finding count, or model registry stage is not sufficient identity or
+authority.
+
+### Pipeline and identity contract
+
+Separate contributor-controlled validation from privileged deployment. Pull-request jobs should
+receive no production role or secrets and must not pass arbitrary executable output into a
+privileged job. Use minimal `GITHUB_TOKEN` permissions, full commit-SHA action pins, ephemeral
+isolated runners for untrusted work, protected environments, and `id-token: write` only in the
+deployment job.
+
+Exchange GitHub OIDC identity for a short-lived cloud session only after verifying issuer,
+audience, subject, repository, protected environment or exact ref, governed reusable workflow and
+time. As reviewed 27 September 2026, GitHub's OIDC reference says repositories created after 15
+July 2026 use immutable owner/repository IDs in default subjects; inspect and deliberately migrate
+older trust policies. Scope the resulting role to the exact actions/resources and bind the
+release manifest in the deployment controller.
+
+### Infrastructure and release contract
+
+Protect Terraform/OpenTofu state and saved plans as sensitive artifacts. Review public exposure,
+IAM wildcards, encryption, backup/deletion protection, destructive replacement, secrets, provider
+and module sources, account/region, monitoring and cost. Apply the exact reviewed plan against the
+expected state/configuration/provider versions; otherwise re-plan and re-review. Use inspected
+refresh-only workflows for drift rather than silently accepting remote change.
+
+Use three-state release gates: pass, fail, and inconclusive. Missing, stale, untrusted or
+underpowered evidence is inconclusive—not a pass. Canary decisions need representative volume and
+slices plus compliant success, forbidden outcomes, valid work blocked, errors, latency, cost,
+saturation and telemetry completeness. Rollback restores an admitted known-good multi-artifact
+manifest; recovery drills additionally prove RTO, RPO, backup integrity, infrastructure rebuild,
+identity and tenant authorization.
+
+### Current implementation options
+
+| Layer | Options | Strong fit | Review before adoption |
+|---|---|---|---|
+| CI/CD | GitHub Actions, GitLab CI, Buildkite, cloud-native pipelines | source-integrated validation and controlled promotion | runner isolation, workflow identity, permissions, artifact/evidence boundaries, cost |
+| GitOps/progressive delivery | Argo CD/Rollouts, Flux, Spinnaker, cloud deployment services | reconciliation, canary and blue-green | secret model, tenant separation, metric authority, data compatibility, rollback verification |
+| infrastructure as code | Terraform/OpenTofu, Pulumi, AWS CDK/CloudFormation | reviewable repeatable environments | state, locks, provider/module supply chain, drift, import, policy and exit |
+| policy as code | OPA/Conftest, Sentinel, cloud policy, admission controllers | deterministic pre-merge and runtime admission | authoritative inputs, enforcement location, exception expiry, bypass and audit |
+| provenance/signing | SLSA/in-toto, Sigstore/Cosign, GitHub attestations | verify artifact origin and build identity | subject, signer-builder trust, transparency/privacy, revocation, offline verification |
+| SBOM/scanning | CycloneDX/SPDX, Syft/Grype, Trivy, dependency review | component inventory and finding workflow | AI assets, VEX/exploitability, database freshness, waivers, false positives |
+| ML lifecycle | MLflow, SageMaker, Vertex AI, Azure ML, Kubeflow | experiment/model registry and managed deployment | prompt/policy/data lineage, identity, approval semantics, portability and rollback |
+
+GitHub artifact attestations can bind build provenance to repository, workflow, environment,
+commit and event, but GitHub explicitly states that attestations do not guarantee security; the
+consumer must verify them under a policy. SLSA v1.1 defines provenance build definition and run
+details. Sigstore supports keyless identity verification. CycloneDX represents traditional and
+AI/ML bill-of-materials information. Argo Rollouts provides progressive-delivery mechanics, not
+the application outcome or safety policy.
+
+Primary and official sources: [GitHub Actions secure use](https://docs.github.com/en/actions/reference/security/secure-use),
+[GitHub OIDC reference](https://docs.github.com/en/actions/reference/security/oidc),
+[GitHub artifact attestations](https://docs.github.com/en/actions/concepts/security/artifact-attestations),
+[SLSA v1.1](https://slsa.dev/spec/v1.1/),
+[Sigstore verification](https://docs.sigstore.dev/cosign/verifying/verify/),
+[CycloneDX ML-BOM](https://cyclonedx.org/capabilities/mlbom/),
+[Terraform plan](https://developer.hashicorp.com/terraform/cli/commands/plan),
+[Terraform sensitive data](https://developer.hashicorp.com/terraform/language/manage-sensitive-data),
+[Terraform automation](https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform),
+and [Argo Rollouts](https://argoproj.github.io/argo-rollouts/).
+
 ## Selection scorecard
 
 For every material decision, record the requirement/non-goal; maturity; functional fit; identity,

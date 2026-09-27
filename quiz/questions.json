@@ -972,6 +972,90 @@
       "options": ["A model, prompt, tool schema, data source, provider, or policy change", "Only an annual calendar date", "A README typo", "None after launch"],
       "answer": 0,
       "explanation": "Material component, capability, data, supplier, policy, incident, and threat changes can invalidate assumptions and prior evidence."
+    },
+    {
+      "id": "q109", "course": "10", "category": "release-identity",
+      "prompt": "Why should staging and production promote the same artifact digest?",
+      "options": ["To remove tests", "So production uses the exact bytes covered by build and validation evidence", "To avoid provenance", "Because tags are encrypted"],
+      "answer": 1,
+      "explanation": "Rebuilding changes the evidence subject and can resolve different dependencies; digest promotion preserves the verified artifact identity."
+    },
+    {
+      "id": "q110", "course": "10", "category": "provenance",
+      "prompt": "A provenance attestation verifies successfully. What still requires separate policy?",
+      "options": ["Security, compatibility, quality, authorization, and risk acceptance", "Nothing", "Only the filename", "Only documentation spelling"],
+      "answer": 0,
+      "explanation": "Provenance supports origin and build claims but does not establish that an artifact is safe, correct, compatible, or authorized for release."
+    },
+    {
+      "id": "q111", "course": "10", "category": "evidence",
+      "prompt": "A passing evaluation record names the right commit but a different release-manifest digest. What should admission do?",
+      "options": ["Reuse it", "Reject it as evidence for a different artifact graph", "Change the digest", "Ask the candidate model"],
+      "answer": 1,
+      "explanation": "Commit identity alone does not identify model, prompt, policy, data, evaluator, image, and IaC; evidence must bind the exact manifest."
+    },
+    {
+      "id": "q112", "course": "10", "category": "oidc",
+      "prompt": "Which control most directly replaces stored cloud access keys in GitHub Actions?",
+      "options": ["A mutable tag", "OIDC exchange into a short-lived scoped cloud session", "A README secret", "A public runner cache"],
+      "answer": 1,
+      "explanation": "OIDC lets the cloud verify workload claims and issue a short-duration role session without storing a long-lived credential in GitHub."
+    },
+    {
+      "id": "q113", "course": "10", "category": "workflow-security",
+      "prompt": "Why should a privileged workflow not check out untrusted pull-request code?",
+      "options": ["It slows formatting", "Contributor-controlled code can steal credentials or corrupt privileged outputs", "Pull requests have no files", "It prevents unit tests"],
+      "answer": 1,
+      "explanation": "Privilege separation fails if attacker-controlled code runs in a context with secrets, write tokens, cloud identity, shared caches, or sensitive network access."
+    },
+    {
+      "id": "q114", "course": "10", "category": "iac",
+      "prompt": "State changed after a Terraform plan was approved. What is the safe next step?",
+      "options": ["Apply anyway", "Create and review a new plan against current state", "Delete state", "Trust the old screenshot"],
+      "answer": 1,
+      "explanation": "The approved effect no longer matches current infrastructure assumptions; optimistic state/version mismatch requires re-planning and review."
+    },
+    {
+      "id": "q115", "course": "10", "category": "state-security",
+      "prompt": "How should saved Terraform plans generally be classified?",
+      "options": ["Public documentation", "Potentially sensitive artifacts with restricted storage and retention", "Harmless source code", "Temporary data that never contains values"],
+      "answer": 1,
+      "explanation": "Saved plans can contain configuration, prior state and sensitive values, even where terminal output is redacted."
+    },
+    {
+      "id": "q116", "course": "10", "category": "canary",
+      "prompt": "Which canary result is a hard stop despite improved latency?",
+      "options": ["One confirmed forbidden outcome", "A lower cost", "A larger sample", "A matching version"],
+      "answer": 0,
+      "explanation": "Predeclared safety invariants are not averaged against speed or cost; a forbidden outcome triggers containment and rollback."
+    },
+    {
+      "id": "q117", "course": "10", "category": "canary",
+      "prompt": "Why is an underpowered canary inconclusive rather than passing?",
+      "options": ["Metrics are always wrong", "Too little representative evidence cannot support the promotion claim", "Small samples always fail", "It has no container"],
+      "answer": 1,
+      "explanation": "Minimum volume, horizon, slices, and telemetry completeness are evidence requirements; absence of observed harm in a tiny sample is not proof."
+    },
+    {
+      "id": "q118", "course": "10", "category": "rollback",
+      "prompt": "What is the safest rollback target?",
+      "options": ["Whatever tag was deployed yesterday", "A verified admitted known-good full release manifest", "The newest model", "An untested local image"],
+      "answer": 1,
+      "explanation": "The target must be an available, compatible, non-revoked release graph with evidence, not a mutable pointer or one isolated component."
+    },
+    {
+      "id": "q119", "course": "10", "category": "recovery",
+      "prompt": "Which pair correctly distinguishes recovery objectives?",
+      "options": ["RTO is recovery time; RPO is acceptable data loss measured in time", "RTO is model quality; RPO is cost", "Both are latency percentiles", "Both are artifact digests"],
+      "answer": 0,
+      "explanation": "RTO bounds restoration duration, while RPO bounds how far data may roll back or be lost after the failure."
+    },
+    {
+      "id": "q120", "course": "10", "category": "recovery",
+      "prompt": "A restored service answers requests but cross-tenant authorization was not tested. What is the recovery status?",
+      "options": ["Verified", "Incomplete because availability alone does not prove safe authorization", "Automatically compliant", "Promoted globally"],
+      "answer": 1,
+      "explanation": "Recovery verification must cover integrity, identity, permissions and tenant isolation in addition to service availability and timing."
     }
   ]
 }
