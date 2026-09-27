@@ -1,0 +1,90 @@
+{
+  "title": "Course 10 checkpoint — CI/CD, Infrastructure, and AI DevOps",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c10-01", "category": "artifacts",
+      "prompt": "Why promote an image digest rather than rebuild from the same commit for production?",
+      "options": ["Digests make builds faster", "The existing evidence covers the exact bytes promoted", "Commits cannot be signed", "Tags contain secrets"],
+      "answer": 1,
+      "explanation": "A rebuild creates a different artifact subject and can use changed dependencies or infrastructure; promoting the verified digest preserves evidence identity."
+    },
+    {
+      "id": "c10-02", "category": "provenance",
+      "prompt": "What does a valid provenance attestation establish by itself?",
+      "options": ["The artifact is vulnerability-free", "How an identified artifact was built under stated identity and inputs", "The model is fair", "Production approval"],
+      "answer": 1,
+      "explanation": "Provenance supports origin and build-process verification; consumers still need security, quality, compatibility, authorization, and risk policy."
+    },
+    {
+      "id": "c10-03", "category": "evidence",
+      "prompt": "An evaluation service is unavailable during release admission. What disposition is most accurate?",
+      "options": ["Pass", "Fail the model quality threshold", "Inconclusive because required evidence is missing", "Deploy and delete the gate"],
+      "answer": 2,
+      "explanation": "Unavailable evidence does not prove regression or success; the gate is inconclusive and promotion waits for trustworthy evidence or an authorized bounded exception."
+    },
+    {
+      "id": "c10-04", "category": "identity",
+      "prompt": "Which OIDC trust condition best prevents a feature branch from using the production role?",
+      "options": ["Repository name alone", "A subject bound to the protected production environment or exact ref", "The workflow display name", "A long-lived access key"],
+      "answer": 1,
+      "explanation": "The cloud trust policy should bind subject and audience to the expected repository plus protected environment/ref, and ideally the governed reusable workflow."
+    },
+    {
+      "id": "c10-05", "category": "workflows",
+      "prompt": "Why pin a third-party GitHub Action to a full commit SHA?",
+      "options": ["It grants more permissions", "It makes that dependency reference immutable", "It disables networking", "It automatically verifies business logic"],
+      "answer": 1,
+      "explanation": "A version tag can move; a verified full commit SHA fixes the referenced action revision, although source and permissions still require review."
+    },
+    {
+      "id": "c10-06", "category": "iac",
+      "prompt": "Why must automation apply the exact reviewed Terraform plan?",
+      "options": ["Plans never contain secrets", "A new plan can differ because state, inputs, providers, or configuration changed", "Reviewers approve all future changes", "Terraform cannot detect drift"],
+      "answer": 1,
+      "explanation": "Re-planning at apply time breaks the link between approval and effect; changes to state or inputs require a newly inspected plan."
+    },
+    {
+      "id": "c10-07", "category": "state",
+      "prompt": "A Terraform variable is marked sensitive. What remains true?",
+      "options": ["Its value can never enter state", "It may still be stored in plan or state and those artifacts need protection", "It becomes encrypted automatically", "It can be committed safely"],
+      "answer": 1,
+      "explanation": "Sensitive marking primarily redacts presentation; use ephemeral/write-only mechanisms where suitable and protect plans and remote state as restricted data."
+    },
+    {
+      "id": "c10-08", "category": "canary",
+      "prompt": "A canary has zero errors after 20 requests but policy requires 200. What should happen?",
+      "options": ["Promote", "Fail permanently", "Remain inconclusive until the predeclared evidence requirement is met", "Ignore the policy"],
+      "answer": 2,
+      "explanation": "A tiny sample creates false confidence; minimum population and horizon are part of the versioned rollout decision contract."
+    },
+    {
+      "id": "c10-09", "category": "safety",
+      "prompt": "A canary improves latency but produces one confirmed forbidden outcome. What should the hard safety gate do?",
+      "options": ["Average it with latency", "Stop promotion and trigger containment/rollback", "Hide the slice", "Increase traffic"],
+      "answer": 1,
+      "explanation": "A forbidden outcome is not compensated by performance gains; the predeclared safety invariant stops exposure and initiates response."
+    },
+    {
+      "id": "c10-10", "category": "rollback",
+      "prompt": "Why is rolling back only the container tag insufficient for an AI release?",
+      "options": ["Containers are immutable", "Model, prompt, policy, data/index, and infrastructure may remain incompatible", "Tags are too long", "Rollback must delete logs"],
+      "answer": 1,
+      "explanation": "Recovery must restore a verified compatible release graph, not one component whose surrounding contracts may have changed."
+    },
+    {
+      "id": "c10-11", "category": "recovery",
+      "prompt": "What does RPO describe?",
+      "options": ["Maximum acceptable data loss measured in time", "Maximum recovery duration", "Maximum request latency", "Artifact retention only"],
+      "answer": 0,
+      "explanation": "RPO bounds the amount of state that may be lost; RTO separately bounds how long restoration may take."
+    },
+    {
+      "id": "c10-12", "category": "recovery",
+      "prompt": "A restore meets RTO and RPO but tenant authorization was not retested. Is the drill complete?",
+      "options": ["Yes", "No; integrity and authorization must also be verified", "Yes if the model starts", "Only if backups are public"],
+      "answer": 1,
+      "explanation": "Availability and data timing do not prove a safe restore; access control and tenant isolation must be revalidated before declaring recovery."
+    }
+  ]
+}

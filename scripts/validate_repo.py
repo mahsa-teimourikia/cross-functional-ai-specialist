@@ -46,6 +46,7 @@ def validate_registry() -> None:
         "advanced-07",
         "advanced-08",
         "advanced-09",
+        "advanced-10",
     ]
     for lesson in lessons:
         assert lesson["status"] in {"ready", "planned"}
