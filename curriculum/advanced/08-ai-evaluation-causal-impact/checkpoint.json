@@ -1,0 +1,103 @@
+{
+  "course": "08",
+  "title": "AI Evaluation, Experimentation, and Causal Impact checkpoint",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c08-01",
+      "category": "metrics",
+      "prompt": "What must be explicit before interpreting a metric value?",
+      "options": ["Only its name", "Population, numerator, denominator, aggregation, uncertainty, and owner", "Only its visualization", "The vendor that computed it"],
+      "answer": 1,
+      "explanation": "A numeric score is not decision evidence until its eligible population, arithmetic, aggregation, uncertainty, and governance are defined."
+    },
+    {
+      "id": "c08-02",
+      "category": "datasets",
+      "prompt": "Why keep a frozen release set separate from development cases?",
+      "options": ["To make it smaller", "To avoid tuning to the evidence used for the release claim", "To remove difficult cases", "To let judges see system identity"],
+      "answer": 1,
+      "explanation": "Repeated tuning against release cases leaks decision evidence into development and makes the reported generalization claim optimistic."
+    },
+    {
+      "id": "c08-03",
+      "category": "evaluation",
+      "prompt": "Which property should normally be checked deterministically?",
+      "options": ["Whether prose feels elegant", "Whether an unapproved tool was used", "Whether a user enjoys the product", "Whether a business outcome is causal"],
+      "answer": 1,
+      "explanation": "Allowed tool use is application-known state and should not be delegated to a probabilistic evaluator."
+    },
+    {
+      "id": "c08-04",
+      "category": "judges",
+      "prompt": "What makes an automated judge suitable for a release workflow?",
+      "options": ["It is a large model", "Measured agreement and error behavior on blinded human-labelled cases plus bias audits", "It produces long rationales", "It agrees with itself"],
+      "answer": 1,
+      "explanation": "A judge is a measurement instrument whose accuracy, error costs, slices, order sensitivity, and permitted use must be calibrated against human reference labels."
+    },
+    {
+      "id": "c08-05",
+      "category": "uncertainty",
+      "prompt": "How is non-inferiority established for candidate-minus-baseline quality?",
+      "options": ["The p-value is above 0.05", "The interval's lower bound exceeds the predeclared negative margin", "The point estimate is positive", "The candidate is cheaper"],
+      "answer": 1,
+      "explanation": "Failure to detect a difference is not equivalence; the interval must exclude regressions larger than the agreed margin."
+    },
+    {
+      "id": "c08-06",
+      "category": "release",
+      "prompt": "How should insufficient cases in a required risk slice be classified?",
+      "options": ["Pass", "Inconclusive", "Fail every model permanently", "Ignore the slice"],
+      "answer": 1,
+      "explanation": "Missing precision is missing evidence, so the release remains inconclusive rather than being silently treated as success."
+    },
+    {
+      "id": "c08-07",
+      "category": "experiments",
+      "prompt": "What does intention-to-treat compare?",
+      "options": ["Only treatment adopters", "All units as originally assigned", "Only successful tasks", "Only users with complete positive outcomes"],
+      "answer": 1,
+      "explanation": "ITT preserves random assignment and estimates the effect of offering treatment under the uptake and conditions observed in the experiment."
+    },
+    {
+      "id": "c08-08",
+      "category": "experiments",
+      "prompt": "Why is adopter-only treatment versus control not a randomized estimate?",
+      "options": ["Adoption occurs after assignment and is self-selected", "Control users always adopt", "It uses too many observations", "It is identical to ITT"],
+      "answer": 0,
+      "explanation": "Conditioning on post-treatment adoption selects a non-random subset whose motivation, difficulty, or skill can also affect outcomes."
+    },
+    {
+      "id": "c08-09",
+      "category": "variance",
+      "prompt": "What is a valid CUPED covariate?",
+      "options": ["A measure caused by treatment", "A predictive pre-treatment measure", "Only the final outcome", "Whether a treatment user adopted"],
+      "answer": 1,
+      "explanation": "CUPED uses a predictive variable fixed before treatment; a treatment-affected variable can bias the estimand rather than merely reduce variance."
+    },
+    {
+      "id": "c08-10",
+      "category": "causality",
+      "prompt": "What can propensity-score adjustment remove?",
+      "options": ["Every causal bias", "Confounding from measured covariates under overlap and identification assumptions", "Unmeasured confounding automatically", "Measurement error"],
+      "answer": 1,
+      "explanation": "Propensity methods balance observed pre-treatment covariates; they do not solve unmeasured confounding, poor overlap, or invalid measurement."
+    },
+    {
+      "id": "c08-11",
+      "category": "causality",
+      "prompt": "What assumption identifies the standard difference-in-differences effect?",
+      "options": ["Equal outcome levels", "Parallel untreated trends", "Perfect adoption", "No pre-treatment data"],
+      "answer": 1,
+      "explanation": "The control group's change must represent how the treated group would have changed without treatment, conditional on the design assumptions."
+    },
+    {
+      "id": "c08-12",
+      "category": "governance",
+      "prompt": "Who should authorize a broader rollout?",
+      "options": ["The automated judge", "The application and domain owners under change governance", "The notebook kernel", "Whichever system has the highest score"],
+      "answer": 1,
+      "explanation": "Evaluation produces evidence; accountable owners interpret limitations and authorize a bounded rollout with monitoring and rollback."
+    }
+  ]
+}
