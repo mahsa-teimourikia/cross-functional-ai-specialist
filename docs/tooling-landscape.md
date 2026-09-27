@@ -1,6 +1,6 @@
 # Tooling and State-of-the-Art Review
 
-**Reviewed:** 2026-09-21
+**Reviewed:** 2026-09-27
 **Purpose:** decision guidance for the full program, not a mandatory shopping list.
 
 Tooling changes faster than architecture fundamentals. Verify maintenance, licensing, security,
@@ -231,13 +231,107 @@ and [OWASP RAG security](https://cheatsheetseries.owasp.org/cheatsheets/RAG_Secu
 
 Begin with a deterministic workflow. Add routing, planning, or multiple agents only when measured
 task variability justifies coordination and capability cost. MCP standardizes how applications
-expose/consume context and tools, but descriptions and results remain untrusted. Compare managed
-and custom orchestration on restart, identity, tool authorization, observability, versioning,
-lock-in, evaluation, and operating effort—not demo speed.
+expose/consume context and tools, but descriptions, resources, arguments, results, elicitation, and
+task state remain untrusted. Schema validity is not business authorization. Authenticate the user
+and workload, derive tenant/resource scope from trusted state, keep credentials at the gateway,
+authorize every call, reserve budget before execution, validate results, and reconcile unknown
+effects with one stable logical operation ID.
 
-Sources: [MCP specification](https://modelcontextprotocol.io/specification/),
-[Bedrock AgentCore](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html),
-and [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/).
+### Control-flow options
+
+| Option | Maturity | Strong fit | Primary selection concern |
+|---|---|---|---|
+| plain Python/state machine | Established pattern | small bounded workflow with owned runtime | durability and platform work |
+| LangGraph | Current production option | explicit state graphs, checkpoints, interrupts | store/concurrency/replay semantics |
+| OpenAI Agents SDK | Current production option | lightweight tools, handoffs, guardrails, tracing | hosted boundaries and provider fit |
+| Strands Agents | Current production option | AWS-oriented agents, graphs, workflows, swarms | runtime and AWS-default decisions |
+| Google ADK | Current production option | deterministic and dynamic multi-agent workflows | ecosystem/deployment maturity |
+| Microsoft Agent Framework | Current evolving option | functional/graph workflows and orchestrations | migration and version maturity |
+| CrewAI | Current production option | crews plus explicit flow orchestration | prove durability and coordination value |
+| custom event-driven runtime | Specialist option | distributed actor/message architecture | highest engineering and operating cost |
+
+Use a durable workflow engine such as AWS Step Functions, Temporal, Durable Task, Dapr, or Restate
+when runs must survive process loss, wait for approval, own timers, or coordinate external effects.
+Agent frameworks and workflow engines can be composed: put model decisions inside bounded durable
+nodes/activities. Do not execute provider calls inside replayed deterministic workflow logic.
+
+### MCP
+
+The final MCP 2026-07-28 release uses a stateless protocol core and an extensions framework,
+including Tasks for long-running operations. Stateless HTTP transport simplifies load balancing;
+it does not make the underlying business task stateless, authorized, or exactly once. Validate OAuth
+issuer/audience/client/scope, isolate server credentials, authorize every task poll/cancel/result,
+scope cache entries, constrain egress, and propagate only safe trace context.
+
+Protocol adoption is moving quickly. Pin a supported revision, test negotiation and downgrade,
+review SDK release notes, and treat new extensions according to maturity. Internal registries need
+admission, ownership, versioning, trust metadata, review, revocation, and incident response.
+
+### Amazon Bedrock AgentCore
+
+As reviewed in September 2026, AgentCore documents independently usable managed capabilities:
+Harness, Runtime, Memory, Gateway, Identity, Browser, Code Interpreter, Observability, Payments,
+Evaluations, Optimization, Policy, and Registry. Runtime supports custom frameworks and models;
+Gateway can front APIs, Lambda functions, MCP servers, and runtime targets; Policy can enforce
+deterministic rules around gateway calls; and telemetry integrates with OpenTelemetry-compatible
+signals.
+
+Do not confuse AgentCore with Agents for Amazon Bedrock. Bedrock Agents is a managed orchestration
+service configured around a foundation model, instructions, action groups, knowledge bases,
+guardrails, and optional agent collaborators. AgentCore is modular infrastructure for custom or
+framework-built agents. Use Bedrock Agents when its managed loop fits; use AgentCore or a custom
+runtime when the application must own loop, graph, checkpoint, replay, or framework behavior. They
+can be combined, but neither product removes the need to prove application authorization,
+idempotency, approval freshness, budgets, cancellation, and recovery.
+
+| AgentCore capability | Use it for | Still prove in the application |
+|---|---|---|
+| Harness / Runtime | managed loop or deployment/isolation | budgets, state, termination, framework semantics |
+| Gateway / Policy | governed tool surface and deterministic policy | every route covered; direct runtime bypass denied |
+| Identity | inbound/outbound authentication and credentials | user/workload/tenant binding and delegation |
+| Memory | short/long-term memory infrastructure | provenance, authorization, correction, retention, deletion |
+| Browser / Code Interpreter | managed isolated tools | filesystem/network/data policy and output validation |
+| Observability | traces, logs, metrics, operational inspection | redaction, sampling, retention, correlation, SLO ownership |
+| Evaluations / Optimization | trace/session scoring and experiments | labels, judge calibration, thresholds, rollback decisions |
+| Registry | tool, MCP, skill, and agent discovery/governance | admission authority, ownership, signatures, revocation |
+
+AgentCore Runtime security guidance distinguishes IAM SigV4 service authentication from JWT
+end-user authentication. The raw user-ID path does not itself verify an IdP identity; production
+systems should derive it from authenticated context. Separate user-delegated and autonomous
+credentials, scope runtime roles and network egress, run containers without root, and use current
+metadata-service protections. If Gateway/Policy is the enforcement point, use resource/workload and
+network restrictions so callers cannot invoke the Runtime directly and bypass it.
+
+Compare AgentCore with custom orchestration on region/feature availability, quotas, network and
+data boundaries, checkpoint semantics, tool policy coverage, observability export, framework/model
+portability, operating ownership, cost, incident recovery, and exit plan. Managed runtime does not
+prove business authorization, effect idempotency, usefulness, or compliance.
+
+### Evaluation and coordination tax
+
+Evaluate labelled task and adversarial cases with required/forbidden tools, argument/resource
+bindings, evidence, terminal states, approval, and budgets. Measure task success, compliant success,
+forbidden outcomes, valid work blocked, trajectory/tool accuracy, retry amplification, restart and
+cancellation recovery, latency, and cost per successful compliant task. Calibrate model judges to
+human labels; use code evaluators for deterministic invariants.
+
+Multi-agent designs must beat workflow and single-agent baselines after counting extra calls,
+handoffs, duplicated context/tool work, merge/review work, capability exposure, and operations.
+Parallelism may reduce wall-clock latency while increasing total work; report both.
+
+Primary and official sources: [ReAct](https://arxiv.org/abs/2210.03629),
+[AgentBench](https://arxiv.org/abs/2308.03688), [SWE-bench](https://arxiv.org/abs/2310.06770),
+[MCP 2026-07-28](https://blog.modelcontextprotocol.io/posts/2026-07-28/),
+[MCP Tasks](https://tasks.extensions.modelcontextprotocol.io/specification/draft/tasks),
+[LangGraph durable execution](https://docs.langchain.com/oss/python/langgraph/durable-execution),
+[OpenAI Agents orchestration](https://openai.github.io/openai-agents-python/multi_agent/),
+[Google ADK workflows](https://google.github.io/adk-docs/workflows/),
+[Microsoft Agent Framework workflows](https://learn.microsoft.com/en-us/agent-framework/workflows/),
+[Strands patterns](https://strandsagents.com/docs/user-guide/sdk/multi-agent/multi-agent-patterns/),
+[Agents for Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-build-modify.html),
+[AgentCore overview](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html),
+[AgentCore Runtime security](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-security-best-practices.html),
+and [AgentCore release notes](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/release-notes.html).
 
 ## Observability
 

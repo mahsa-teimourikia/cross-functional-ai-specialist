@@ -1,0 +1,102 @@
+{
+  "title": "Course 5 Checkpoint — Agentic AI Architecture and AgentCore",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c05q01",
+      "category": "architecture",
+      "prompt": "A fixed exception-review process and a bounded agent achieve equal compliant success, but the agent adds model calls, latency, and cost. What is the default architecture decision?",
+      "options": ["Choose the agent because it is more autonomous", "Choose the workflow unless variable-path evidence justifies agency", "Deploy both without comparison", "Add more specialist agents"],
+      "answer": 1,
+      "explanation": "Use the least autonomous design that meets the requirement; extra coordination needs measurable benefit, not novelty."
+    },
+    {
+      "id": "c05q02",
+      "category": "trust-boundary",
+      "prompt": "A model emits a schema-valid tool call containing tenant_id='northstar'. What establishes tenant authority?",
+      "options": ["The argument value", "The model's system prompt", "Authenticated principal and workload state plus policy", "The MCP server name"],
+      "answer": 2,
+      "explanation": "Typed arguments prove shape only; trusted identity, workload capability, current policy, and resource state establish authority."
+    },
+    {
+      "id": "c05q03",
+      "category": "mcp",
+      "prompt": "What does MCP primarily standardize for this course?",
+      "options": ["Business authorization", "Tool and context interoperability", "Exactly-once effects", "Model correctness"],
+      "answer": 1,
+      "explanation": "MCP standardizes discovery and invocation surfaces; applications must still authenticate, authorize, validate, and reconcile effects."
+    },
+    {
+      "id": "c05q04",
+      "category": "approval",
+      "prompt": "Which approval remains valid after a proposal's decision or arguments change?",
+      "options": ["A ticket saying approved", "A boolean stored in agent memory", "None; changed content requires a newly bound approval", "Any approval from the same day"],
+      "answer": 2,
+      "explanation": "Consequential approval binds the exact proposal digest, action, target, identities, policy version, and validity window."
+    },
+    {
+      "id": "c05q05",
+      "category": "recovery",
+      "prompt": "A publication times out after it may have committed. What should happen before another write?",
+      "options": ["Generate a new operation ID and retry", "Reconcile the stable logical operation against authoritative state", "Assume failure", "Ask the model whether it succeeded"],
+      "answer": 1,
+      "explanation": "The outcome is unknown; reconciliation by stable operation ID and request digest prevents duplicate external effects."
+    },
+    {
+      "id": "c05q06",
+      "category": "budgets",
+      "prompt": "Why must a consequential tool's remaining budget be checked before execution?",
+      "options": ["A post-call check can undo any effect", "It prevents an over-budget effect that cannot be rolled back", "It improves model vocabulary", "It replaces authorization"],
+      "answer": 1,
+      "explanation": "Cost, time, attempt, and cancellation limits must gate the effect; detection after commit is observability, not prevention."
+    },
+    {
+      "id": "c05q07",
+      "category": "state",
+      "prompt": "What is required when resuming a checkpoint after process loss?",
+      "options": ["Trust the serialized state unchanged", "Reset all budgets", "Reauthorize and refresh policy, approvals, evidence, and in-flight effects", "Replay the entire prompt history blindly"],
+      "answer": 2,
+      "explanation": "A durable checkpoint is not current authority; resume must verify ownership, revisions, current state, and uncertain effects."
+    },
+    {
+      "id": "c05q08",
+      "category": "security",
+      "prompt": "Retrieved policy text instructs the agent to call an export tool. What is the decisive control?",
+      "options": ["Tell the model to ignore malicious text", "Remove all tools", "A fixed capability manifest and tool-boundary authorization", "Use a longer system prompt"],
+      "answer": 2,
+      "explanation": "Prompt defenses help, but only deterministic capability and authorization checks prevent the untrusted text from widening authority."
+    },
+    {
+      "id": "c05q09",
+      "category": "metrics",
+      "prompt": "Why report blocked attempts separately from forbidden outcomes?",
+      "options": ["They use different populations and mean prevention versus actual harm", "Every blocked attempt is a harmful effect", "Forbidden outcomes are model calls", "It reduces evaluation cost"],
+      "answer": 0,
+      "explanation": "Control activity, successful prevention, actual harmful effects, and valid work blocked require separate denominators and decisions."
+    },
+    {
+      "id": "c05q10",
+      "category": "multi-agent",
+      "prompt": "What must a multi-agent proposal demonstrate beyond final-answer quality?",
+      "options": ["More role names", "Measured benefit exceeding coordination and capability cost", "A longer transcript", "Peer approval by another model"],
+      "answer": 1,
+      "explanation": "Additional agents add calls, handoffs, shared-state risks, duplicated work, and operations; those costs need measured justification."
+    },
+    {
+      "id": "c05q11",
+      "category": "agentcore",
+      "prompt": "What remains application-owned when deploying a custom agent on AgentCore Runtime?",
+      "options": ["Nothing", "Business authorization, state semantics, idempotency, completion, and evaluation contracts", "Only the model name", "Only container formatting"],
+      "answer": 1,
+      "explanation": "Managed runtime capabilities reduce platform work but do not define the application's authority, effects, evidence, or success semantics."
+    },
+    {
+      "id": "c05q12",
+      "category": "termination",
+      "prompt": "Which is a trustworthy agent completion condition?",
+      "options": ["The output contains DONE", "A supervisor model says complete", "Required evidence, validation, approval, and verified effect are present in trusted state", "The context window is full"],
+      "answer": 2,
+      "explanation": "Completion is an application-owned terminal state derived from explicit invariants, not model-generated language."
+    }
+  ]
+}

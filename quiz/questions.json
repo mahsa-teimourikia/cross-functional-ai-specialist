@@ -432,6 +432,114 @@
       "options": ["Anonymization", "Authorization", "Neither; it remains sensitive derived data", "Prompt-injection resistance"],
       "answer": 2,
       "explanation": "Embeddings can expose source information and must inherit access, encryption, retention, query, and deletion controls."
+    },
+    {
+      "id": "q49",
+      "course": "05",
+      "category": "architecture",
+      "prompt": "A workflow and bounded agent have equal compliant success, but the agent costs more. What is the default choice?",
+      "options": ["The agent", "The workflow unless variable-path evidence justifies agency", "A multi-agent swarm", "Whichever has more tools"],
+      "answer": 1,
+      "explanation": "The least-autonomous architecture wins when it meets the requirement with equal outcomes and lower control and operating cost."
+    },
+    {
+      "id": "q50",
+      "course": "05",
+      "category": "tools",
+      "prompt": "What does a valid tool schema establish?",
+      "options": ["Argument shape, not authority", "Tenant ownership", "Human approval", "The truth of model output"],
+      "answer": 0,
+      "explanation": "Structural validation is necessary, but trusted identity, workload capability, policy, and authoritative state decide permission."
+    },
+    {
+      "id": "q51",
+      "course": "05",
+      "category": "mcp",
+      "prompt": "Which responsibility does MCP not remove?",
+      "options": ["Tool interoperability", "Per-call authentication, authorization, and effect validation", "Protocol negotiation", "Schema discovery"],
+      "answer": 1,
+      "explanation": "MCP standardizes communication surfaces; applications still govern who may invoke a tool and whether the result is safe and valid."
+    },
+    {
+      "id": "q52",
+      "course": "05",
+      "category": "injection",
+      "prompt": "A retrieved document asks the agent to export customer data. Which control prevents capability widening?",
+      "options": ["A longer prompt", "The document's classification label alone", "A fixed workload tool manifest and gateway policy", "A second model agreeing"],
+      "answer": 2,
+      "explanation": "Retrieved content is untrusted data; deterministic capability and authorization checks must reject a tool outside the run manifest."
+    },
+    {
+      "id": "q53",
+      "course": "05",
+      "category": "approval",
+      "prompt": "What should happen when an approved proposal's arguments change?",
+      "options": ["Reuse the receipt", "Issue a new approval bound to the changed digest", "Let the agent choose", "Ignore the change if the tool name is the same"],
+      "answer": 1,
+      "explanation": "Approval applies to an exact action, target, argument digest, policy version, and validity window; changed content invalidates it."
+    },
+    {
+      "id": "q54",
+      "course": "05",
+      "category": "recovery",
+      "prompt": "Why retain one logical operation ID across an uncertain retry?",
+      "options": ["To create more effects", "To reconcile the intended effect and prevent duplication", "To reset approval", "To hide attempts"],
+      "answer": 1,
+      "explanation": "A stable operation identity and request digest let the executor distinguish replay from a different business intent."
+    },
+    {
+      "id": "q55",
+      "course": "05",
+      "category": "checkpoint",
+      "prompt": "What prevents two resumed workers from silently overwriting run state?",
+      "options": ["A role name", "Optimistic revision or an atomic transition", "A larger model", "Prompt caching"],
+      "answer": 1,
+      "explanation": "A compare-and-set revision makes concurrent and stale checkpoint writes observable instead of accepting last-writer-wins."
+    },
+    {
+      "id": "q56",
+      "course": "05",
+      "category": "budget",
+      "prompt": "When should a cost or deadline limit be checked for a consequential tool?",
+      "options": ["Only after success", "Before each attempt and effect", "At the end of the day", "Only when the model requests it"],
+      "answer": 1,
+      "explanation": "Post-effect accounting cannot prevent an irreversible over-budget action; reserve the relevant budget before execution."
+    },
+    {
+      "id": "q57",
+      "course": "05",
+      "category": "termination",
+      "prompt": "Who owns the trustworthy terminal state of an agent run?",
+      "options": ["The application using explicit completion invariants", "Any specialist agent", "The final natural-language sentence", "The MCP tool description"],
+      "answer": 0,
+      "explanation": "Completion depends on trusted evidence, validation, approval, effects, and budgets; model text cannot declare those facts."
+    },
+    {
+      "id": "q58",
+      "course": "05",
+      "category": "metrics",
+      "prompt": "What is the denominator for cost per successful compliant task?",
+      "options": ["All model calls", "Successful tasks that also satisfied every required control", "Blocked attacks", "Tool definitions"],
+      "answer": 1,
+      "explanation": "Dividing total cost by compliant successes connects spend to the useful governed outcome rather than cheap failed requests."
+    },
+    {
+      "id": "q59",
+      "course": "05",
+      "category": "multi-agent",
+      "prompt": "What does coordination tax include?",
+      "options": ["Only wall-clock latency", "Extra calls, handoffs, duplicated work, merging, failures, and operations", "Only token price", "Only agent count"],
+      "answer": 1,
+      "explanation": "Multi-agent designs add total work, capability surfaces, shared-state and handoff failures, and operational ownership beyond latency."
+    },
+    {
+      "id": "q60",
+      "course": "05",
+      "category": "agentcore",
+      "prompt": "What does AgentCore Runtime hosting prove by itself?",
+      "options": ["Application authorization is correct", "The agent is useful", "Neither; application controls and evaluation remain necessary", "Every tool effect is exactly once"],
+      "answer": 2,
+      "explanation": "Managed hosting supplies runtime capabilities, not proof of business policy, idempotency, completion, quality, or safe tool behavior."
     }
   ]
 }
