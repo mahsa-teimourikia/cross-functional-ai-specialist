@@ -6,7 +6,7 @@ moving toward Staff AI Scientist, AI Architect, or cross-functional AI technical
 > **Start here:** open the [Learning Hub](hub/index.html), then complete the ready courses
 > in order. The Hub separates material that is ready to learn from courses that are still planned.
 
-[One+i](https://oneplusi.io) · Advanced professional training · Last reviewed 2026-09-21
+[One+i](https://oneplusi.io) · Advanced professional training · Last reviewed 2026-09-27
 
 ## What this program develops
 
@@ -36,7 +36,8 @@ technical strategy and organizational influence
 | 02 — Cloud and Distributed AI Systems | **Ready in repository** | [Course chapter](curriculum/advanced/02-cloud-distributed-ai-systems/README.md) | [Notebook](curriculum/advanced/02-cloud-distributed-ai-systems/cloud_distributed_ai_systems.ipynb) · [Lab](curriculum/advanced/02-cloud-distributed-ai-systems/lab.py) |
 | 03 — Enterprise Identity and Agent Authorization | **Ready in repository** | [Course chapter](curriculum/advanced/03-enterprise-identity-agent-authorization/README.md) | [Notebook](curriculum/advanced/03-enterprise-identity-agent-authorization/enterprise_identity_agent_authorization.ipynb) · [Lab](curriculum/advanced/03-enterprise-identity-agent-authorization/lab.py) |
 | 04 — Production RAG and Knowledge Systems | **Ready in repository** | [Course chapter](curriculum/advanced/04-production-rag-knowledge-systems/README.md) | [Notebook](curriculum/advanced/04-production-rag-knowledge-systems/production_rag_knowledge_systems.ipynb) · [Lab](curriculum/advanced/04-production-rag-knowledge-systems/lab.py) |
-| 05–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
+| 05 — Agentic AI Architecture and AgentCore | **Ready in repository** | [Course chapter](curriculum/advanced/05-agentic-ai-architecture-agentcore/README.md) | [Notebook](curriculum/advanced/05-agentic-ai-architecture-agentcore/agentic_ai_architecture_agentcore.ipynb) · [Lab](curriculum/advanced/05-agentic-ai-architecture-agentcore/lab.py) |
+| 06–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
 
 “Planned” is deliberate: a title in a roadmap is not presented as completed training.
 
@@ -76,6 +77,9 @@ uv run jupyter execute \
 uv run jupyter execute \
   curriculum/advanced/04-production-rag-knowledge-systems/production_rag_knowledge_systems.ipynb \
   --inplace
+uv run jupyter execute \
+  curriculum/advanced/05-agentic-ai-architecture-agentcore/agentic_ai_architecture_agentcore.ipynb \
+  --inplace
 ```
 
 The notebook and lab use deterministic local adapters. No cloud account, API key, or paid model
@@ -95,6 +99,7 @@ uv run python -m http.server 8000
 - [Course 2 checkpoint](curriculum/advanced/02-cloud-distributed-ai-systems/checkpoint.json)
 - [Course 3 checkpoint](curriculum/advanced/03-enterprise-identity-agent-authorization/checkpoint.json)
 - [Course 4 checkpoint](curriculum/advanced/04-production-rag-knowledge-systems/checkpoint.json)
+- [Course 5 checkpoint](curriculum/advanced/05-agentic-ai-architecture-agentcore/checkpoint.json)
 - [Full knowledge check](quiz/index.html)
 - [Contribution and course quality standard](CONTRIBUTING.md)
 

@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–4 are complete
-vertical slices; Courses 5–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–5 are complete
+vertical slices; Courses 6–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -46,7 +46,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 2 | Cloud and Distributed AI Systems | 3 | **Ready** | AWS deployment architecture, load/failure model, ADR |
 | 3 | Enterprise Identity and Agent Authorization | 2 | **Ready** | Threat-aware auth design, delegated capability tests |
 | 4 | Production RAG and Knowledge Systems | 3 | **Ready** | Secure ingestion/retrieval pipeline and retrieval eval |
-| 5 | Agentic AI Architecture and AgentCore | 3 | Planned | Bounded workflow/agent comparison and recovery plan |
+| 5 | Agentic AI Architecture and AgentCore | 3 | **Ready** | Bounded workflow/agent comparison and recovery plan |
 | 6 | Model Gateways and Inference Economics | 2 | Planned | Routing policy, fallback experiment, unit economics |
 | 7 | AI Observability and Reliability Engineering | 2 | Planned | OpenTelemetry traces, SLOs, runbook, game day |
 | 8 | AI Evaluation, Experimentation, and Causal Impact | 3 | Planned | Release gate, human-eval protocol, causal experiment |
@@ -142,7 +142,7 @@ evaluation, knowledge data contract, ADR, threat model, and production migration
 
 ## Course 5 — Agentic AI Architecture and AgentCore
 
-**Status:** Planned · **Prerequisites:** Courses 2–4
+**Status:** Ready in repository · **Prerequisites:** Courses 2–4
 **Thesis:** use the least autonomous architecture that meets the requirement; when autonomy is
 justified, bound tools, state, authority, cost, time, retries, and termination in application code.
 
@@ -154,8 +154,14 @@ justified, bound tools, state, authority, cost, time, retries, and termination i
 - Bedrock Agents/AgentCore and custom orchestration compared on control, identity, portability,
   observability, durability, operating effort, and cost.
 
-The lab implements one exception-review task as a workflow and bounded agent, then injects tool
-timeout, malicious content, budget exhaustion, duplicates, cancellation, and restart. Evidence:
+The lab implements one exception-review task as a workflow and bounded agent over the same trusted
+tool gateway, then measures task/compliant success, tool attempts, latency, and cost. It proves
+typed action admission, current principal/workload authorization, pre-effect budgets, exact
+single-use approval, stable logical operation replay, unknown-outcome reconciliation, optimistic
+checkpoint restart, and application-owned termination. Failure injection covers malicious
+retrieved instructions, cross-tenant scope, schema widening, transient timeout/retry exhaustion,
+model/cost budgets, cancellation, stale entitlements and case state, concurrent checkpoint writes,
+approval alteration/replay/expiry, duplicate delivery, and a lost response after commit. Evidence:
 measured architecture decision, threat model, recovery plan, and agent evaluation.
 
 ## Course 6 — Model Gateways and Inference Economics

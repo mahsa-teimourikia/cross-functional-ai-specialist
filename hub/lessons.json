@@ -56,7 +56,18 @@
     "checkpoint": "../curriculum/advanced/04-production-rag-knowledge-systems/checkpoint.json"
   },
   {
-    "id": "advanced-05", "level": "advanced", "step": 5, "phase": "Agents", "title": "Agentic AI Architecture and AgentCore", "summary": "Compare workflows and bounded agents under failure, authority, and cost constraints.", "outcomes": ["Choose autonomy deliberately", "Bound tools and state", "Recover from restart and duplicates"], "status": "planned", "readme": "../COURSE_PLAN.md#course-5--agentic-ai-architecture-and-agentcore", "notebook": null, "lab": null, "checkpoint": null
+    "id": "advanced-05",
+    "level": "advanced",
+    "step": 5,
+    "phase": "Agents",
+    "title": "Agentic AI Architecture and AgentCore",
+    "summary": "Compare a deterministic workflow with a bounded agent through one governed tool, approval, budget, checkpoint, and recovery boundary.",
+    "outcomes": ["Choose the least-autonomous architecture from measured task, safety, latency, and cost evidence", "Implement typed tools, current authorization, budgets, approvals, idempotency, and application-owned termination", "Recover safely from timeout, cancellation, restart, duplicate delivery, stale state, and unknown effects", "Map custom orchestration responsibilities to current Amazon Bedrock AgentCore capabilities"],
+    "status": "ready",
+    "readme": "../curriculum/advanced/05-agentic-ai-architecture-agentcore/README.md",
+    "notebook": "../curriculum/advanced/05-agentic-ai-architecture-agentcore/agentic_ai_architecture_agentcore.ipynb",
+    "lab": "../curriculum/advanced/05-agentic-ai-architecture-agentcore/lab.py",
+    "checkpoint": "../curriculum/advanced/05-agentic-ai-architecture-agentcore/checkpoint.json"
   },
   {
     "id": "advanced-06", "level": "advanced", "step": 6, "phase": "Inference", "title": "Model Gateways and Inference Economics", "summary": "Route models and fallbacks using quality, latency, reliability, policy, and cost evidence.", "outcomes": ["Design provider contracts", "Measure routing frontiers", "Calculate compliant-task economics"], "status": "planned", "readme": "../COURSE_PLAN.md#course-6--model-gateways-and-inference-economics", "notebook": null, "lab": null, "checkpoint": null
