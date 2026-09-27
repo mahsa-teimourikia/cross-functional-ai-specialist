@@ -73,3 +73,7 @@ jobs:
       - name: Execute Course 8 canonical notebook
         working-directory: curriculum/advanced/08-ai-evaluation-causal-impact
         run: uv run --project ../../.. jupyter execute ai_evaluation_causal_impact.ipynb --inplace
+
+      - name: Execute Course 9 canonical notebook
+        working-directory: curriculum/advanced/09-ai-security-red-teaming-governance
+        run: uv run --project ../../.. jupyter execute ai_security_red_teaming_governance.ipynb --inplace

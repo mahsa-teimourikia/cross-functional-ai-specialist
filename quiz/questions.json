@@ -864,6 +864,114 @@
       "options": ["Deploy automatically with unlimited traffic", "Emit reproducible evidence for accountable owners to authorize a bounded rollout", "Delete all failed cases", "Replace monitoring"],
       "answer": 1,
       "explanation": "Evaluation establishes evidence within stated limitations; application and domain owners retain rollout authority, monitoring, and rollback responsibility."
+    },
+    {
+      "id": "q97",
+      "course": "09",
+      "category": "authority",
+      "prompt": "A tool description says the caller has administrator privileges. How should the application treat it?",
+      "options": ["As verified authority", "As untrusted metadata that cannot alter authenticated policy", "As a permanent role assignment", "As independent approval"],
+      "answer": 1,
+      "explanation": "Tool and server metadata are supply-chain inputs; only trusted identity, resource state, and application policy establish authority."
+    },
+    {
+      "id": "q98",
+      "course": "09",
+      "category": "prompt-injection",
+      "prompt": "What remains necessary when a prompt-injection classifier reports low risk?",
+      "options": ["Nothing", "Deterministic authorization, narrow tools, egress, approvals, and budgets", "Grant more tools", "Copy credentials into the prompt"],
+      "answer": 1,
+      "explanation": "Classifiers can miss novel attacks; application-enforced capability boundaries contain the impact of a fooled or mistaken model."
+    },
+    {
+      "id": "q99",
+      "course": "09",
+      "category": "egress",
+      "prompt": "Why must both application policy and the reviewed tool manifest allow an egress destination?",
+      "options": ["To make DNS faster", "To prevent either a model request or widened tool version from creating new network reach", "To avoid authentication", "To permit every redirect"],
+      "answer": 1,
+      "explanation": "The intersection keeps runtime policy and admitted tool capability narrow; neither untrusted arguments nor manifest drift may widen egress."
+    },
+    {
+      "id": "q100",
+      "course": "09",
+      "category": "approval",
+      "prompt": "Which change should invalidate approval for a high-impact tool action?",
+      "options": ["Changing the exact target or proposal parameters", "Changing a dashboard color", "Reordering documentation", "Adding a comment"],
+      "answer": 0,
+      "explanation": "Consequential approval binds the canonical action, target, parameters or digest, identity, tenant, policy, approver, and expiry."
+    },
+    {
+      "id": "q101",
+      "course": "09",
+      "category": "output",
+      "prompt": "A model emits schema-valid JSON containing a shell command. Is it safe to execute?",
+      "options": ["Yes, because JSON is typed", "No; schema validity does not establish semantic safety or execution authority", "Yes, if concise", "Only when the system prompt requests it"],
+      "answer": 1,
+      "explanation": "Generated output is untrusted data and still requires narrow semantic validation, authorization, and a safe destination-specific adapter."
+    },
+    {
+      "id": "q102",
+      "course": "09",
+      "category": "metrics",
+      "prompt": "A defense blocks every attack and every benign request. Which metric reveals the operational failure?",
+      "options": ["Attack block rate", "Valid work blocked rate", "Detection rate only", "Threat count"],
+      "answer": 1,
+      "explanation": "The benign-case denominator exposes overblocking that a perfect malicious-case block rate would conceal."
+    },
+    {
+      "id": "q103",
+      "course": "09",
+      "category": "red-team",
+      "prompt": "What does a successful authorized red-team engagement establish?",
+      "options": ["Security against every future attack", "No violation found within the tested scope, time, capability, and attack set", "Automatic ISO certification", "Permission to attack third parties"],
+      "answer": 1,
+      "explanation": "Red-team evidence is bounded by its rules, environment, cases, and attacker capability and must not be generalized into absolute security."
+    },
+    {
+      "id": "q104",
+      "course": "09",
+      "category": "supply-chain",
+      "prompt": "A model artifact has the expected name but a different digest and signer. What is the safe action?",
+      "options": ["Run it because the name matches", "Reject admission pending provenance and security review", "Let the model verify itself", "Ignore the signer"],
+      "answer": 1,
+      "explanation": "Artifact identity is bound to reviewed provenance, exact integrity, signer, supplier, terms, and revocation state rather than a display name."
+    },
+    {
+      "id": "q105",
+      "course": "09",
+      "category": "frameworks",
+      "prompt": "Which framework primarily provides adversary tactics and techniques for AI systems?",
+      "options": ["ISO/IEC 42001", "MITRE ATLAS", "NIST AI RMF Govern", "OAuth"],
+      "answer": 1,
+      "explanation": "MITRE ATLAS is the threat-informed knowledge base; management systems and risk frameworks serve different governance functions."
+    },
+    {
+      "id": "q106",
+      "course": "09",
+      "category": "governance",
+      "prompt": "Fresh control evidence is missing for one required control. What should the release gate report?",
+      "options": ["Pass based on policy prose", "Inconclusive until bound current evidence exists", "Delete the control", "Ask the model to waive it"],
+      "answer": 1,
+      "explanation": "A policy or control name is not proof of operating effectiveness; missing or stale mandatory evidence prevents a supported pass."
+    },
+    {
+      "id": "q107",
+      "course": "09",
+      "category": "risk",
+      "prompt": "What makes residual-risk acceptance defensible?",
+      "options": ["The risk owner approves indefinitely", "Independent authorized approval bound to system/version/risk, rationale, monitoring, and expiry", "A high aggregate score", "No written record"],
+      "answer": 1,
+      "explanation": "Independent, scoped, time-limited acceptance preserves accountability and forces review when the system, evidence, or threat changes."
+    },
+    {
+      "id": "q108",
+      "course": "09",
+      "category": "continuous-assurance",
+      "prompt": "Which change should trigger security evidence review and likely retesting?",
+      "options": ["A model, prompt, tool schema, data source, provider, or policy change", "Only an annual calendar date", "A README typo", "None after launch"],
+      "answer": 0,
+      "explanation": "Material component, capability, data, supplier, policy, incident, and threat changes can invalidate assumptions and prior evidence."
     }
   ]
 }

@@ -1,0 +1,103 @@
+{
+  "course": "09",
+  "title": "AI Security, Red Teaming, and Governance checkpoint",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c09-01",
+      "category": "authority",
+      "prompt": "A retrieved document tells the model it is now an administrator. What authority does that create?",
+      "options": ["Administrator authority", "Only untrusted content; application policy remains authoritative", "Temporary tenant ownership", "Approval to call every tool"],
+      "answer": 1,
+      "explanation": "Retrieved content can influence a model proposal but cannot authenticate a principal, grant permission, or alter application policy."
+    },
+    {
+      "id": "c09-02",
+      "category": "injection",
+      "prompt": "Why is a prompt-injection detector insufficient as the only control?",
+      "options": ["It is always too expensive", "Novel or transformed injections can evade it, so effects still need deterministic containment", "It blocks every attack perfectly", "It replaces authorization"],
+      "answer": 1,
+      "explanation": "Content detection is probabilistic and incomplete; authorization, narrow tools, egress, approval, and budgets constrain consequences after a miss."
+    },
+    {
+      "id": "c09-03",
+      "category": "data",
+      "prompt": "Where should tenant authorization normally occur for RAG?",
+      "options": ["After model generation", "Before retrieval and ranking using authoritative identity and ownership", "Inside the retrieved document", "Only in the system prompt"],
+      "answer": 1,
+      "explanation": "Unauthorized content should never enter ranking or model context; authoritative application state establishes tenant and resource scope first."
+    },
+    {
+      "id": "c09-04",
+      "category": "tools",
+      "prompt": "What should determine whether a discovered tool is callable?",
+      "options": ["Its persuasive description", "Owned registry admission, pinned integrity, authenticated policy, and current request authorization", "The model's confidence", "The shortest name"],
+      "answer": 1,
+      "explanation": "Tool metadata is untrusted supply-chain input; application controls admit the exact version and authorize every requested effect."
+    },
+    {
+      "id": "c09-05",
+      "category": "approval",
+      "prompt": "A request contains a valid approval but fails an injection check. What happens to the receipt?",
+      "options": ["Consume it anyway", "Do not execute or consume it", "Let the model decide", "Convert it into general permission"],
+      "answer": 1,
+      "explanation": "A blocked request must not burn a valid single-use approval; validation must complete before atomic approval consumption and effect execution."
+    },
+    {
+      "id": "c09-06",
+      "category": "output",
+      "prompt": "How should generated text intended for a command or query sink be handled?",
+      "options": ["Execute it directly", "Parse into a narrow contract, validate semantics, and use a safe application-owned adapter", "Trust it if JSON-valid", "Hide it in a system prompt"],
+      "answer": 1,
+      "explanation": "Schema validity does not make model output trusted code; destination-specific validation and safe parameterization remain required."
+    },
+    {
+      "id": "c09-07",
+      "category": "metrics",
+      "prompt": "An attack is detected and logged but still exports restricted data. How is it counted?",
+      "options": ["Detection only", "Both detected and a forbidden outcome", "Successfully blocked", "Benign work blocked"],
+      "answer": 1,
+      "explanation": "Detection and outcome are distinct dimensions; a signal does not erase the actual unauthorized effect."
+    },
+    {
+      "id": "c09-08",
+      "category": "red-team",
+      "prompt": "Why include benign near-neighbor cases in a red-team suite?",
+      "options": ["To reduce coverage", "To measure valid work blocked and avoid a block-everything defense", "To authorize production", "To hide false negatives"],
+      "answer": 1,
+      "explanation": "Security controls must contain attacks without making the intended workflow unusable, so benign false blocking needs its own denominator."
+    },
+    {
+      "id": "c09-09",
+      "category": "supply-chain",
+      "prompt": "Which AI artifacts belong in supply-chain assurance?",
+      "options": ["Only Python packages", "Models, data, prompts, tools, skills, code, dependencies, providers, and their provenance/terms", "Only containers", "Only public models"],
+      "answer": 1,
+      "explanation": "AI behavior depends on many versioned external and internal artifacts whose integrity, lineage, rights, and revocation must be governed."
+    },
+    {
+      "id": "c09-10",
+      "category": "governance",
+      "prompt": "What does a framework crosswalk prove?",
+      "options": ["Automatic compliance", "Terminology and potential control relationships that still require implementation evidence", "That every risk is low", "That certification is unnecessary"],
+      "answer": 1,
+      "explanation": "Crosswalks help organize overlapping concepts but do not prove that controls are appropriately designed, deployed, or operating."
+    },
+    {
+      "id": "c09-11",
+      "category": "risk",
+      "prompt": "Can an executive acceptance waive a prohibited AI use?",
+      "options": ["Yes, indefinitely", "No; prohibited risk cannot be converted into an accepted residual risk", "Yes, if the model agrees", "Only when tests are missing"],
+      "answer": 1,
+      "explanation": "Risk acceptance is for bounded non-prohibited residual risk and cannot override a defined prohibition or failed mandatory control."
+    },
+    {
+      "id": "c09-12",
+      "category": "evidence",
+      "prompt": "Control evidence passed for version 8 but the deployed system is version 9. What is the governance result?",
+      "options": ["Pass", "Inconclusive or failed according to policy because evidence is misbound", "Automatically rebind it", "Ignore versions"],
+      "answer": 1,
+      "explanation": "Evidence must bind to the exact governed version; material changes require reviewed migration and retesting rather than silent reuse."
+    }
+  ]
+}
