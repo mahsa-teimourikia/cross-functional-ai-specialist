@@ -178,15 +178,54 @@ Sources: [Bedrock Converse](https://docs.aws.amazon.com/bedrock/latest/userguide
 
 ## Retrieval and knowledge systems
 
-Hybrid sparse+dense retrieval plus reranking is an established strong baseline when exact terms and
-semantic similarity both matter. Query transformation, HyDE, graph retrieval, late interaction,
-and multimodal retrieval are conditional upgrades. Authorize before ranking, preserve provenance
-and version, and evaluate freshness/deletion as well as Recall@k.
+A production RAG system is a governed knowledge lifecycle, not an embedding API plus a prompt.
+Preserve immutable originals and manifests; carry tenant, ACL/classification, source/version/locator,
+digest, lifecycle, parser/chunker/embedding versions, and lineage into every chunk; authorize
+current evidence before every candidate/reranking stage; and revalidate cited evidence after
+generation. Treat embeddings as sensitive derived data and retrieved content as untrusted data.
 
-Primary references: [BM25](https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf),
+Hybrid lexical+dense retrieval with rank fusion and optional reranking is an established baseline
+when exact identifiers and semantic paraphrases both matter. Keep BM25 as a measured baseline:
+[BEIR](https://arxiv.org/abs/2104.08663) found it robust in zero-shot evaluation, while reranking
+and late interaction improved average quality at greater computation. Compare approximate vector
+search with exact search under representative tenant/ACL filters; metadata filtering can consume
+ANN candidate budgets and reduce recall.
+
+| Option | Maturity | Strong fit | Primary selection concern |
+|---|---|---|---|
+| PostgreSQL full text + pgvector | Current production option | relational truth and bounded/medium vector workloads | filtered ANN recall, index operations, scale headroom |
+| OpenSearch / Elasticsearch | Established search platforms | lexical, filters, hybrid pipelines, search operations | cluster skill, consistency, resource cost |
+| Qdrant / Milvus / Weaviate / Pinecone | Current vector-first options | specialized vector scale and managed features | tenant model, lexical depth, metadata filtering, exit cost |
+| Azure AI Search and managed cloud search | Current production option | integrated cloud ingestion, identity, semantic features | preview boundaries, region, coupling, reindex semantics |
+| Vespa | Established specialist option | large-scale programmable retrieval and ranking | operating and ranking expertise |
+| model-provider file search | Bounded managed option | fastest integration for a contained product | lifecycle control, observability, portability, policy fit |
+
+For parsing, Apache Tika is a broad content/metadata extraction layer; Docling and Unstructured add
+layout/element-aware document processing. Select with downstream field/table accuracy, reading
+order, locator preservation, failure visibility, latency, cost, and deployment constraints—not a
+single attractive PDF example.
+
+Conditional upgrades require a labelled query slice and an operating-cost case: query expansion and
+HyDE for vocabulary mismatch; ColBERT-style late interaction for token-level matching; parent-child
+or RAPTOR for long cross-section questions; GraphRAG for measured global/relational questions; and
+ColPali-style multimodal retrieval for layout/table/image evidence. Each adds derived data,
+lineage, deletion, evaluation, latency, and cost obligations.
+
+Measure retrieval with Recall@k, MRR, nDCG, exact-versus-ANN recall, and access/freshness outcomes;
+measure generation separately with answer correctness, claim support, citation completeness and
+correctness, refusal quality, user outcomes, latency, and cost per successful compliant answer.
+Ragas and RAGChecker accelerate diagnostics, but automated judges must be calibrated against human
+labels and drift slices.
+
+Primary and official sources: [RAG](https://arxiv.org/abs/2005.11401),
 [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906),
-[ColBERT](https://arxiv.org/abs/2004.12832),
-[HyDE](https://arxiv.org/abs/2212.10496), and [BEIR](https://arxiv.org/abs/2104.08663).
+[BEIR](https://arxiv.org/abs/2104.08663), [ColBERTv2](https://arxiv.org/abs/2112.01488),
+[HyDE](https://arxiv.org/abs/2212.10496), [RAPTOR](https://arxiv.org/abs/2401.18059),
+[GraphRAG](https://arxiv.org/abs/2404.16130), [ColPali](https://arxiv.org/abs/2407.01449),
+[pgvector](https://github.com/pgvector/pgvector),
+[OpenSearch hybrid search](https://docs.opensearch.org/latest/vector-search/ai-search/hybrid-search/index/),
+[Azure document access](https://learn.microsoft.com/en-us/azure/search/search-document-level-access-overview),
+and [OWASP RAG security](https://cheatsheetseries.owasp.org/cheatsheets/RAG_Security_Cheat_Sheet.html).
 
 ## Agents and tools
 

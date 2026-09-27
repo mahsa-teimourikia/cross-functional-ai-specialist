@@ -1,0 +1,103 @@
+{
+  "course": "04-production-rag-knowledge-systems",
+  "title": "Course 4 Checkpoint",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c04-01",
+      "category": "knowledge-contract",
+      "prompt": "Which metadata must follow a source into every retrievable chunk?",
+      "options": ["Only the embedding", "Tenant, ACL, source/version/locator, digest, lifecycle, and processing versions", "Only the filename", "The model's confidence"],
+      "answer": 1,
+      "explanation": "Chunk-level provenance and policy metadata make authorization, freshness, deletion, reproduction, and citation verification enforceable."
+    },
+    {
+      "id": "c04-02",
+      "category": "authorization",
+      "prompt": "Why should ACL and lifecycle filtering happen before sparse, vector, and reranking stages?",
+      "options": ["It guarantees perfect relevance", "It prevents unauthorized or stale evidence from entering candidate scoring and downstream context", "It removes the need for identity", "It makes embeddings reversible"],
+      "answer": 1,
+      "explanation": "Post-filtering can leak candidates and scores, waste capacity, reduce recall, or expose restricted text to later ranking and generation components."
+    },
+    {
+      "id": "c04-03",
+      "category": "retrieval",
+      "prompt": "Which query is the strongest reason to preserve a lexical BM25-style branch?",
+      "options": ["A broad paraphrase", "An exact policy identifier such as UW-17", "A request with no text", "A deleted document"],
+      "answer": 1,
+      "explanation": "Sparse retrieval is especially valuable for exact identifiers, rare names, codes, numbers, and terminology that dense representations can blur."
+    },
+    {
+      "id": "c04-04",
+      "category": "hybrid",
+      "prompt": "What does reciprocal rank fusion avoid assuming?",
+      "options": ["That raw sparse and dense scores share a calibrated scale", "That documents have stable IDs", "That access policy exists", "That rankings contain documents"],
+      "answer": 0,
+      "explanation": "RRF combines rank positions rather than incomparable raw score magnitudes, making it a useful hybrid baseline before calibrated score fusion."
+    },
+    {
+      "id": "c04-05",
+      "category": "lifecycle",
+      "prompt": "A newly uploaded version is flagged as poisoned. What is the safest default?",
+      "options": ["Publish it because it is newest", "Quarantine it without silently replacing the known-good active version", "Delete every historical version", "Let the generator decide"],
+      "answer": 1,
+      "explanation": "Version recency does not establish safety or authority; quarantine keeps suspect content out while an explicit recovery workflow proceeds."
+    },
+    {
+      "id": "c04-06",
+      "category": "idempotency",
+      "prompt": "What should happen when an ingestion operation ID is retried with different content?",
+      "options": ["Overwrite the prior result", "Treat it as an operation conflict", "Create duplicate chunks", "Ignore the digest"],
+      "answer": 1,
+      "explanation": "A stable operation ID represents one exact intent, so changed payload under the same ID must not produce a different knowledge state."
+    },
+    {
+      "id": "c04-07",
+      "category": "citations",
+      "prompt": "A generated citation ID exists in the corpus but was not retrieved for this request. What should the application do?",
+      "options": ["Accept it because it exists", "Reject it as a forged citation", "Ask the model whether it is allowed", "Add it to the retrieved set after generation"],
+      "answer": 1,
+      "explanation": "Existence does not prove request-scoped retrieval, authorization, currency, or support; citations must be bound to validated evidence for this request."
+    },
+    {
+      "id": "c04-08",
+      "category": "consistency",
+      "prompt": "Why revalidate cited evidence after generation?",
+      "options": ["To increase token count", "To close the race where evidence is deleted, superseded, or unauthorized after retrieval", "To retrain embeddings", "To replace the source of truth"],
+      "answer": 1,
+      "explanation": "Retrieval is a time-of-check; citation validation must confirm that the evidence remains unchanged, current, and authorized at publication time."
+    },
+    {
+      "id": "c04-09",
+      "category": "evaluation",
+      "prompt": "What is the denominator of Recall@k?",
+      "options": ["All returned hits", "All labelled relevant evidence for the evaluated cases", "All model tokens", "Only the first relevant hit"],
+      "answer": 1,
+      "explanation": "Recall@k measures how much of the labelled relevant set appears in the top-k results; incomplete relevance judgments can bias it."
+    },
+    {
+      "id": "c04-10",
+      "category": "ann",
+      "prompt": "Why can metadata filtering reduce approximate-nearest-neighbour recall?",
+      "options": ["Vectors cannot have metadata", "The search budget may visit neighbours later removed by the filter", "Exact search is always slower", "BM25 deletes embeddings"],
+      "answer": 1,
+      "explanation": "Filtered candidates can consume a bounded ANN exploration budget, requiring filter-aware indexes, iterative scans, partitioning, or tuned exact fallbacks."
+    },
+    {
+      "id": "c04-11",
+      "category": "state-of-the-art",
+      "prompt": "When is GraphRAG justified over an established hybrid baseline?",
+      "options": ["Whenever a graph library is available", "When measured global or relational questions benefit enough to justify extraction and operating cost", "For every exact identifier query", "When access control is absent"],
+      "answer": 1,
+      "explanation": "Graph construction adds derived data, lineage, quality, deletion, latency, and cost concerns and should solve a measured query class."
+    },
+    {
+      "id": "c04-12",
+      "category": "security",
+      "prompt": "What security property does a source embedding provide?",
+      "options": ["Automatic anonymization", "Automatic authorization", "Neither; embeddings remain sensitive derived data", "Guaranteed prompt-injection resistance"],
+      "answer": 2,
+      "explanation": "Embeddings can leak source information and must inherit access, encryption, retention, query, and deletion controls from the source data."
+    }
+  ]
+}

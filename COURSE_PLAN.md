@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–3 are complete
-vertical slices; Courses 4–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–4 are complete
+vertical slices; Courses 5–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -45,7 +45,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 1 | Production AI Development in Python | 3 | **Ready** | Tested service core, review memo, packaging decision |
 | 2 | Cloud and Distributed AI Systems | 3 | **Ready** | AWS deployment architecture, load/failure model, ADR |
 | 3 | Enterprise Identity and Agent Authorization | 2 | **Ready** | Threat-aware auth design, delegated capability tests |
-| 4 | Production RAG and Knowledge Systems | 3 | Planned | Secure ingestion/retrieval pipeline and retrieval eval |
+| 4 | Production RAG and Knowledge Systems | 3 | **Ready** | Secure ingestion/retrieval pipeline and retrieval eval |
 | 5 | Agentic AI Architecture and AgentCore | 3 | Planned | Bounded workflow/agent comparison and recovery plan |
 | 6 | Model Gateways and Inference Economics | 2 | Planned | Routing policy, fallback experiment, unit economics |
 | 7 | AI Observability and Reliability Engineering | 2 | Planned | OpenTelemetry traces, SLOs, runbook, game day |
@@ -120,7 +120,7 @@ Evidence: identity sequence, authorization matrix, negative tests, and delegated
 
 ## Course 4 — Production RAG and Knowledge Systems
 
-**Status:** Planned · **Prerequisites:** Courses 2–3
+**Status:** Ready in repository · **Prerequisites:** Courses 2–3
 **Thesis:** a production knowledge system owns provenance, freshness, authorization, retrieval
 quality, and lifecycle—not only embeddings and prompts.
 
@@ -132,9 +132,13 @@ quality, and lifecycle—not only embeddings and prompts.
 - Authorization before ranking, tenant isolation, injection resistance, freshness SLOs, Recall@k,
   MRR, nDCG, and citation correctness/completeness.
 
-The lab compares sparse/dense/hybrid baselines over versioned policies and injects stale, deleted,
-poisoned, and unauthorized sources. Evidence: retrieval evaluation, data contract, ADR, and
-production migration plan.
+The lab builds an idempotent, optimistic-versioned ingestion path; carries source digest, locator,
+ACL, classification, lifecycle, and processing versions into each chunk; and compares BM25-like
+sparse, deterministic dense, RRF hybrid, and bounded reranking paths. Authorization and current
+lifecycle filter candidates before scoring. Failure injection covers stale ingestion plans,
+cross-tenant/restricted evidence, supersession, deletion, quarantine, stale entitlements, forged
+citations, unsupported claims, and evidence deleted during generation. Evidence: retrieval
+evaluation, knowledge data contract, ADR, threat model, and production migration plan.
 
 ## Course 5 — Agentic AI Architecture and AgentCore
 
