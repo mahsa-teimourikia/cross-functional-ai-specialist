@@ -756,6 +756,114 @@
       "options": ["Couple every alert directly to unpinned fields", "Maintain a versioned internal contract and tested mapping", "Avoid version metadata", "Record every prompt for portability"],
       "answer": 1,
       "explanation": "Pinning and mapping protect operational consumers while allowing a deliberate migration as external conventions mature."
+    },
+    {
+      "id": "q85",
+      "course": "08",
+      "category": "metrics",
+      "prompt": "Why is an aggregate judge score insufficient for a release decision?",
+      "options": ["It is always too low", "It omits population, slices, uncertainty, hard invariants, and error costs", "Judges cannot return numbers", "Only latency matters"],
+      "answer": 1,
+      "explanation": "Release evidence needs defined populations and denominators, risk slices, uncertainty, deterministic prohibitions, and application-specific consequences."
+    },
+    {
+      "id": "q86",
+      "course": "08",
+      "category": "datasets",
+      "prompt": "What is the principal purpose of a frozen release partition?",
+      "options": ["To train the candidate repeatedly", "To estimate performance on evidence not used for iteration or calibration", "To contain only easy cases", "To replace production monitoring"],
+      "answer": 1,
+      "explanation": "Keeping release cases outside development and threshold tuning protects the generalization claim from direct evaluation-set overfitting."
+    },
+    {
+      "id": "q87",
+      "course": "08",
+      "category": "slices",
+      "prompt": "A required restricted-data slice has two cases but policy requires twenty. What is the defensible result?",
+      "options": ["Pass based on the overall mean", "Inconclusive because slice evidence is insufficient", "Delete the slice", "Assume no harm"],
+      "answer": 1,
+      "explanation": "An overall mean cannot substitute for adequate evidence on a predeclared high-risk population; missing support should block a confident pass."
+    },
+    {
+      "id": "q88",
+      "course": "08",
+      "category": "judges",
+      "prompt": "Which change requires automated-judge recalibration?",
+      "options": ["A new evaluator model or materially changed rubric", "Renaming a chart", "Adding a README heading", "Sorting case IDs"],
+      "answer": 0,
+      "explanation": "Evaluator model, prompt, rubric, task, language, and distribution changes can alter measurement behavior and invalidate the prior calibration envelope."
+    },
+    {
+      "id": "q89",
+      "course": "08",
+      "category": "bias",
+      "prompt": "How should pairwise evaluator position bias be measured?",
+      "options": ["Always put the candidate first", "Reverse presentation order on a sample and measure preference flips", "Use longer responses", "Ask only one case"],
+      "answer": 1,
+      "explanation": "A controlled left-right reversal reveals whether presentation position changes the judgment independently of answer quality."
+    },
+    {
+      "id": "q90",
+      "course": "08",
+      "category": "uncertainty",
+      "prompt": "Why use a paired baseline-candidate comparison on the same cases?",
+      "options": ["To remove all bias", "To remove case difficulty from between-system variation", "To avoid confidence intervals", "To increase data leakage"],
+      "answer": 1,
+      "explanation": "Per-case differences control the shared difficulty of each case and generally provide a more precise estimate of system change."
+    },
+    {
+      "id": "q91",
+      "course": "08",
+      "category": "multiplicity",
+      "prompt": "What is wrong with repeatedly checking a fixed-horizon p-value and stopping below 0.05?",
+      "options": ["It makes the sample too large", "It inflates the false-positive rate", "It guarantees no effect", "It removes selection bias"],
+      "answer": 1,
+      "explanation": "Unplanned repeated looks create multiple opportunities to cross the threshold; valid sequential designs account for this stopping process."
+    },
+    {
+      "id": "q92",
+      "course": "08",
+      "category": "experiments",
+      "prompt": "A treatment user never opens the assistant. Where do they belong in ITT analysis?",
+      "options": ["Remove them", "Keep them in the assigned treatment arm", "Move them to control", "Count them only if successful"],
+      "answer": 1,
+      "explanation": "ITT retains every eligible unit in its randomized arm and estimates the effect of offering treatment under observed adoption."
+    },
+    {
+      "id": "q93",
+      "course": "08",
+      "category": "variance",
+      "prompt": "What does CUPED change in a valid randomized experiment?",
+      "options": ["The true product effect", "Precision by using predictive pre-treatment information", "The assignment", "The treatment definition"],
+      "answer": 1,
+      "explanation": "A pre-treatment covariate can explain outcome variance and narrow the estimate while leaving the randomized estimand unchanged."
+    },
+    {
+      "id": "q94",
+      "course": "08",
+      "category": "causality",
+      "prompt": "Why should treatment adoption usually not be an adjustment covariate for the total effect?",
+      "options": ["It is always missing", "It is a post-treatment mediator", "It is the randomization unit", "It is a pre-treatment confounder"],
+      "answer": 1,
+      "explanation": "Adoption is affected by assignment and lies on a pathway to outcomes; conditioning on it changes the estimand and can induce bias."
+    },
+    {
+      "id": "q95",
+      "course": "08",
+      "category": "quasi-experiments",
+      "prompt": "What must be argued for a difference-in-differences design?",
+      "options": ["Treated and control levels are identical", "Untreated trends would have been parallel", "Every user adopts", "There are no pre-periods"],
+      "answer": 1,
+      "explanation": "The identifying claim is that, without treatment, the treated group's change would have followed the control group's change."
+    },
+    {
+      "id": "q96",
+      "course": "08",
+      "category": "decision-rights",
+      "prompt": "What should a passing evaluation job do?",
+      "options": ["Deploy automatically with unlimited traffic", "Emit reproducible evidence for accountable owners to authorize a bounded rollout", "Delete all failed cases", "Replace monitoring"],
+      "answer": 1,
+      "explanation": "Evaluation establishes evidence within stated limitations; application and domain owners retain rollout authority, monitoring, and rollback responsibility."
     }
   ]
 }

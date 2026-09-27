@@ -154,15 +154,71 @@ Primary sources: [OpenID Connect Core](https://openid.net/specs/openid-connect-c
 ## Testing and evaluation
 
 Use pytest for deterministic invariants and Hypothesis where generated cases explore meaningful
-boundaries. Separate integration tests from live-model evaluation. AI release evidence should mix
-deterministic checks, labelled sets, calibrated judges, blinded human review, production outcomes,
-and slices. Evaluation frameworks accelerate execution; metric contracts and release thresholds
-remain application responsibilities.
+boundaries. Separate component tests, integration tests, offline live-model evaluation, online
+evaluation, and causal product experiments: they answer different questions.
+
+### Evidence architecture
+
+Keep an application-owned versioned contract for cases, outputs, annotations, evaluator versions,
+metric definitions, slices, paired comparisons, confidence intervals, and release decisions. Use
+separate development, judge-calibration, frozen release, red-team, and production-observation
+populations. Detect cross-partition duplicates and review semantic near-duplicates, shared source
+lineage, and benchmark contamination.
+
+AI release evidence should combine:
+
+- deterministic tests for schema, authorization, resource binding, allowed tools, budgets, and
+  forbidden outcomes;
+- component and end-to-end metrics on labelled cases and risk slices;
+- blinded human review with rubric, agreement, adjudication, and label provenance;
+- automated judges calibrated against those human labels, with confusion metrics, intervals,
+  order/verbosity/self-preference audits, and drift triggers;
+- paired baseline/candidate estimates, non-inferiority margins, and multiplicity controls; and
+- post-release causal evidence from pre-registered randomized experiments where feasible.
+
+Use `pass`, `fail`, and `inconclusive`. Leakage or a forbidden effect is a hard failure; inadequate
+slice support, wide uncertainty, judge drift, or an unproven non-inferiority claim is inconclusive.
+Evaluation tooling should emit a reproducible evidence package and never acquire deployment
+authority merely because a threshold passed.
+
+### Frameworks and platforms (reviewed 2026-09-27)
+
+| Option | Strong fit | Review before adoption |
+|---|---|---|
+| pytest + Hypothesis | deterministic application invariants and generated boundaries | keep semantic/live-model evaluation separate |
+| OpenAI Evals, promptfoo, DeepEval, Ragas | local and CI evaluation with custom or built-in metrics | metric validity, judge dependence, custody, reproducibility |
+| LangSmith | offline/online datasets, traces, experiments, annotation workflows | evaluator/version export, tenancy, retention, lock-in |
+| MLflow GenAI | evaluation datasets, scorers, comparisons, regression testing, lifecycle lineage | deployment integration, scale, backend operations |
+| Amazon Bedrock AgentCore Evaluations | managed online, on-demand, batch, built-in, ground-truth, and custom evaluation | current regions, evaluator versions, quotas, data terms, cost |
+| Google Vertex AI evaluation | managed pointwise/pairwise evaluation and judge calibration | supported models/regions, rubric control, data handling |
+| Microsoft Foundry evaluation | quality, safety, and agent evaluators integrated with Foundry | preview versus GA status by evaluator, export, regional support |
+| Phoenix, Weave, Langfuse | trace-to-evaluation and production feedback workflows | sampling bias, outcome semantics, privacy, retention, portability |
+
+Frameworks accelerate execution; the organization still owns construct validity, datasets,
+thresholds, statistical design, privacy, release authority, and rollback. A selection pilot should
+prove export by reproducing the same decision outside the vendor.
+
+For product impact, prefer randomized assignment and intention-to-treat analysis. Pre-register the
+unit, eligibility, hypothesis, primary metric, guardrail, minimum detectable effect, power, horizon,
+sample-ratio check, missingness, multiplicity, variance reduction, and heterogeneity plan. Adoption
+is an operational result, not a reason to discard assigned non-adopters. For observational studies,
+draw the causal graph and defend exchangeability, overlap, consistency, timing, and measurement;
+propensity methods balance observed covariates only, while difference-in-differences requires a
+credible parallel-trends argument.
 
 Sources: [pytest practices](https://docs.pytest.org/en/stable/explanation/goodpractices.html),
 [Hypothesis](https://hypothesis.readthedocs.io/en/latest/),
-[OpenAI Evals](https://github.com/openai/evals), and
-[Ragas metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/).
+[HELM](https://arxiv.org/abs/2211.09110),
+[MT-Bench and LLM-as-a-Judge](https://arxiv.org/abs/2306.05685),
+[OpenAI Evals](https://github.com/openai/evals),
+[Ragas metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/),
+[LangSmith evaluation types](https://docs.langchain.com/langsmith/evaluation-types),
+[MLflow GenAI evaluation](https://mlflow.org/docs/latest/genai/eval-monitor/),
+[Amazon Bedrock AgentCore Evaluations](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations.html),
+[Vertex AI judge calibration](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/evaluate-judge-model),
+[Microsoft Foundry agent evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/agent-evaluators),
+[CUPED](https://gwern.net/doc/statistics/power-analysis/2013-deng.pdf), and
+[Rosenbaum and Rubin on propensity scores](https://www.stat.cmu.edu/~ryantibs/journalclub/rosenbaum_1983.pdf).
 
 ## Model access and gateways
 

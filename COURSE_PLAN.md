@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–7 are complete
-vertical slices; Courses 8–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–8 are complete
+vertical slices; Courses 9–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -49,7 +49,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 5 | Agentic AI Architecture and AgentCore | 3 | **Ready** | Bounded workflow/agent comparison and recovery plan |
 | 6 | Model Gateways and Inference Economics | 2 | **Ready** | Routing policy, fallback experiment, unit economics |
 | 7 | AI Observability and Reliability Engineering | 2 | **Ready** | OpenTelemetry traces, SLOs, runbook, game day |
-| 8 | AI Evaluation, Experimentation, and Causal Impact | 3 | Planned | Release gate, human-eval protocol, causal experiment |
+| 8 | AI Evaluation, Experimentation, and Causal Impact | 3 | **Ready** | Release gate, human-eval protocol, causal experiment |
 | 9 | AI Security, Red Teaming, and Governance | 3 | Planned | Threat model, adversarial suite, governance controls |
 | 10 | CI/CD, Infrastructure, and AI DevOps | 2 | Planned | Promotion pipeline, IaC plan, rollback evidence |
 | 11 | Solution Architecture and Technical Strategy | 2 | Planned | Options paper, target architecture, migration roadmap |
@@ -215,7 +215,7 @@ tool-selection memo.
 
 ## Course 8 — AI Evaluation, Experimentation, and Causal Impact
 
-**Status:** Planned · **Prerequisites:** Courses 4–7
+**Status:** Ready in repository · **Prerequisites:** Courses 4–7
 **Thesis:** release decisions need representative cases, trustworthy measurements, uncertainty,
 and causal product evidence—not one aggregate judge score.
 
@@ -228,9 +228,18 @@ and causal product evidence—not one aggregate judge score.
 - A/B tests, DAGs, confounding, heterogeneous effects, propensity methods and difference-in-
   differences; adoption versus task quality, time saved, and business outcomes.
 
-The lab builds a release gate, calibrates an automated judge against human labels, and designs the
-experiment: “Does the assistant improve productivity without harming decision quality?” Evidence:
-metric contracts, evaluation strategy, analysis plan, and decision memo.
+The deterministic lab separates development, judge-calibration, and frozen release partitions;
+evaluates paired baseline/candidate cases across required risk slices; treats leakage and forbidden
+tools as hard failures; and combines Wilson and bootstrap intervals with an explicit three-way
+release policy. It adjudicates blinded human labels, calibrates a versioned judge, audits position
+bias, and prevents uncalibrated automation from becoming ground truth.
+
+The product study pre-registers the experiment “Does the assistant improve productivity without
+harming decision quality?” It proves assignment balance, fixed-horizon ITT, decision-quality
+non-inferiority, CUPED variance reduction, adoption-selection bias, and novice/expert heterogeneity.
+The causal extension covers DAG-aware adjustment, propensity-method assumptions, pretrends, and
+difference-in-differences. Evidence: metric registry, dataset/evaluation strategy, judge protocol,
+release gate, analysis plan, and accountable decision memo.
 
 ## Course 9 — AI Security, Red Teaming, and Governance
 
