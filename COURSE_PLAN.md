@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–8 are complete
-vertical slices; Courses 9–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–9 are complete
+vertical slices; Courses 10–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -50,7 +50,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 6 | Model Gateways and Inference Economics | 2 | **Ready** | Routing policy, fallback experiment, unit economics |
 | 7 | AI Observability and Reliability Engineering | 2 | **Ready** | OpenTelemetry traces, SLOs, runbook, game day |
 | 8 | AI Evaluation, Experimentation, and Causal Impact | 3 | **Ready** | Release gate, human-eval protocol, causal experiment |
-| 9 | AI Security, Red Teaming, and Governance | 3 | Planned | Threat model, adversarial suite, governance controls |
+| 9 | AI Security, Red Teaming, and Governance | 3 | **Ready** | Threat model, adversarial suite, governance controls |
 | 10 | CI/CD, Infrastructure, and AI DevOps | 2 | Planned | Promotion pipeline, IaC plan, rollback evidence |
 | 11 | Solution Architecture and Technical Strategy | 2 | Planned | Options paper, target architecture, migration roadmap |
 | 12 | Enterprise AI Operating Model and Leadership | 2 | Planned | Portfolio strategy, standards, executive narrative |
@@ -243,7 +243,7 @@ release gate, analysis plan, and accountable decision memo.
 
 ## Course 9 — AI Security, Red Teaming, and Governance
 
-**Status:** Planned · **Prerequisites:** Courses 3–8
+**Status:** Ready in repository · **Prerequisites:** Courses 3–8
 **Thesis:** combine deterministic preventive controls, adversarial evidence, monitoring, and
 governance records across the whole system lifecycle.
 
@@ -256,8 +256,17 @@ governance records across the whole system lifecycle.
 - NIST AI RMF, ISO/IEC 42001 concepts, OWASP, MITRE ATLAS, AI inventory, risk tier, system cards,
   approvals, auditability, continuous controls and residual-risk ownership.
 
-The lab attacks the platform using labelled adversarial cases. Evidence: threat model, control
-matrix, red-team report, governance-as-code proposal, and explicit residual-risk acceptance.
+The deterministic lab replaces prompt-only filtering with an application-owned security gateway
+that enforces authoritative tenant/resource binding, tool admission and integrity, default-deny
+egress, output handling, budgets, artifact provenance, and exact single-use approval. A labelled
+suite compares sixteen attacks and four benign cases across injection, exfiltration, excessive
+agency, tool poisoning, supply chain, unsafe output, resource exhaustion, and context poisoning.
+
+The governance gate binds an AI inventory and threat model to fresh control evidence, adversarial
+coverage, separate forbidden-outcome and valid-work-blocked metrics, and independent expiring
+residual-risk acceptance. Evidence: system inventory/card, asset and threat register, control
+matrix, supply-chain record, red-team plan/report, governance-as-code proposal, and explicit risk
+decision.
 
 ## Course 10 — CI/CD, Infrastructure, and AI DevOps
 

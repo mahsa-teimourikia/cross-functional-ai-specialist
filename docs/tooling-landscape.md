@@ -565,9 +565,74 @@ risk outcomes, and ISO/IEC 42001 for organizational management-system requiremen
 domain threat modelling, identity controls, secure SDLC, privacy review, or measured control
 effectiveness. Guardrails are defense in depth; prompts are not security boundaries.
 
-Sources: [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/),
-[MITRE ATLAS](https://atlas.mitre.org/), [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework),
-and [ISO/IEC 42001](https://www.iso.org/standard/81230.html).
+### Assurance architecture
+
+Assume the model, retrieved content, memory, tool metadata/results, and generated output can be
+wrong or adversarial. Keep authenticated identity, resource ownership, authorization, tool
+admission, egress, budgets, approval, execution, and verification in trusted application controls.
+Prompt filters and content classifiers can reduce exposure but must not create permission.
+
+Maintain one evidence chain:
+
+```text
+inventory -> assets/trust boundaries -> threats/abuse cases -> controls/tests
+          -> red-team and benign results -> control evidence -> residual-risk decision
+          -> bounded rollout -> monitoring/incident/revocation -> retest
+```
+
+Report blocked malicious attempts, actual forbidden outcomes, detection, valid work blocked, and
+coverage separately. A detected exfiltration is still a forbidden outcome; a block-everything
+system is not a usable secure system.
+
+### Current standards and guidance (reviewed 2026-09-27)
+
+- NIST AI RMF 1.0 uses Govern, Map, Measure, and Manage. NIST states that version 1.0 is being
+  revised; pin the version used in evidence and governance records.
+- NIST AI 600-1 is the cross-sector Generative AI Profile. NIST SP 800-218A extends the Secure
+  Software Development Framework for model producers, AI system producers, and acquirers.
+- ISO/IEC 42001:2023 specifies an AI management system and continual improvement. It is not a
+  penetration-test checklist or an automatic compliance claim.
+- The OWASP GenAI Security Project released its 2026 LLM Top 10 and Agent Control Standard in
+  September 2026. Treat the control standard as emerging and validate interoperability/maturity.
+- MITRE ATLAS supplies threat-informed tactics and techniques such as prompt injection, model/data
+  poisoning, supply-chain compromise, exfiltration, cost harvesting, and denial of service.
+- MCP 2026-07-28 hardens protocol authorization, but application owners still decide which servers,
+  tools, scopes, resources, and effects are trusted.
+
+### Tool categories
+
+| Category | Examples | Strong fit | Review before adoption |
+|---|---|---|---|
+| adversary knowledge | OWASP GenAI Security, MITRE ATLAS | threat and abuse-case vocabulary | edition, architecture fit, missing domain harms |
+| reproducible AI testing | NIST Dioptra | tracked, modular model experiments and controlled red teams | application/agent scope, deployment burden, access controls |
+| red-team orchestration | PyRIT, garak, Giskard, promptfoo, Inspect AI | probe generation, attack suites, CI regression | authorization, isolation, payload/data custody, judge dependence |
+| content/workflow guardrails | NeMo Guardrails, Guardrails AI, cloud safety filters | layered policy and content checks | bypass rate, false blocking, latency, versioning, authority boundary |
+| authorization policy | OPA, Cedar, OpenFGA, cloud IAM | deterministic principal/action/resource decisions | trusted attributes, lifecycle, current enforcement, fail mode |
+| sandbox and effect broker | isolated containers/microVMs, brokered tool gateways, network policy | bound untrusted code and tool work | kernel/credential boundary, egress, cleanup, observability |
+| artifact assurance | Sigstore, in-toto/SLSA, CycloneDX, registries | signatures, attestations, provenance, inventory | model/data/prompt/tool semantics, admission, revocation |
+| AI governance platform | inventory, risk, evidence, and workflow products | portfolio visibility and review workflow | system discovery accuracy, evidence APIs/export, decision rights |
+
+Select tools through an authorized production-shaped pilot. Prove attack and benign case behavior,
+tenant isolation, effect containment, evidence export, version pinning, revocation, false-positive
+operations, latency/cost, and exit. Never send confidential data or unsafe payloads to an
+unapproved model/evaluator during security testing.
+
+AI supply-chain scope includes models, adapters, data, prompts, policies, evaluators, embeddings,
+indexes, memories, skills, agents, tools, MCP servers, code, containers, dependencies, providers,
+annotators, and usage/retention terms. Traditional SBOMs remain necessary; capture AI-specific
+lineage, data rights, evaluations, approval, and withdrawal/revocation as well.
+
+Sources: [OWASP GenAI LLM Top 10 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/),
+[OWASP Agent Control Standard](https://genai.owasp.org/resource/agent-control-standard-acs/),
+[MITRE ATLAS](https://atlas.mitre.org/),
+[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework),
+[NIST AI 600-1](https://doi.org/10.6028/NIST.AI.600-1),
+[NIST SP 800-218A](https://doi.org/10.6028/NIST.SP.800-218A),
+[NIST Dioptra](https://pages.nist.gov/dioptra/),
+[ISO/IEC 42001](https://www.iso.org/standard/42001),
+[MCP 2026-07-28](https://blog.modelcontextprotocol.io/posts/2026-07-28/),
+[SLSA](https://slsa.dev/spec/v1.1/), [Sigstore](https://docs.sigstore.dev/), and
+[CycloneDX ML-BOM](https://cyclonedx.org/capabilities/mlbom/).
 
 ## Selection scorecard
 

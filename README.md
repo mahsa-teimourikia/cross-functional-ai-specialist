@@ -40,7 +40,8 @@ technical strategy and organizational influence
 | 06 — Model Gateways and Inference Economics | **Ready in repository** | [Course chapter](curriculum/advanced/06-model-gateways-inference-economics/README.md) | [Notebook](curriculum/advanced/06-model-gateways-inference-economics/model_gateways_inference_economics.ipynb) · [Lab](curriculum/advanced/06-model-gateways-inference-economics/lab.py) |
 | 07 — AI Observability and Reliability Engineering | **Ready in repository** | [Course chapter](curriculum/advanced/07-ai-observability-reliability/README.md) | [Notebook](curriculum/advanced/07-ai-observability-reliability/ai_observability_reliability.ipynb) · [Lab](curriculum/advanced/07-ai-observability-reliability/lab.py) |
 | 08 — AI Evaluation, Experimentation, and Causal Impact | **Ready in repository** | [Course chapter](curriculum/advanced/08-ai-evaluation-causal-impact/README.md) | [Notebook](curriculum/advanced/08-ai-evaluation-causal-impact/ai_evaluation_causal_impact.ipynb) · [Lab](curriculum/advanced/08-ai-evaluation-causal-impact/lab.py) |
-| 09–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
+| 09 — AI Security, Red Teaming, and Governance | **Ready in repository** | [Course chapter](curriculum/advanced/09-ai-security-red-teaming-governance/README.md) | [Notebook](curriculum/advanced/09-ai-security-red-teaming-governance/ai_security_red_teaming_governance.ipynb) · [Lab](curriculum/advanced/09-ai-security-red-teaming-governance/lab.py) |
+| 10–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
 
 “Planned” is deliberate: a title in a roadmap is not presented as completed training.
 
@@ -92,6 +93,9 @@ uv run jupyter execute \
 uv run jupyter execute \
   curriculum/advanced/08-ai-evaluation-causal-impact/ai_evaluation_causal_impact.ipynb \
   --inplace
+uv run jupyter execute \
+  curriculum/advanced/09-ai-security-red-teaming-governance/ai_security_red_teaming_governance.ipynb \
+  --inplace
 ```
 
 The notebook and lab use deterministic local adapters. No cloud account, API key, or paid model
@@ -115,6 +119,7 @@ uv run python -m http.server 8000
 - [Course 6 checkpoint](curriculum/advanced/06-model-gateways-inference-economics/checkpoint.json)
 - [Course 7 checkpoint](curriculum/advanced/07-ai-observability-reliability/checkpoint.json)
 - [Course 8 checkpoint](curriculum/advanced/08-ai-evaluation-causal-impact/checkpoint.json)
+- [Course 9 checkpoint](curriculum/advanced/09-ai-security-red-teaming-governance/checkpoint.json)
 - [Full knowledge check](quiz/index.html)
 - [Contribution and course quality standard](CONTRIBUTING.md)
 
