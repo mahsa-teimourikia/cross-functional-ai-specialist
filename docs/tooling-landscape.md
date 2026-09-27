@@ -430,15 +430,77 @@ and [AgentCore release notes](https://docs.aws.amazon.com/bedrock-agentcore/late
 
 ## Observability
 
-OpenTelemetry is the vendor-neutral base for traces, metrics, and logs. Check current component
-maturity; Python traces and metrics are stable while logs have historically evolved. Emerging GenAI
-semantic conventions improve portability but do not decide what should be recorded. Capture IDs,
-versions, validated arguments/digests, policy decisions, evidence, budgets, latency, cost, errors,
-and terminal state. Avoid secrets, unnecessary content, and private reasoning.
+OpenTelemetry is the vendor-neutral base for traces, metrics, logs, context propagation, and OTLP.
+As reviewed on 27 September 2026, Python traces and metrics are stable while logs remain in
+development. GenAI semantic conventions moved from the core repository to the dedicated
+`semantic-conventions-genai` repository; its generative-client spans remain development-stage and
+the new repository still marks the schema URL as TODO. Pin versions, keep a stable internal
+contract, test the mapping, and migrate dashboards and alerts deliberately.
 
-Sources: [OpenTelemetry Python status](https://opentelemetry.io/docs/languages/python/),
-[instrumentation](https://opentelemetry.io/docs/languages/python/instrumentation/), and
-[GenAI conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/).
+Record stable logical request/run/attempt/provider request IDs; route, prompt, policy, evaluator,
+schema, model, deployment, and telemetry-contract versions; bounded reason/error classes; budgets,
+usage, duration, cost, fallback/retry/degradation, application validation, and terminal state. Do
+not record secrets or private reasoning. Default prompt/input/output capture off: the current GenAI
+span guidance also defaults to no instruction, input, or output recording.
+
+### Signal and sampling contract
+
+Use traces for causal reconstruction, metrics for population objectives, events for named state
+changes, and logs for correlated diagnostics. Create authoritative counters and histograms before
+trace sampling. Tail sampling can retain errors, slow traces, fallback, and degradation, but it
+buffers state and must receive all spans for a trace at one decision point. OpenTelemetry's scaled
+gateway guidance uses trace-ID routing and warns about topology changes and decision consistency.
+
+Keep metric dimensions bounded: request, trace, user, case, prompt text, output, and raw error
+strings do not belong in labels. Treat pseudonymization, tenant query isolation, region, redaction,
+retention, deletion, Collector queues/export loss, and backend access as architecture—not dashboard
+configuration.
+
+### Reliability objective and control plane
+
+Define eligible user events and successful compliant outcomes before choosing a target. Keep policy
+blocks, degraded outcomes, and transport success distinct. Track compliant-success ratio, latency
+threshold ratio and tails, fallback and attempts per logical request, saturation, cost per
+successful compliant task, and version/model mix. Use multiwindow burn alerts for actionable error-
+budget risk, with explicit low-traffic handling, ownership, and runbooks.
+
+Retries need one owner and a deadline. Circuit breakers count relevant dependency failures, not
+authorization, safety, or malformed-input denials. Bulkheads isolate workload capacity. Degradation
+must have a typed user-visible contract and cannot silently count as full success. A game day needs
+a hypothesis, fault scope, abort conditions, expected detector/containment, cleanup, owners, and
+retest. Application evidence and accountable owners—not model text—establish recovery and closure.
+
+### Current implementation options
+
+| Option | Current fit | Selection concerns |
+|---|---|---|
+| OpenTelemetry SDK + Collector | portable instrumentation, processing, multi-backend OTLP | per-language maturity, component pins, redaction, trace affinity, loss, Collector operations |
+| Prometheus/Grafana + tracing/log backend | mature SLI, alert, dashboard, and infrastructure operations | exemplars, cardinality, storage, multi-tenancy, AI-specific semantics |
+| cloud-native APM | existing cloud identity, service operations, and managed storage | AI coverage, export, cross-account/region access, data defaults, price |
+| Amazon Bedrock AgentCore Observability | AgentCore workloads and CloudWatch-native agent views | custom outcome spans, non-AgentCore correlation, content policy, export, SLO ownership |
+| Langfuse | AI tracing, prompt/evaluation workflows, hosted or self-hosted | current OTLP path, region, RBAC, lifecycle, SDK/server compatibility, operations |
+| MLflow Tracing | MLflow-centered AI trace and evaluation workflows | convention translation, backend operations, tenant access, sampling, retention |
+| Phoenix/OpenInference | open-source AI tracing, evaluation, framework instrumentation | OpenInference/OTel mapping, authentication, scale, lifecycle, owner |
+| LangSmith | LangChain/LangGraph-heavy tracing and evaluation | platform coupling, non-LangChain paths, region/retention, export, cost |
+| commercial APM/AI observability | enterprise on-call and existing service telemetry | GenAI schema/content defaults, evaluation depth, portability, cardinality cost |
+
+Run a production-shaped pilot. Score correlation completeness, telemetry loss and overhead,
+redaction timing, tenant isolation, SLO arithmetic, query performance, incident workflow,
+convention/version support, export/exit, operating burden, and total cost. A trace viewer does not
+own application outcome validation, reliability objectives, resilience, or incident closure.
+
+Primary and official sources: [W3C Trace Context](https://www.w3.org/TR/trace-context/),
+[OpenTelemetry Python status](https://opentelemetry.io/docs/languages/python/),
+[OpenTelemetry specification](https://opentelemetry.io/docs/specs/otel/overview/),
+[Collector agent-to-gateway deployment](https://opentelemetry.io/docs/collector/deploy/other/agent-to-gateway/),
+[GenAI conventions repository](https://github.com/open-telemetry/semantic-conventions-genai),
+[GenAI span conventions](https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-spans.md),
+[Google SRE alerting on SLOs](https://sre.google/workbook/alerting-on-slos/),
+[AgentCore Observability](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/observability.html),
+[MLflow Tracing](https://mlflow.org/docs/latest/genai/tracing/),
+[Langfuse tracing](https://langfuse.com/docs/observability/get-started),
+[Phoenix tracing](https://docs.arize.com/phoenix/tracing/), and
+[LangSmith observability](https://docs.langchain.com/langsmith/observability).
 
 ## Security and governance
 

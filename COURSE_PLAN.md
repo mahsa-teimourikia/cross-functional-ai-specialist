@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–6 are complete
-vertical slices; Courses 7–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–7 are complete
+vertical slices; Courses 8–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -48,7 +48,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 4 | Production RAG and Knowledge Systems | 3 | **Ready** | Secure ingestion/retrieval pipeline and retrieval eval |
 | 5 | Agentic AI Architecture and AgentCore | 3 | **Ready** | Bounded workflow/agent comparison and recovery plan |
 | 6 | Model Gateways and Inference Economics | 2 | **Ready** | Routing policy, fallback experiment, unit economics |
-| 7 | AI Observability and Reliability Engineering | 2 | Planned | OpenTelemetry traces, SLOs, runbook, game day |
+| 7 | AI Observability and Reliability Engineering | 2 | **Ready** | OpenTelemetry traces, SLOs, runbook, game day |
 | 8 | AI Evaluation, Experimentation, and Causal Impact | 3 | Planned | Release gate, human-eval protocol, causal experiment |
 | 9 | AI Security, Red Teaming, and Governance | 3 | Planned | Threat model, adversarial suite, governance controls |
 | 10 | CI/CD, Infrastructure, and AI DevOps | 2 | Planned | Promotion pipeline, IaC plan, rollback evidence |
@@ -190,7 +190,7 @@ routing policy, gateway ADR, quality/latency/cost frontier, and sensitivity anal
 
 ## Course 7 — AI Observability and Reliability Engineering
 
-**Status:** Planned · **Prerequisites:** Courses 2 and 6
+**Status:** Ready in repository · **Prerequisites:** Courses 2 and 6
 **Thesis:** operate AI systems with correlated telemetry and user-facing objectives without logging
 secrets, unnecessary content, or private reasoning.
 
@@ -202,8 +202,16 @@ secrets, unnecessary content, or private reasoning.
 - SLIs/SLOs, error budgets, circuit breakers, bulkheads, graceful degradation, game days and
   incident review; maturity of GenAI semantic conventions.
 
-The lab reconstructs a request, detects silent fallback regression, and runs a failure game day.
-Evidence: telemetry contract, dashboards, SLOs, alerts, runbook, and incident report.
+The lab defines a privacy-safe versioned telemetry contract; reconstructs tenant-scoped parent/child
+traces; keeps authoritative low-cardinality metrics independent of trace sampling; compares head
+and policy-based tail sampling; calculates compliant-success, latency, error-budget, fallback, and
+unit-economics signals; detects silent fallback through route/model/cost shifts; and exercises a
+closed/open/half-open circuit breaker, bulkhead isolation, typed degradation, and evidence-backed
+incident lifecycle. Failure injection covers raw content, secrets and high-cardinality fields,
+rare errors lost by head sampling, sustained versus low-volume burn, provider impairment, batch
+overload, and invalid incident closure. Evidence: telemetry contract, Collector data flow,
+dashboard/alert specification, SLO, runbook, resilience ADR, game-day record, incident report, and
+tool-selection memo.
 
 ## Course 8 — AI Evaluation, Experimentation, and Causal Impact
 
