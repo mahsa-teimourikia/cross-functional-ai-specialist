@@ -38,7 +38,8 @@ technical strategy and organizational influence
 | 04 — Production RAG and Knowledge Systems | **Ready in repository** | [Course chapter](curriculum/advanced/04-production-rag-knowledge-systems/README.md) | [Notebook](curriculum/advanced/04-production-rag-knowledge-systems/production_rag_knowledge_systems.ipynb) · [Lab](curriculum/advanced/04-production-rag-knowledge-systems/lab.py) |
 | 05 — Agentic AI Architecture and AgentCore | **Ready in repository** | [Course chapter](curriculum/advanced/05-agentic-ai-architecture-agentcore/README.md) | [Notebook](curriculum/advanced/05-agentic-ai-architecture-agentcore/agentic_ai_architecture_agentcore.ipynb) · [Lab](curriculum/advanced/05-agentic-ai-architecture-agentcore/lab.py) |
 | 06 — Model Gateways and Inference Economics | **Ready in repository** | [Course chapter](curriculum/advanced/06-model-gateways-inference-economics/README.md) | [Notebook](curriculum/advanced/06-model-gateways-inference-economics/model_gateways_inference_economics.ipynb) · [Lab](curriculum/advanced/06-model-gateways-inference-economics/lab.py) |
-| 07–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
+| 07 — AI Observability and Reliability Engineering | **Ready in repository** | [Course chapter](curriculum/advanced/07-ai-observability-reliability/README.md) | [Notebook](curriculum/advanced/07-ai-observability-reliability/ai_observability_reliability.ipynb) · [Lab](curriculum/advanced/07-ai-observability-reliability/lab.py) |
+| 08–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
 
 “Planned” is deliberate: a title in a roadmap is not presented as completed training.
 
@@ -84,6 +85,9 @@ uv run jupyter execute \
 uv run jupyter execute \
   curriculum/advanced/06-model-gateways-inference-economics/model_gateways_inference_economics.ipynb \
   --inplace
+uv run jupyter execute \
+  curriculum/advanced/07-ai-observability-reliability/ai_observability_reliability.ipynb \
+  --inplace
 ```
 
 The notebook and lab use deterministic local adapters. No cloud account, API key, or paid model
@@ -105,6 +109,7 @@ uv run python -m http.server 8000
 - [Course 4 checkpoint](curriculum/advanced/04-production-rag-knowledge-systems/checkpoint.json)
 - [Course 5 checkpoint](curriculum/advanced/05-agentic-ai-architecture-agentcore/checkpoint.json)
 - [Course 6 checkpoint](curriculum/advanced/06-model-gateways-inference-economics/checkpoint.json)
+- [Course 7 checkpoint](curriculum/advanced/07-ai-observability-reliability/checkpoint.json)
 - [Full knowledge check](quiz/index.html)
 - [Contribution and course quality standard](CONTRIBUTING.md)
 

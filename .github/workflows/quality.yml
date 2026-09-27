@@ -65,3 +65,7 @@ jobs:
       - name: Execute Course 6 canonical notebook
         working-directory: curriculum/advanced/06-model-gateways-inference-economics
         run: uv run --project ../../.. jupyter execute model_gateways_inference_economics.ipynb --inplace
+
+      - name: Execute Course 7 canonical notebook
+        working-directory: curriculum/advanced/07-ai-observability-reliability
+        run: uv run --project ../../.. jupyter execute ai_observability_reliability.ipynb --inplace

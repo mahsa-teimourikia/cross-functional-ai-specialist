@@ -648,6 +648,114 @@
       "options": ["Pick the newest router", "Apply explicit quality/compliance floors and latency constraints, then minimize cost", "Always select the cheapest request", "Average all metrics into an ownerless score"],
       "answer": 1,
       "explanation": "Release constraints protect required outcomes; cost is optimized only among policies that satisfy them."
+    },
+    {
+      "id": "q73",
+      "course": "07",
+      "category": "signals",
+      "prompt": "Which data source should supply the compliant-success SLO denominator?",
+      "options": ["Only retained traces", "Unsampled application-owned outcome metrics", "Only error logs", "Incident summaries"],
+      "answer": 1,
+      "explanation": "Trace retention is intentionally biased by sampling; the SLO population needs an authoritative event for every eligible logical request."
+    },
+    {
+      "id": "q74",
+      "course": "07",
+      "category": "context",
+      "prompt": "Which value is appropriate for propagation in allowlisted baggage?",
+      "options": ["An API key", "A customer email", "A bounded service tier", "The raw prompt"],
+      "answer": 2,
+      "explanation": "Baggage travels across services, so only reviewed low-sensitivity bounded context should propagate; identity and secrets require trusted channels."
+    },
+    {
+      "id": "q75",
+      "course": "07",
+      "category": "privacy",
+      "prompt": "What should be the default policy for model instructions, inputs, outputs, and private reasoning in general telemetry?",
+      "options": ["Capture everything", "Do not record content", "Store it as metric labels", "Put it in tracestate"],
+      "answer": 1,
+      "explanation": "Operators usually need versions, sizes, reason codes, and outcomes; content capture expands privacy, security, residency, volume, and retention risk."
+    },
+    {
+      "id": "q76",
+      "course": "07",
+      "category": "sampling",
+      "prompt": "What topology property does tail sampling require?",
+      "options": ["Every span for a trace reaches the same sampling decision point", "Every request uses one process", "Metrics are disabled", "All prompts are logged"],
+      "answer": 0,
+      "explanation": "A tail sampler needs the completed trace; distributing its spans across independent decisions can produce incomplete or inconsistent retention."
+    },
+    {
+      "id": "q77",
+      "course": "07",
+      "category": "cardinality",
+      "prompt": "Which field is unsafe as a metric dimension?",
+      "options": ["Bounded terminal state", "Reviewed route policy", "Unique request ID", "Small task-type enum"],
+      "answer": 2,
+      "explanation": "Unique identity creates unbounded time-series cardinality; keep it on traces and correlated logs instead."
+    },
+    {
+      "id": "q78",
+      "course": "07",
+      "category": "slo",
+      "prompt": "Why is a latency SLI often conditioned on successful compliant outcomes?",
+      "options": ["To make failures faster", "So fast failures do not improve perceived service latency", "To remove tail latency", "So sampling is unnecessary"],
+      "answer": 1,
+      "explanation": "A fast failed or invalid response did not satisfy the user; conditioning keeps it from making the latency objective look healthy."
+    },
+    {
+      "id": "q79",
+      "course": "07",
+      "category": "alerting",
+      "prompt": "A one-hour burn is high but the five-minute burn has recovered. Should a paired multiwindow page continue firing?",
+      "options": ["Yes, forever", "No, because the short window shows the severe burn is no longer active", "Yes, if any trace exists", "No, because SLOs never page"],
+      "answer": 1,
+      "explanation": "Requiring both windows preserves material-impact detection while allowing the page to reset after the active burn stops."
+    },
+    {
+      "id": "q80",
+      "course": "07",
+      "category": "fallback",
+      "prompt": "Which combined signals reveal a silent fallback regression while success remains green?",
+      "options": ["Only HTTP status", "Fallback rate, model mix, attempts, latency, and cost", "Only prompt length", "Only one provider trace"],
+      "answer": 1,
+      "explanation": "The backup can preserve success while increasing upstream work, premium share, latency, quota consumption, and unit cost."
+    },
+    {
+      "id": "q81",
+      "course": "07",
+      "category": "breaker",
+      "prompt": "What should a half-open circuit breaker do?",
+      "options": ["Admit unlimited traffic", "Allow bounded recovery probes before closing", "Disable authorization", "Count every policy denial as provider failure"],
+      "answer": 1,
+      "explanation": "A small number of probes tests recovery without sending the full workload into a dependency that may still be unhealthy."
+    },
+    {
+      "id": "q82",
+      "course": "07",
+      "category": "bulkhead",
+      "prompt": "Why isolate interactive and batch concurrency pools?",
+      "options": ["To make retries free", "To prevent batch saturation from consuming interactive capacity", "To hide rejections", "To change model quality"],
+      "answer": 1,
+      "explanation": "Bulkhead isolation contains overload within a workload class so a non-critical queue cannot exhaust every request path."
+    },
+    {
+      "id": "q83",
+      "course": "07",
+      "category": "incident",
+      "prompt": "What proves recovery after mitigation?",
+      "options": ["A model-generated statement", "Silence from the alert alone", "Measured application outcomes and successful recovery probes", "Deleting failed traces"],
+      "answer": 2,
+      "explanation": "Telemetry can itself fail or an alert can reset prematurely; representative outcomes and application checks provide recovery evidence."
+    },
+    {
+      "id": "q84",
+      "course": "07",
+      "category": "standards",
+      "prompt": "What is the safe adoption strategy for evolving GenAI semantic conventions?",
+      "options": ["Couple every alert directly to unpinned fields", "Maintain a versioned internal contract and tested mapping", "Avoid version metadata", "Record every prompt for portability"],
+      "answer": 1,
+      "explanation": "Pinning and mapping protect operational consumers while allowing a deliberate migration as external conventions mature."
     }
   ]
 }

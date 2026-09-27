@@ -1,0 +1,103 @@
+{
+  "course": "07",
+  "title": "AI Observability and Reliability Engineering checkpoint",
+  "passing_score": 80,
+  "questions": [
+    {
+      "id": "c07-01",
+      "category": "signals",
+      "prompt": "Which signal should be authoritative for the compliant-success SLO denominator?",
+      "options": ["Retained traces", "Unsampled application-owned outcome metrics", "Raw provider logs", "Incident tickets"],
+      "answer": 1,
+      "explanation": "Trace sampling changes which diagnostic executions are retained; authoritative counters must cover the full eligible request population."
+    },
+    {
+      "id": "c07-02",
+      "category": "privacy",
+      "prompt": "What is the safest default for prompts, outputs, and private reasoning in telemetry?",
+      "options": ["Record everything", "Disable content capture", "Put it in baggage", "Hash every token"],
+      "answer": 1,
+      "explanation": "Versions, reason codes, sizes, and typed outcomes usually support operations without copying sensitive or unnecessary content."
+    },
+    {
+      "id": "c07-03",
+      "category": "cardinality",
+      "prompt": "Why should request_id not be a metric label?",
+      "options": ["It is too short", "It creates an unbounded time-series dimension", "It prevents traces", "It changes model output"],
+      "answer": 1,
+      "explanation": "A unique label value per request creates high-cardinality series that increase cost and can destabilize metric storage and queries."
+    },
+    {
+      "id": "c07-04",
+      "category": "sampling",
+      "prompt": "What advantage does tail sampling have over head sampling?",
+      "options": ["It needs no state", "It can retain traces based on completed errors, latency, fallback, or degradation", "It makes every metric exact", "It removes privacy review"],
+      "answer": 1,
+      "explanation": "Tail sampling sees the completed trace and can keep operationally significant outcomes, at the cost of buffering and trace-affinity requirements."
+    },
+    {
+      "id": "c07-05",
+      "category": "slo",
+      "prompt": "A request returns HTTP 200 with a schema-valid answer for the wrong case. Is it a good event?",
+      "options": ["Yes, transport succeeded", "No, application resource binding and compliant outcome failed", "Yes, if it was fast", "Only if it used the premium model"],
+      "answer": 1,
+      "explanation": "The user-facing good-event definition includes semantic resource binding and compliance, not merely transport status."
+    },
+    {
+      "id": "c07-06",
+      "category": "alerting",
+      "prompt": "Why combine long and short windows in a burn-rate alert?",
+      "options": ["To average model scores", "To require material impact and confirm that the burn is still active", "To store more prompts", "To avoid defining an SLO"],
+      "answer": 1,
+      "explanation": "The long window establishes meaningful budget consumption while the short window improves actionability and reset behavior."
+    },
+    {
+      "id": "c07-07",
+      "category": "fallback",
+      "prompt": "Why can aggregate availability miss a silent fallback regression?",
+      "options": ["Fallback removes trace IDs", "Requests can still succeed while model mix, attempts, latency, and cost degrade", "Fallback is free", "Availability includes every price"],
+      "answer": 1,
+      "explanation": "A healthy success rate can conceal dependency failure when a backup path absorbs traffic at higher work, latency, or cost."
+    },
+    {
+      "id": "c07-08",
+      "category": "breaker",
+      "prompt": "Which failure should count toward a provider circuit breaker's threshold?",
+      "options": ["Tenant authorization denial", "Malformed caller input", "Retryable provider unavailability", "Residency policy denial"],
+      "answer": 2,
+      "explanation": "A dependency breaker protects an unhealthy dependency; caller, policy, and safety errors belong to different controls."
+    },
+    {
+      "id": "c07-09",
+      "category": "bulkhead",
+      "prompt": "What reliability property does a workload bulkhead provide?",
+      "options": ["Perfect availability", "Capacity isolation so one workload cannot exhaust every pool", "Automatic model evaluation", "Unlimited retry"],
+      "answer": 1,
+      "explanation": "Separate concurrency and queue pools contain overload and protect critical traffic, while explicit rejection remains observable."
+    },
+    {
+      "id": "c07-10",
+      "category": "degradation",
+      "prompt": "How should a human-review handoff during an outage be represented?",
+      "options": ["As full success", "As an explicit degraded terminal mode with its own outcome", "As a hidden retry", "As a prompt version"],
+      "answer": 1,
+      "explanation": "Typed degradation makes the changed user contract visible and prevents a limited path from falsely satisfying the full objective."
+    },
+    {
+      "id": "c07-11",
+      "category": "incident",
+      "prompt": "What is required before an incident can close?",
+      "options": ["The alert becomes quiet", "A model says the system recovered", "Measured recovery, accountable approval, and owned follow-ups", "All traces are deleted"],
+      "answer": 2,
+      "explanation": "Alert silence alone may reflect telemetry failure; application evidence and accountable human ownership establish recovery and closure."
+    },
+    {
+      "id": "c07-12",
+      "category": "standards",
+      "prompt": "How should a team use development-stage GenAI semantic conventions?",
+      "options": ["Assume attribute names never change", "Pin a version and map a stable internal contract with tested migration", "Avoid OpenTelemetry entirely", "Copy every input and output"],
+      "answer": 1,
+      "explanation": "A versioned internal contract and explicit mapping protect dashboards and alerts while the external GenAI convention evolves."
+    }
+  ]
+}
