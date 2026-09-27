@@ -540,6 +540,114 @@
       "options": ["Application authorization is correct", "The agent is useful", "Neither; application controls and evaluation remain necessary", "Every tool effect is exactly once"],
       "answer": 2,
       "explanation": "Managed hosting supplies runtime capabilities, not proof of business policy, idempotency, completion, quality, or safe tool behavior."
+    },
+    {
+      "id": "q61",
+      "course": "06",
+      "category": "eligibility",
+      "prompt": "What should establish which model and region may process a request?",
+      "options": ["Prompt text", "Authenticated context plus current eligibility policy", "Model confidence", "The first available endpoint"],
+      "answer": 1,
+      "explanation": "Tenant, region, classification, capability, and model admission derive from authenticated application state and current policy."
+    },
+    {
+      "id": "q62",
+      "course": "06",
+      "category": "schema",
+      "prompt": "A response adheres to JSON Schema but names the wrong case. What is the correct action?",
+      "options": ["Accept it", "Reject it at semantic resource-binding validation", "Change the request ID", "Trust the provider"],
+      "answer": 1,
+      "explanation": "Structural validity is insufficient; application code must bind output to the trusted request and resource."
+    },
+    {
+      "id": "q63",
+      "course": "06",
+      "category": "fallback",
+      "prompt": "Which condition is normally eligible for a bounded provider fallback?",
+      "options": ["Residency denial", "Safety refusal", "Transient throttling", "Invalid authentication"],
+      "answer": 2,
+      "explanation": "Transient capacity failure may justify an eligible fallback, while control and safety denials should remain terminal."
+    },
+    {
+      "id": "q64",
+      "course": "06",
+      "category": "cascade",
+      "prompt": "Why should model self-confidence not be the only cascade acceptance gate?",
+      "options": ["It has no numeric value", "It can be miscalibrated and shares failure modes with the output", "It always raises cost", "It reveals the tenant"],
+      "answer": 1,
+      "explanation": "Acceptance needs independently evaluated signals and calibration; a provider's confidence can be high on a wrong answer."
+    },
+    {
+      "id": "q65",
+      "course": "06",
+      "category": "budget",
+      "prompt": "Why reserve worst-case spend before each provider attempt?",
+      "options": ["To increase output length", "To prevent concurrent in-flight calls from overshooting a hard cap", "To replace invoices", "To select the cheapest prompt"],
+      "answer": 1,
+      "explanation": "Atomic reservation includes outstanding work in admission and is settled to actual usage after the call."
+    },
+    {
+      "id": "q66",
+      "course": "06",
+      "category": "cache",
+      "prompt": "What is a provider prompt cache most likely to reuse?",
+      "options": ["A completed validated application answer", "Prefix computation or KV state", "An authorization decision", "A provider outage"],
+      "answer": 1,
+      "explanation": "Prompt caching reuses matching prefix computation but still generates a new output; response caching is a different layer."
+    },
+    {
+      "id": "q67",
+      "course": "06",
+      "category": "cache-security",
+      "prompt": "Which field is essential in a multi-tenant response-cache key?",
+      "options": ["Only the raw prompt", "Tenant and relevant authorization scope", "Only output length", "The provider marketing name"],
+      "answer": 1,
+      "explanation": "Tenant/scope plus semantic and version fields prevent cross-tenant reuse and stale-policy cache hits."
+    },
+    {
+      "id": "q68",
+      "course": "06",
+      "category": "hedging",
+      "prompt": "A hedge returns in 180 ms while two provider calls ran. How should it be reported?",
+      "options": ["One call and 180 ms", "Two calls and total provider cost, with 180 ms wall-clock latency", "Only the losing call", "Zero cost because one call was cancelled"],
+      "answer": 1,
+      "explanation": "Parallelism can improve wall-clock latency while increasing total work, so both measures must be reported."
+    },
+    {
+      "id": "q69",
+      "course": "06",
+      "category": "economics",
+      "prompt": "What belongs in total routing-policy cost?",
+      "options": ["Only the winning model", "All attempts including failed retries, cascade probes, and losing hedges", "Only cached tokens", "Only gateway compute"],
+      "answer": 1,
+      "explanation": "Every started provider operation consumes capacity and may be billed, even when its output is rejected or loses a race."
+    },
+    {
+      "id": "q70",
+      "course": "06",
+      "category": "metrics",
+      "prompt": "Which unit metric best connects inference spend to governed value?",
+      "options": ["Cost per submitted request", "Cost per successful compliant task", "Cost per HTTP 200", "Cost per model name"],
+      "answer": 1,
+      "explanation": "The compliant-success denominator does not reward cheap wrong, failed, or policy-violating results."
+    },
+    {
+      "id": "q71",
+      "course": "06",
+      "category": "availability",
+      "prompt": "What most weakens the assumption that two-provider failures are independent?",
+      "options": ["Different model names", "Shared gateway, identity, cloud, network, policy, or traffic dependencies", "Different token prices", "A JSON schema"],
+      "answer": 1,
+      "explanation": "Common dependencies create correlated failure, so simple independent-availability multiplication can overstate resilience."
+    },
+    {
+      "id": "q72",
+      "course": "06",
+      "category": "selection",
+      "prompt": "How should a team choose among policies on the quality-latency-cost frontier?",
+      "options": ["Pick the newest router", "Apply explicit quality/compliance floors and latency constraints, then minimize cost", "Always select the cheapest request", "Average all metrics into an ownerless score"],
+      "answer": 1,
+      "explanation": "Release constraints protect required outcomes; cost is optimized only among policies that satisfy them."
     }
   ]
 }

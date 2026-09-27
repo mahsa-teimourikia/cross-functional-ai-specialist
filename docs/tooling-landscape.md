@@ -170,11 +170,106 @@ Direct SDKs minimize moving parts. A gateway earns its cost when multiple applic
 identity, quotas, policy, routing, telemetry, fallback, or spend controls. Bedrock Converse provides
 a common message interface across supported Bedrock models; LiteLLM provides a normalized proxy;
 OpenAI-compatible interfaces aid portability but cannot erase capability, safety, streaming, and
-schema differences. Evaluate fallbacks with observed failure and quality data.
+schema differences. Evaluate every route with observed workload, failure, privacy, latency, and
+cost evidence.
 
-Sources: [Bedrock Converse](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html),
-[LiteLLM proxy](https://docs.litellm.ai/docs/simple_proxy), and
-[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses).
+### Gateway responsibilities
+
+A production gateway separates a versioned control plane from the request data plane. The control
+plane admits tenants, principals, credentials, providers, deployments, regions, capabilities,
+prompts, schemas, routes, quotas, budgets, cache policy, and price metadata. The data plane derives
+scope from authenticated state, reserves capacity, chooses only eligible models, translates the
+request, enforces deadlines, normalizes usage/errors, validates output, settles actual cost, and
+records the application-owned result.
+
+Do not accept provider, tenant, region, budget, or safety-policy overrides from prompt content.
+Structured output proves shape within the supported schema subset; application code still proves
+resource binding, authorization, freshness, safety, and task quality.
+
+### Routing patterns
+
+| Pattern | Strong fit | Main cost/risk |
+|---|---|---|
+| direct provider adapter | one bounded workload/provider | duplication if shared controls later emerge |
+| static/rule route | task, region, capability, or risk is explicit | rule sprawl and unmeasured assumptions |
+| load balance | equivalent deployment replicas | does not select for task quality |
+| learned/semantic route | heterogeneous models and sufficient labels | router calibration, drift, added latency and cost |
+| small-to-large cascade | cheap path can be accepted by a calibrated gate | probe cost and serial latency on escalations |
+| reliability fallback | retryable capacity/dependency failure | correlated failure and semantic change |
+| delayed hedge | strict tail-latency objective with spare capacity | duplicate calls, quota and cost amplification |
+
+Authentication, authorization, invalid request, residency, data policy, and safety refusal should
+not become generic provider-shopping loops. Assign retry ownership across clients, gateway, SDK,
+and provider. Count every started retry, fallback, cascade probe, and losing hedge in usage and
+cost.
+
+### Economics and caching
+
+Track uncached input, cached input/cache write, output, reasoning or other provider usage, fixed
+charges, network, gateway operation, and failed/late calls using effective-dated price metadata.
+The primary unit metric is often total cost divided by successful compliant tasks—not requests or
+HTTP 200 responses. Report quality, p95/p99 latency, availability, provider work, and cost by task,
+tenant, model, route, and risk slice.
+
+Provider prompt/KV caches reuse prefix computation but still generate output. Application response
+caches reuse validated results and require tenant/subject scope, prompt/schema/policy/router/model
+generations, source freshness, region, classification, TTL, invalidation, deletion, and cache-hit
+privacy. A high hit rate on stale or cross-tenant output is not an optimization.
+
+Concurrent spend and token enforcement requires atomic worst-case reservation before a call and
+settlement to actual authoritative usage. A check against completed spend alone can allow many
+in-flight requests to overshoot. Decide how distributed counter/database state behaves when stale
+or unavailable and whether hard limits fail closed.
+
+### Current implementation options
+
+| Option | Current fit | Selection concerns |
+|---|---|---|
+| direct OpenAI/Anthropic/Google provider API | fastest native feature access, bounded integration | native lifecycle, retention, errors, schemas, caching, migration |
+| Amazon Bedrock APIs | AWS-governed access to supported models and API shapes | model/feature/region support, IAM, quota, cross-Region/data boundaries |
+| Bedrock intelligent prompt routing | managed selection among documented compatible model sets | workload quality evidence, routing criteria, version and region constraints |
+| Microsoft Foundry model router | managed per-request selection with routing modes/model subsets | record underlying model; evaluate workload and version changes |
+| LiteLLM gateway/router | OpenAI-shaped multi-provider proxy, keys, limits, budgets, routing | Redis/database semantics, admin plane, release parity, retry ownership |
+| cloud API management / commercial AI gateway | organizational identity, networking, policy and analytics | data path, key custody, latency, pricing, export, bypass prevention |
+| Kubernetes Gateway API Inference Extension | self-hosted inference pools and endpoint selection | model-server signals, EPP operation, API maturity, cluster ownership |
+| Envoy AI Gateway | Envoy/Gateway API translation and provider/backend routing | feature maturity, policy integration, data-plane operations |
+
+LiteLLM's current documentation distinguishes retries within a model group from fallbacks to
+another group and documents distributed budget/rate-limit dependencies. Treat those implementation
+details as architecture, not configuration trivia. Managed routers from Bedrock or Foundry reduce
+selection implementation but do not own application eligibility, semantic validation, metric
+denominators, release thresholds, or business outcomes.
+
+### State of the art
+
+Established practice is a provider adapter, immutable prompt/model/policy versions, typed error
+classification, hard deadlines and limits, strongest/cheapest baselines, and workload evaluation.
+Current production direction adds centralized gateways, managed routing, task-aware cascades,
+prompt-cache diagnostics, regional capacity routing, and open inference-gateway integrations.
+
+[FrugalGPT](https://arxiv.org/abs/2305.05176) demonstrated learned cascades;
+[RouteLLM](https://arxiv.org/abs/2406.18665) learned strong-versus-weak selection from preference
+data; and [BEST-Route](https://proceedings.mlr.press/v267/ding25d.html) explores adaptive test-time
+routing. These are research results in particular model pools and datasets, not promised savings.
+Emerging work considers joint quality/output-length/latency/cost prediction, online bandits,
+trajectory-aware agent routing, and uncertainty-aware escalation. Open problems include selective
+feedback, router-induced label bias, distribution and model-pool drift, correlated provider
+failure, semantic non-portability, and caching versus privacy/freshness.
+
+Primary and official sources:
+[OpenAI prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching),
+[OpenAI Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs),
+[OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data),
+[Bedrock inference APIs](https://docs.aws.amazon.com/bedrock/latest/userguide/apis.html),
+[Bedrock intelligent prompt routing](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-routing.html),
+[Bedrock prompt caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html),
+[LiteLLM router](https://docs.litellm.ai/docs/routing),
+[LiteLLM request lifecycle](https://docs.litellm.ai/docs/proxy/architecture),
+[LiteLLM budgets and rate limits](https://docs.litellm.ai/docs/proxy/users),
+[Microsoft Foundry model router](https://learn.microsoft.com/azure/foundry/openai/concepts/model-router),
+[Kubernetes Gateway API Inference Extension](https://gateway-api-inference-extension.sigs.k8s.io/),
+[Envoy AI Gateway](https://aigateway.envoyproxy.io/), and
+[The Tail at Scale](https://research.google/pubs/the-tail-at-scale/).
 
 ## Retrieval and knowledge systems
 

@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–5 are complete
-vertical slices; Courses 6–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–6 are complete
+vertical slices; Courses 7–12 define the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -47,7 +47,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 3 | Enterprise Identity and Agent Authorization | 2 | **Ready** | Threat-aware auth design, delegated capability tests |
 | 4 | Production RAG and Knowledge Systems | 3 | **Ready** | Secure ingestion/retrieval pipeline and retrieval eval |
 | 5 | Agentic AI Architecture and AgentCore | 3 | **Ready** | Bounded workflow/agent comparison and recovery plan |
-| 6 | Model Gateways and Inference Economics | 2 | Planned | Routing policy, fallback experiment, unit economics |
+| 6 | Model Gateways and Inference Economics | 2 | **Ready** | Routing policy, fallback experiment, unit economics |
 | 7 | AI Observability and Reliability Engineering | 2 | Planned | OpenTelemetry traces, SLOs, runbook, game day |
 | 8 | AI Evaluation, Experimentation, and Causal Impact | 3 | Planned | Release gate, human-eval protocol, causal experiment |
 | 9 | AI Security, Red Teaming, and Governance | 3 | Planned | Threat model, adversarial suite, governance controls |
@@ -166,7 +166,7 @@ measured architecture decision, threat model, recovery plan, and agent evaluatio
 
 ## Course 6 — Model Gateways and Inference Economics
 
-**Status:** Planned · **Prerequisite:** Course 5
+**Status:** Ready in repository · **Prerequisite:** Course 5
 **Thesis:** model access is a policy and economics layer balancing quality, latency, availability,
 safety, privacy, and cost—not one provider SDK call.
 
@@ -178,8 +178,15 @@ safety, privacy, and cost—not one provider SDK call.
 - Direct APIs, Bedrock, LiteLLM, and managed gateways; token/cache/egress/retry/operating cost and
   cost per successful compliant task.
 
-The lab uses deterministic provider simulators to compare direct, cascade, and fallback policies.
-Evidence: routing policy, gateway ADR, quality/latency/cost frontier, and sensitivity analysis.
+The lab uses deterministic fictional provider simulators to compare economy and premium direct
+baselines, a calibrated small-to-large cascade, reliability fallback, and delayed hedging through
+one provider-normalized boundary. It proves authenticated eligibility, residency/classification and
+capability admission, prompt/schema/model versions, pre-call token and spend reservation, bounded
+retry classification, safety non-bypass, output/resource binding, tenant-safe response caching,
+deadline accounting, and correct economics denominators. Failure injection covers throttling,
+authentication and safety errors, invalid and wrong-case output, cross-region fallback, quota and
+budget exhaustion, router drift, late responses, cache scope, and hedge amplification. Evidence:
+routing policy, gateway ADR, quality/latency/cost frontier, and sensitivity analysis.
 
 ## Course 7 — AI Observability and Reliability Engineering
 

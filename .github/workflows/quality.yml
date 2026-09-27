@@ -61,3 +61,7 @@ jobs:
       - name: Execute Course 5 canonical notebook
         working-directory: curriculum/advanced/05-agentic-ai-architecture-agentcore
         run: uv run --project ../../.. jupyter execute agentic_ai_architecture_agentcore.ipynb --inplace
+
+      - name: Execute Course 6 canonical notebook
+        working-directory: curriculum/advanced/06-model-gateways-inference-economics
+        run: uv run --project ../../.. jupyter execute model_gateways_inference_economics.ipynb --inplace
