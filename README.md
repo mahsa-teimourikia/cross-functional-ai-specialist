@@ -4,7 +4,9 @@ An executable, project-driven curriculum for experienced data scientists and AI 
 moving toward Staff AI Scientist, AI Architect, or cross-functional AI technical lead roles.
 
 > **Start here:** open the [Learning Hub](hub/index.html), then complete the twelve courses
-> in order. Every course is a complete executable vertical slice in the repository.
+> in order. Every course is a complete executable vertical slice in the repository. The public
+> Hub is deployed at
+> [mahsa-teimourikia.github.io/cross-functional-ai-specialist](https://mahsa-teimourikia.github.io/cross-functional-ai-specialist/).
 
 [One+i](https://oneplusi.io) · Advanced professional training · Last reviewed 2026-09-28
 
@@ -139,8 +141,9 @@ uv run python -m http.server 8000
 
 A course is marked ready only when its prose, implementation, tests, notebook, checkpoint, Hub
 metadata, and quiz agree. CI checks Python quality, deterministic tests, notebook execution,
-JSON validity, and local links. Live cloud adapters, deployment, and external service tests are
-clearly labelled when not run. GitHub Pages deployment has not been performed or verified.
+JSON validity, and local links. Live cloud adapters and external service tests are clearly labelled
+when not run. GitHub Pages publishes the intentionally scoped learning artifact after changes reach
+`main`; the deployment workflow does not publish tests, repository metadata, or local caches.
 
 ## Program boundaries
 
