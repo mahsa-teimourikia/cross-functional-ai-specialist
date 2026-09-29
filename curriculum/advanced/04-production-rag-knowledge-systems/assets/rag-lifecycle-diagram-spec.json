@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "id": "rag-lifecycle",
+  "title": "Production RAG write and read lifecycle",
+  "purpose": "Connect governed ingestion to authorization-first retrieval and citation revalidation.",
+  "output": {
+    "svg": "curriculum/advanced/04-production-rag-knowledge-systems/assets/rag-lifecycle.svg",
+    "medium": "notebook",
+    "alt_text": "An authorized source becomes a versioned manifest, parsed chunks with provenance and access controls, and a current index. A trusted principal and query authorize current chunks before retrieval, fusion, claim generation, citation validation, and an answer or refusal."
+  },
+  "canvas": {"width": 2000, "height": 660, "background": "#F7F9FC", "margin": 64, "grid": 8},
+  "layout": {"primary_flow": "left-to-right", "min_node_gap": 40, "min_layer_gap": 72, "node_padding": {"x": 20, "y": 16}},
+  "style": {
+    "font_family": "Inter, Arial, sans-serif", "title_color": "#16324F",
+    "semantic_colors": {
+      "service": {"fill": "#EAF1FF", "stroke": "#2F6BFF"}, "agent": {"fill": "#F0EEFF", "stroke": "#7667E8"},
+      "data": {"fill": "#E5F7F6", "stroke": "#16A3A5"}, "action": {"fill": "#FFF1DF", "stroke": "#F59E42"},
+      "operations": {"fill": "#FFFFFF", "stroke": "#52606D"}
+    }
+  },
+  "groups": [],
+  "nodes": [
+    {"id": "source", "label": "Authorized source", "type": "operations", "bounds": {"x": 72, "y": 270, "width": 170, "height": 120}, "ports": {"out": {"side": "right", "offset": 0.5}}},
+    {"id": "manifest", "label": "Versioned manifest", "type": "data", "bounds": {"x": 282, "y": 270, "width": 170, "height": 120}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "chunks", "label": "Parse and chunk with provenance plus ACL", "type": "data", "bounds": {"x": 492, "y": 250, "width": 170, "height": 160}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "index", "label": "Current embedded index", "type": "data", "bounds": {"x": 702, "y": 270, "width": 170, "height": 120}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "authorize", "label": "Authorize current chunks for trusted principal and query", "type": "action", "bounds": {"x": 912, "y": 240, "width": 170, "height": 180}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "retrieve", "label": "Sparse or dense retrieval", "type": "service", "bounds": {"x": 1122, "y": 270, "width": 170, "height": 120}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "rerank", "label": "Fuse and rerank", "type": "service", "bounds": {"x": 1332, "y": 270, "width": 170, "height": 120}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "claims", "label": "Proposed claims", "type": "agent", "bounds": {"x": 1542, "y": 270, "width": 170, "height": 120}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "validate", "label": "Revalidate citations then answer or refuse", "type": "action", "bounds": {"x": 1752, "y": 250, "width": 170, "height": 160}, "ports": {"in": {"side": "left", "offset": 0.5}}}
+  ],
+  "edges": [
+    {"id": "source_manifest", "from": {"node": "source", "port": "out"}, "to": {"node": "manifest", "port": "in"}, "kind": "primary", "route": [[242, 330], [282, 330]]},
+    {"id": "manifest_chunks", "from": {"node": "manifest", "port": "out"}, "to": {"node": "chunks", "port": "in"}, "kind": "primary", "route": [[452, 330], [492, 330]]},
+    {"id": "chunks_index", "from": {"node": "chunks", "port": "out"}, "to": {"node": "index", "port": "in"}, "kind": "primary", "route": [[662, 330], [702, 330]]},
+    {"id": "index_authorize", "from": {"node": "index", "port": "out"}, "to": {"node": "authorize", "port": "in"}, "kind": "primary", "route": [[872, 330], [912, 330]]},
+    {"id": "authorize_retrieve", "from": {"node": "authorize", "port": "out"}, "to": {"node": "retrieve", "port": "in"}, "kind": "primary", "route": [[1082, 330], [1122, 330]]},
+    {"id": "retrieve_rerank", "from": {"node": "retrieve", "port": "out"}, "to": {"node": "rerank", "port": "in"}, "kind": "primary", "route": [[1292, 330], [1332, 330]]},
+    {"id": "rerank_claims", "from": {"node": "rerank", "port": "out"}, "to": {"node": "claims", "port": "in"}, "kind": "primary", "route": [[1502, 330], [1542, 330]]},
+    {"id": "claims_validate", "from": {"node": "claims", "port": "out"}, "to": {"node": "validate", "port": "in"}, "kind": "primary", "route": [[1712, 330], [1752, 330]]}
+  ],
+  "validation": {"no_overlaps": true, "route_around_nodes": true, "min_text_padding": 16, "min_connector_clearance": 12, "verify_port_attachment": true, "verify_contrast": true}
+}

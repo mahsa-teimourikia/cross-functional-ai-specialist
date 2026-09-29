@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "id": "gateway-decision-path",
+  "title": "Governed model gateway decision path",
+  "purpose": "Trace eligibility, caching, reservation, routing, normalization, validation, fallback, settlement, and terminal results.",
+  "output": {
+    "svg": "curriculum/advanced/06-model-gateways-inference-economics/assets/gateway-decision-path.svg",
+    "medium": "notebook",
+    "alt_text": "Authenticated context and a normalized task pass through eligibility policy, a safe response-cache lookup, atomic budget reservation, provider routing, output normalization, schema and case validation, an acceptance or fallback decision, and final usage settlement."
+  },
+  "canvas": {"width": 2300, "height": 660, "background": "#F7F9FC", "margin": 64, "grid": 8},
+  "layout": {"primary_flow": "left-to-right", "min_node_gap": 55, "min_layer_gap": 72, "node_padding": {"x": 22, "y": 16}},
+  "style": {
+    "font_family": "Inter, Arial, sans-serif", "title_color": "#16324F",
+    "semantic_colors": {
+      "service": {"fill": "#EAF1FF", "stroke": "#2F6BFF"}, "agent": {"fill": "#F0EEFF", "stroke": "#7667E8"},
+      "data": {"fill": "#E5F7F6", "stroke": "#16A3A5"}, "action": {"fill": "#FFF1DF", "stroke": "#F59E42"},
+      "operations": {"fill": "#FFFFFF", "stroke": "#52606D"}
+    }
+  },
+  "groups": [],
+  "nodes": [
+    {"id": "context", "label": "Authenticated context plus normalized task", "type": "operations", "bounds": {"x": 64, "y": 250, "width": 190, "height": 160}, "ports": {"out": {"side": "right", "offset": 0.5}}},
+    {"id": "eligibility", "label": "Eligibility and version policy", "type": "action", "bounds": {"x": 309, "y": 270, "width": 190, "height": 120}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "cache", "label": "Safe response-cache lookup", "type": "data", "bounds": {"x": 554, "y": 270, "width": 190, "height": 120}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "reserve", "label": "Atomic cost and token reservation", "type": "action", "bounds": {"x": 799, "y": 260, "width": 190, "height": 140}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "route", "label": "Route and provider adapter", "type": "service", "bounds": {"x": 1044, "y": 270, "width": 190, "height": 120}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "normalize", "label": "Normalize usage, error, and output", "type": "service", "bounds": {"x": 1289, "y": 260, "width": 190, "height": 140}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "validate", "label": "Validate schema and case binding", "type": "action", "bounds": {"x": 1534, "y": 260, "width": 190, "height": 140}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "decision", "label": "Acceptance or fallback decision", "type": "agent", "bounds": {"x": 1779, "y": 260, "width": 190, "height": 140}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "settle", "label": "Settle actual usage and terminal result", "type": "data", "bounds": {"x": 2024, "y": 250, "width": 190, "height": 160}, "ports": {"in": {"side": "left", "offset": 0.5}}}
+  ],
+  "edges": [
+    {"id": "context_eligibility", "from": {"node": "context", "port": "out"}, "to": {"node": "eligibility", "port": "in"}, "kind": "primary", "route": [[254, 330], [309, 330]]},
+    {"id": "eligibility_cache", "from": {"node": "eligibility", "port": "out"}, "to": {"node": "cache", "port": "in"}, "kind": "primary", "route": [[499, 330], [554, 330]]},
+    {"id": "cache_reserve", "from": {"node": "cache", "port": "out"}, "to": {"node": "reserve", "port": "in"}, "kind": "primary", "route": [[744, 330], [799, 330]]},
+    {"id": "reserve_route", "from": {"node": "reserve", "port": "out"}, "to": {"node": "route", "port": "in"}, "kind": "primary", "route": [[989, 330], [1044, 330]]},
+    {"id": "route_normalize", "from": {"node": "route", "port": "out"}, "to": {"node": "normalize", "port": "in"}, "kind": "primary", "route": [[1234, 330], [1289, 330]]},
+    {"id": "normalize_validate", "from": {"node": "normalize", "port": "out"}, "to": {"node": "validate", "port": "in"}, "kind": "primary", "route": [[1479, 330], [1534, 330]]},
+    {"id": "validate_decision", "from": {"node": "validate", "port": "out"}, "to": {"node": "decision", "port": "in"}, "kind": "primary", "route": [[1724, 330], [1779, 330]]},
+    {"id": "decision_settle", "from": {"node": "decision", "port": "out"}, "to": {"node": "settle", "port": "in"}, "kind": "primary", "route": [[1969, 330], [2024, 330]]}
+  ],
+  "validation": {"no_overlaps": true, "route_around_nodes": true, "min_text_padding": 16, "min_connector_clearance": 12, "verify_port_attachment": true, "verify_contrast": true}
+}
