@@ -145,6 +145,27 @@ def validate_web_assets() -> None:
     landing = (ROOT / "index.html").read_text(encoding="utf-8")
     assert 'url=hub/' in landing and 'href="hub/"' in landing
 
+    hub_app = (ROOT / "hub/app.js").read_text(encoding="utf-8")
+    assert (
+        "https://github.com/mahsa-teimourikia/cross-functional-ai-specialist/blob/main/"
+        in hub_app
+    ), "Hub artifact links must use GitHub's rendered file views"
+    for marker in (
+        "previewUrl(lesson.readme)",
+        "previewUrl(lesson.notebook)",
+        "previewUrl(lesson.lab)",
+        "previewUrl(lesson.checkpoint)",
+    ):
+        assert marker in hub_app, f"Hub artifact preview missing: {marker}"
+
+    hub_index = (ROOT / "hub/index.html").read_text(encoding="utf-8")
+    assert (
+        "https://github.com/mahsa-teimourikia/cross-functional-ai-specialist/"
+        "blob/main/COURSE_PLAN.md"
+        in hub_index
+    ), "Hub course plan must open in GitHub's rendered Markdown view"
+    assert 'href="../COURSE_PLAN.md"' not in hub_index
+
     pages_workflow = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
     for marker in (
         "permissions: {}",
