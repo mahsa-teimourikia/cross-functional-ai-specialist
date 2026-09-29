@@ -703,6 +703,60 @@ Primary and official sources: [GitHub Actions secure use](https://docs.github.co
 [Terraform automation](https://developer.hashicorp.com/terraform/tutorials/automation/automate-terraform),
 and [Argo Rollouts](https://argoproj.github.io/argo-rollouts/).
 
+## Solution architecture and technical strategy
+
+Architecture practice should connect stakeholder outcomes and measurable quality scenarios to
+system/data/control/trust views, options, evidence, decisions, migration and runtime feedback.
+Frameworks supply vocabulary and review questions; they do not select products or accept trade-offs
+for the accountable owner.
+
+### Description, analysis, and decision records
+
+ISO/IEC/IEEE 42010:2022 distinguishes a system's architecture from an architecture description and
+relates stakeholders, concerns, viewpoints, views and model kinds. The C4 model supplies
+notation-independent context, container, component and code abstractions plus dynamic and
+deployment views. For AI systems, augment C4 with data lineage/lifecycle, identity and trust,
+model/prompt/policy/evaluation versions, failure/recovery and operating-ownership views.
+
+Use quality-attribute scenarios with source, stimulus, environment, affected artifact, response and
+measure. Keep hard legal, safety, residency, identity and tenant-isolation constraints outside
+compensatory scoring. Bind option evidence to an exact version, criterion, unit, source, producer,
+freshness, confidence and independence requirement. Missing evidence is inconclusive, not zero.
+Run weight, volume, price, adoption, staffing, risk and exit-cost sensitivity before committing.
+
+ADRs preserve accepted decisions; RFCs/options papers enable challenge before acceptance. Record
+credible alternatives, positive and negative consequences, evidence IDs, assumptions, accountable
+owner, independent approver when required, review date and reversal triggers. Supersede rather than
+silently rewriting history. Architecture review is not production authorization.
+
+### Current review lenses
+
+| Lens/method | Strong fit | Limitation to manage |
+|---|---|---|
+| ISO/IEC/IEEE 42010 | concern-driven architecture descriptions and viewpoints | not a delivery process, notation or product selector |
+| C4 | accessible hierarchical static structure plus dynamic/deployment views | add data, trust, lifecycle, failure and organization views |
+| SEI ATAM | structured quality-attribute trade-off and risk analysis | tailor ceremony to decision size; needs real evidence |
+| AWS Well-Architected + GenAI/RAI lenses | AWS workload risks across lifecycle and pillars | provider context; question set does not make the decision |
+| Azure Well-Architected AI workload guidance | nondeterminism, experimentation, decay, adaptability and AI workload areas | provider context and service evolution |
+| Google Cloud Well-Architected + AI/ML perspective | six pillars, change, documentation, AI/ML and financial-services guidance | provider context; validate option-specific assumptions |
+| TOGAF Standard 10th Edition | enterprise capability, portfolio, transition and governance practice | configure proportionately; avoid document-first process |
+| FinOps Framework | business-value, unit-economics and collaborative cost decisions | combine with quality, risk, reliability and causal outcomes |
+
+The current direction is toward executable architecture evidence: fitness functions in delivery,
+SLO/evaluation/cost/control data linked to ADR assumptions, internal AI platforms as products, and
+explicit provider-exit rehearsal. Open problems remain around hosted-model mutability, agent/tool
+interoperability, data-rights propagation, causal business-value attribution and measuring the
+organizational effect of platform centralization.
+
+Primary and official sources: [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74393.html),
+[C4 model](https://c4model.com/),
+[SEI ATAM](https://www.sei.cmu.edu/library/the-architecture-tradeoff-analysis-method/),
+[AWS Generative AI Lens](https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html),
+[Azure Well-Architected AI workloads](https://learn.microsoft.com/en-us/azure/well-architected/ai/get-started),
+[Google Cloud Well-Architected Framework](https://docs.cloud.google.com/architecture/framework),
+[TOGAF Standard](https://www.opengroup.org/togaf), and
+[FinOps Framework](https://www.finops.org/framework/).
+
 ## Selection scorecard
 
 For every material decision, record the requirement/non-goal; maturity; functional fit; identity,

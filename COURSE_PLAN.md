@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–10 are complete
-vertical slices; Courses 11–12 define the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. Courses 1–11 are complete
+vertical slices; Course 12 defines the agreed sequence and scope.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -52,7 +52,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 8 | AI Evaluation, Experimentation, and Causal Impact | 3 | **Ready** | Release gate, human-eval protocol, causal experiment |
 | 9 | AI Security, Red Teaming, and Governance | 3 | **Ready** | Threat model, adversarial suite, governance controls |
 | 10 | CI/CD, Infrastructure, and AI DevOps | 2 | **Ready** | Promotion pipeline, IaC plan, rollback evidence |
-| 11 | Solution Architecture and Technical Strategy | 2 | Planned | Options paper, target architecture, migration roadmap |
+| 11 | Solution Architecture and Technical Strategy | 2 | **Ready** | Options paper, target architecture, migration roadmap |
 | 12 | Enterprise AI Operating Model and Leadership | 2 | Planned | Portfolio strategy, standards, executive narrative |
 
 ## Course 1 — Production AI Development in Python
@@ -287,7 +287,7 @@ release record, rollback proof, and disaster-recovery rehearsal.
 
 ## Course 11 — Solution Architecture and Technical Strategy
 
-**Status:** Planned · **Prerequisites:** Courses 1–10
+**Status:** Ready in repository · **Prerequisites:** Courses 1–10
 **Thesis:** turn requirements and constraints into options, evidence, decisions, migration paths,
 and operating consequences that stakeholders can challenge.
 

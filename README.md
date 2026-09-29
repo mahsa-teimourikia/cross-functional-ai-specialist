@@ -42,7 +42,8 @@ technical strategy and organizational influence
 | 08 — AI Evaluation, Experimentation, and Causal Impact | **Ready in repository** | [Course chapter](curriculum/advanced/08-ai-evaluation-causal-impact/README.md) | [Notebook](curriculum/advanced/08-ai-evaluation-causal-impact/ai_evaluation_causal_impact.ipynb) · [Lab](curriculum/advanced/08-ai-evaluation-causal-impact/lab.py) |
 | 09 — AI Security, Red Teaming, and Governance | **Ready in repository** | [Course chapter](curriculum/advanced/09-ai-security-red-teaming-governance/README.md) | [Notebook](curriculum/advanced/09-ai-security-red-teaming-governance/ai_security_red_teaming_governance.ipynb) · [Lab](curriculum/advanced/09-ai-security-red-teaming-governance/lab.py) |
 | 10 — CI/CD, Infrastructure, and AI DevOps | **Ready in repository** | [Course chapter](curriculum/advanced/10-ci-cd-infrastructure-ai-devops/README.md) | [Notebook](curriculum/advanced/10-ci-cd-infrastructure-ai-devops/ai_devops.ipynb) · [Lab](curriculum/advanced/10-ci-cd-infrastructure-ai-devops/lab.py) |
-| 11–12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
+| 11 — Solution Architecture and Technical Strategy | **Ready in repository** | [Course chapter](curriculum/advanced/11-solution-architecture-technical-strategy/README.md) | [Notebook](curriculum/advanced/11-solution-architecture-technical-strategy/solution_architecture_strategy.ipynb) · [Lab](curriculum/advanced/11-solution-architecture-technical-strategy/lab.py) |
+| 12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
 
 “Planned” is deliberate: a title in a roadmap is not presented as completed training.
 
@@ -100,6 +101,9 @@ uv run jupyter execute \
 uv run jupyter execute \
   curriculum/advanced/10-ci-cd-infrastructure-ai-devops/ai_devops.ipynb \
   --inplace
+uv run jupyter execute \
+  curriculum/advanced/11-solution-architecture-technical-strategy/solution_architecture_strategy.ipynb \
+  --inplace
 ```
 
 The notebook and lab use deterministic local adapters. No cloud account, API key, or paid model
@@ -125,6 +129,7 @@ uv run python -m http.server 8000
 - [Course 8 checkpoint](curriculum/advanced/08-ai-evaluation-causal-impact/checkpoint.json)
 - [Course 9 checkpoint](curriculum/advanced/09-ai-security-red-teaming-governance/checkpoint.json)
 - [Course 10 checkpoint](curriculum/advanced/10-ci-cd-infrastructure-ai-devops/checkpoint.json)
+- [Course 11 checkpoint](curriculum/advanced/11-solution-architecture-technical-strategy/checkpoint.json)
 - [Full knowledge check](quiz/index.html)
 - [Contribution and course quality standard](CONTRIBUTING.md)
 
