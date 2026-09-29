@@ -131,6 +131,7 @@ def validate_markdown_links() -> None:
 
 def validate_web_assets() -> None:
     required = (
+        "index.html",
         "hub/index.html",
         "hub/styles.css",
         "hub/app.js",
@@ -140,6 +141,21 @@ def validate_web_assets() -> None:
     )
     for item in required:
         assert (ROOT / item).exists(), f"missing web asset: {item}"
+
+    landing = (ROOT / "index.html").read_text(encoding="utf-8")
+    assert 'url=hub/' in landing and 'href="hub/"' in landing
+
+    pages_workflow = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
+    for marker in (
+        "permissions: {}",
+        "actions/configure-pages@",
+        "actions/upload-pages-artifact@",
+        "actions/deploy-pages@",
+        "pages: write",
+        "id-token: write",
+        "path: _site",
+    ):
+        assert marker in pages_workflow, f"Pages workflow missing: {marker}"
 
 
 def main() -> None:
