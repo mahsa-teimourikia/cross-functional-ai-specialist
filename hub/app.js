@@ -1,5 +1,18 @@
 const state = { lessons: [], selected: null, filter: "all", view: "learn" };
 const progressKey = "cross-functional-ai-specialist-progress-v1";
+const repositoryBlobBase =
+  "https://github.com/mahsa-teimourikia/cross-functional-ai-specialist/blob/main/";
+
+function previewUrl(path) {
+  if (!path) return "#";
+  if (/^https?:\/\//.test(path)) return path;
+
+  const [filePath, fragment] = path.split("#", 2);
+  const repositoryPath = filePath.replace(/^(\.\.\/)+/, "");
+  const encodedPath = repositoryPath.split("/").map(encodeURIComponent).join("/");
+  const encodedFragment = fragment ? `#${encodeURIComponent(fragment)}` : "";
+  return `${repositoryBlobBase}${encodedPath}${encodedFragment}`;
+}
 
 function progress() {
   try { return JSON.parse(localStorage.getItem(progressKey)) || {}; }
@@ -46,9 +59,9 @@ function viewCopy(lesson) {
     return `<div class="notice"><strong>Planned, not ready.</strong> The scope is defined in the sequential plan. Notebook, lab, and checkpoint will appear only after the complete course passes quality gates.</div>`;
   }
   const views = {
-    learn: `<p>Use the chapter as the technical narrative: motivation, mechanics, architecture alternatives, tooling, state of the art, failure analysis, production upgrades, exercises, and sources.</p><a class="action" href="${lesson.readme}">Open course chapter</a>`,
-    lab: `<p>The notebook is the primary guided experience. It imports the same deterministic implementation tested by the repository, compares a baseline, injects failures, and interprets evaluation evidence.</p><div class="actions"><a class="action" href="${lesson.notebook}">Open notebook</a><a class="action secondary" href="${lesson.lab}">Inspect reusable lab</a></div>`,
-    checkpoint: `<p>The focused checkpoint tests architecture judgment, trust boundaries, failure policy, and metric interpretation—not memorized vocabulary.</p><div class="actions"><a class="action" href="${lesson.checkpoint}">Open checkpoint data</a><a class="action secondary" href="../quiz/index.html">Take full quiz</a></div>`
+    learn: `<p>Use the chapter as the technical narrative: motivation, mechanics, architecture alternatives, tooling, state of the art, failure analysis, production upgrades, exercises, and sources.</p><a class="action" href="${previewUrl(lesson.readme)}" target="_blank" rel="noopener noreferrer">Open rendered chapter</a>`,
+    lab: `<p>The notebook is the primary guided experience. It imports the same deterministic implementation tested by the repository, compares a baseline, injects failures, and interprets evaluation evidence.</p><div class="actions"><a class="action" href="${previewUrl(lesson.notebook)}" target="_blank" rel="noopener noreferrer">Open rendered notebook</a><a class="action secondary" href="${previewUrl(lesson.lab)}" target="_blank" rel="noopener noreferrer">View lab source</a></div>`,
+    checkpoint: `<p>The focused checkpoint tests architecture judgment, trust boundaries, failure policy, and metric interpretation—not memorized vocabulary.</p><div class="actions"><a class="action" href="${previewUrl(lesson.checkpoint)}" target="_blank" rel="noopener noreferrer">View checkpoint data</a><a class="action secondary" href="../quiz/index.html">Take full quiz</a></div>`
   };
   return views[state.view];
 }
@@ -70,7 +83,7 @@ function renderDetail() {
     <div class="view">${viewCopy(lesson)}</div>
     <div class="actions">
       ${lesson.status === "ready" ? `<button class="complete ${done ? "done" : ""}">${done ? "Completed ✓" : "Mark complete"}</button>` : ""}
-      <a class="action secondary" href="${lesson.readme}">${lesson.status === "ready" ? "Course source" : "Read planned scope"}</a>
+      <a class="action secondary" href="${previewUrl(lesson.readme)}" target="_blank" rel="noopener noreferrer">${lesson.status === "ready" ? "Rendered course source" : "Read planned scope"}</a>
     </div>`;
   document.querySelectorAll(".tab").forEach((tab) => tab.addEventListener("click", () => {
     if (tab.disabled) return;
