@@ -10,8 +10,8 @@ produce a working model call.
 
 Courses are developed **one by one**. A course moves from `planned` to `ready` only after its
 chapter, reusable implementation, notebook, tests, checkpoint, quiz integration, Hub entry, and
-validation evidence all pass. Deployment is a separate verified step. Courses 1–11 are complete
-vertical slices; Course 12 defines the agreed sequence and scope.
+validation evidence all pass. Deployment is a separate verified step. All 12 courses are complete
+vertical slices in the repository.
 
 ## Program project: Northstar Underwriting AI Platform
 
@@ -53,7 +53,7 @@ courses may revise earlier decisions; the learner must explain why the evidence 
 | 9 | AI Security, Red Teaming, and Governance | 3 | **Ready** | Threat model, adversarial suite, governance controls |
 | 10 | CI/CD, Infrastructure, and AI DevOps | 2 | **Ready** | Promotion pipeline, IaC plan, rollback evidence |
 | 11 | Solution Architecture and Technical Strategy | 2 | **Ready** | Options paper, target architecture, migration roadmap |
-| 12 | Enterprise AI Operating Model and Leadership | 2 | Planned | Portfolio strategy, standards, executive narrative |
+| 12 | Enterprise AI Operating Model and Leadership | 2 | **Ready** | Portfolio strategy, standards, executive narrative |
 
 ## Course 1 — Production AI Development in Python
 
@@ -304,7 +304,7 @@ paper, target architecture, cost/risk model, ADR set, migration roadmap, and exe
 
 ## Course 12 — Enterprise AI Operating Model and Leadership
 
-**Status:** Planned · **Prerequisite:** Course 11
+**Status:** Ready in repository · **Prerequisite:** Course 11
 **Thesis:** Staff impact improves how the organization chooses, builds, governs, and learns from AI
 work—not how much one person implements.
 
@@ -319,6 +319,11 @@ work—not how much one person implements.
 Final scenario: triage 70 GenAI proofs of concept and define how a small, evidence-backed portfolio
 moves to production. Evidence: standards, service catalogue, decision rights, maturity assessment,
 12-month roadmap, investment case, and oral architecture defense.
+
+The deterministic lab implements hard portfolio gates, exact-version evidence qualification,
+bounded experiments, budget/capacity/dependency/duplication constraints, risk-tiered control paths,
+scoped expiring exceptions, complete decision rights and service contracts, evidence-based maturity,
+roadmap validation, investment sensitivity, dissent, delegation, and correctly denominated metrics.
 
 ## Cross-course interview practice
 

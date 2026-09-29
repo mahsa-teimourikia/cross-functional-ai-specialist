@@ -3,10 +3,10 @@
 An executable, project-driven curriculum for experienced data scientists and AI engineers
 moving toward Staff AI Scientist, AI Architect, or cross-functional AI technical lead roles.
 
-> **Start here:** open the [Learning Hub](hub/index.html), then complete the ready courses
-> in order. The Hub separates material that is ready to learn from courses that are still planned.
+> **Start here:** open the [Learning Hub](hub/index.html), then complete the twelve courses
+> in order. Every course is a complete executable vertical slice in the repository.
 
-[One+i](https://oneplusi.io) · Advanced professional training · Last reviewed 2026-09-27
+[One+i](https://oneplusi.io) · Advanced professional training · Last reviewed 2026-09-28
 
 ## What this program develops
 
@@ -43,9 +43,7 @@ technical strategy and organizational influence
 | 09 — AI Security, Red Teaming, and Governance | **Ready in repository** | [Course chapter](curriculum/advanced/09-ai-security-red-teaming-governance/README.md) | [Notebook](curriculum/advanced/09-ai-security-red-teaming-governance/ai_security_red_teaming_governance.ipynb) · [Lab](curriculum/advanced/09-ai-security-red-teaming-governance/lab.py) |
 | 10 — CI/CD, Infrastructure, and AI DevOps | **Ready in repository** | [Course chapter](curriculum/advanced/10-ci-cd-infrastructure-ai-devops/README.md) | [Notebook](curriculum/advanced/10-ci-cd-infrastructure-ai-devops/ai_devops.ipynb) · [Lab](curriculum/advanced/10-ci-cd-infrastructure-ai-devops/lab.py) |
 | 11 — Solution Architecture and Technical Strategy | **Ready in repository** | [Course chapter](curriculum/advanced/11-solution-architecture-technical-strategy/README.md) | [Notebook](curriculum/advanced/11-solution-architecture-technical-strategy/solution_architecture_strategy.ipynb) · [Lab](curriculum/advanced/11-solution-architecture-technical-strategy/lab.py) |
-| 12 | **Planned** | [Sequential course plan](COURSE_PLAN.md) | Completed one vertical slice at a time |
-
-“Planned” is deliberate: a title in a roadmap is not presented as completed training.
+| 12 — Enterprise AI Operating Model and Leadership | **Ready in repository** | [Course chapter](curriculum/advanced/12-enterprise-ai-operating-model-leadership/README.md) | [Notebook](curriculum/advanced/12-enterprise-ai-operating-model-leadership/enterprise_ai_operating_model.ipynb) · [Lab](curriculum/advanced/12-enterprise-ai-operating-model-leadership/lab.py) |
 
 ## How the learning product works
 
@@ -104,6 +102,9 @@ uv run jupyter execute \
 uv run jupyter execute \
   curriculum/advanced/11-solution-architecture-technical-strategy/solution_architecture_strategy.ipynb \
   --inplace
+uv run jupyter execute \
+  curriculum/advanced/12-enterprise-ai-operating-model-leadership/enterprise_ai_operating_model.ipynb \
+  --inplace
 ```
 
 The notebook and lab use deterministic local adapters. No cloud account, API key, or paid model
@@ -130,6 +131,7 @@ uv run python -m http.server 8000
 - [Course 9 checkpoint](curriculum/advanced/09-ai-security-red-teaming-governance/checkpoint.json)
 - [Course 10 checkpoint](curriculum/advanced/10-ci-cd-infrastructure-ai-devops/checkpoint.json)
 - [Course 11 checkpoint](curriculum/advanced/11-solution-architecture-technical-strategy/checkpoint.json)
+- [Course 12 checkpoint](curriculum/advanced/12-enterprise-ai-operating-model-leadership/checkpoint.json)
 - [Full knowledge check](quiz/index.html)
 - [Contribution and course quality standard](CONTRIBUTING.md)
 

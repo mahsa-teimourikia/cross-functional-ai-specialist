@@ -85,3 +85,7 @@ jobs:
       - name: Execute Course 11 canonical notebook
         working-directory: curriculum/advanced/11-solution-architecture-technical-strategy
         run: uv run --project ../../.. jupyter execute solution_architecture_strategy.ipynb --inplace
+
+      - name: Execute Course 12 canonical notebook
+        working-directory: curriculum/advanced/12-enterprise-ai-operating-model-leadership
+        run: uv run --project ../../.. jupyter execute enterprise_ai_operating_model.ipynb --inplace
