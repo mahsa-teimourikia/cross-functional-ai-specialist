@@ -165,6 +165,9 @@ def validate_web_assets() -> None:
         in hub_index
     ), "Hub course plan must open in GitHub's rendered Markdown view"
     assert 'href="../COURSE_PLAN.md"' not in hub_index
+    assert 'src="app.js?v=rendered-previews"' in hub_index, (
+        "Hub must version the app script so deployed link fixes bypass browser caches"
+    )
 
     pages_workflow = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
     for marker in (
