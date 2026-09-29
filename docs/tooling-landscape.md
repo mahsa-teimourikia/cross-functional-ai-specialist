@@ -757,6 +757,62 @@ Primary and official sources: [ISO/IEC/IEEE 42010:2022](https://www.iso.org/stan
 [TOGAF Standard](https://www.opengroup.org/togaf), and
 [FinOps Framework](https://www.finops.org/framework/).
 
+## Enterprise AI operating model and leadership
+
+Operating-model tooling should make ownership, evidence, risk, allocation, service contracts,
+exceptions, outcomes and lifecycle inspectable. It cannot replace an accountable authority or turn
+an org-chart label into runtime permission.
+
+### Current operating pattern
+
+Use a federated model when domains need outcome and workflow ownership while platform, evaluation,
+security, risk, finance, procurement and enablement provide reusable services or independently
+owned decisions. Keep the interaction proportional to risk and maturity: self-service for bounded
+low-risk work, guarded paths for moderate risk, independent review for high risk, and stop for
+prohibited work. Exceptions bind the exact subject and policy, require independent authority and
+compensating controls, expire, and cannot waive non-negotiable boundaries.
+
+Portfolio intake should preserve hard gates before preference, exact-version evidence with units
+and freshness, and distinct `fund`, `experiment`, `hold`, `stop` and `refer` states. Selection must
+respect budget, capacity, dependencies, duplicated capability and concentration. Prior spend is
+sunk cost, not prospective value. Roadmaps bind outcomes, baselines, targets, resources,
+dependencies, exit and kill criteria; maturity claims bind current evidence and expose the weakest
+relevant capability.
+
+### Framework and tool landscape
+
+| Layer | Options | Strong fit | Review before adoption |
+|---|---|---|---|
+| AI management and risk | ISO/IEC 42001, NIST AI RMF/Playbook, sector frameworks | roles, inventory, lifecycle, risk and management-system outcomes | voluntary versus certifiable scope, evidence, local law, no checklist theatre |
+| operating-model guidance | Azure CAF, Google AI Adoption Framework, AWS CAF | people/process/technology/team comparisons | vendor context, service incentives, organization-specific fit |
+| platform product | CNCF Platforms White Paper and maturity model, Backstage ecosystems | service catalogue, self-service, developer experience and measurement | portal versus product, consumer research, SLO, support, lifecycle and exit |
+| economics | FinOps Framework, FOCUS datasets, internal unit economics | cross-functional allocation, forecast, value and governance | shared-cost rules, quality/safety trade-offs, forecast error and gaming |
+| delivery and experience research | DORA, SPACE | balanced delivery, reliability and developer-experience measures | association versus causation, survey validity, local workflow differences |
+| portfolio and governance systems | product portfolio, EA repository, GRC and work-management tools | durable candidates, dependencies, decisions, controls and evidence links | identity, audit, export, retention, integration, workflow rigidity and exit |
+| decision analysis | spreadsheets, constrained optimization, scenario simulation | transparent small decisions or complex portfolios | objective assumptions, hard gates, explainability and accountable override |
+
+The September 2026 state of practice is moving toward composable AI paved roads that join identity,
+model gateways, evaluation, observability, security evidence, cost allocation and release controls;
+machine-verifiable policy/evidence gates; and portfolio decisions that combine causal value, AI
+risk, architecture, capacity and FinOps. Open problems include causal organizational measurement,
+human skill formation and deskilling, cross-supplier and cross-jurisdiction governance, shared-value
+allocation, metric gaming, and durable evidence when hosted models change independently.
+
+As reviewed 28 September 2026, NIST states AI RMF 1.0 is under revision, so validate revision status
+before adopting exact mappings. The 2025 DORA report describes AI as an amplifier of the underlying
+organizational system; treat this as research evidence and a capability prompt, not proof that a
+specific tool causes local performance.
+
+Primary and official sources: [ISO/IEC 42001:2023](https://www.iso.org/standard/42001),
+[NIST AI RMF Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/),
+[NIST AI RMF status](https://www.nist.gov/itl/ai-risk-management-framework),
+[CNCF Platforms White Paper](https://tag-app-delivery.cncf.io/whitepapers/platforms/),
+[CNCF Platform Engineering Maturity Model](https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/),
+[Microsoft Cloud Adoption Framework operating models](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/plan/prepare-organization-for-cloud),
+[Google Cloud AI Adoption Framework](https://cloud.google.com/resources/cloud-ai-adoption-framework-whitepaper),
+[FinOps Framework](https://www.finops.org/framework/), and
+[DORA 2025](https://dora.dev/research/2025/dora-report/).
+
 ## Selection scorecard
 
 For every material decision, record the requirement/non-goal; maturity; functional fit; identity,
