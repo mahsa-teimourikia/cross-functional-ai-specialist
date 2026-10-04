@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="660" viewBox="0 0 2000 660" role="img" aria-labelledby="title desc">
+<title id="title">Production RAG write and read lifecycle</title>
+<desc id="desc">An authorized source becomes a versioned manifest, parsed chunks with provenance and access controls, and a current index. A trusted principal and query authorize current chunks before retrieval, fusion, claim generation, citation validation, and an answer or refusal.</desc>
+<defs>
+<marker id="arrow-primary" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2F6BFF"/></marker>
+<marker id="arrow-secondary" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#52606D"/></marker>
+</defs>
+<rect width="2000" height="660" fill="#F7F9FC"/>
+<text x="64" y="64" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#16324F">Production RAG write and read lifecycle</text>
+<text x="64" y="96" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D">Connect governed ingestion to authorization-first retrieval and citation revalidation.</text>
+<polyline points="242,330 282,330" fill="none" stroke="#2F6BFF" stroke-width="2.5" marker-end="url(#arrow-primary)" stroke-linejoin="round"/>
+<polyline points="452,330 492,330" fill="none" stroke="#2F6BFF" stroke-width="2.5" marker-end="url(#arrow-primary)" stroke-linejoin="round"/>
+<polyline points="662,330 702,330" fill="none" stroke="#2F6BFF" stroke-width="2.5" marker-end="url(#arrow-primary)" stroke-linejoin="round"/>
+<polyline points="872,330 912,330" fill="none" stroke="#2F6BFF" stroke-width="2.5" marker-end="url(#arrow-primary)" stroke-linejoin="round"/>
+<polyline points="1082,330 1122,330" fill="none" stroke="#2F6BFF" stroke-width="2.5" marker-end="url(#arrow-primary)" stroke-linejoin="round"/>
+<polyline points="1292,330 1332,330" fill="none" stroke="#2F6BFF" stroke-width="2.5" marker-end="url(#arrow-primary)" stroke-linejoin="round"/>
+<polyline points="1502,330 1542,330" fill="none" stroke="#2F6BFF" stroke-width="2.5" marker-end="url(#arrow-primary)" stroke-linejoin="round"/>
+<polyline points="1712,330 1752,330" fill="none" stroke="#2F6BFF" stroke-width="2.5" marker-end="url(#arrow-primary)" stroke-linejoin="round"/>
+<rect x="72" y="270" width="170" height="120" rx="14" fill="#FFFFFF" stroke="#52606D" stroke-width="2"/>
+<text x="157.0" y="324.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Authorized</text>
+<text x="157.0" y="346.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">source</text>
+<rect x="282" y="270" width="170" height="120" rx="14" fill="#E5F7F6" stroke="#16A3A5" stroke-width="2"/>
+<text x="367.0" y="324.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Versioned</text>
+<text x="367.0" y="346.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">manifest</text>
+<rect x="492" y="250" width="170" height="160" rx="14" fill="#E5F7F6" stroke="#16A3A5" stroke-width="2"/>
+<text x="577.0" y="313.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Parse and chunk</text>
+<text x="577.0" y="335.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">with provenance</text>
+<text x="577.0" y="357.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">plus ACL</text>
+<rect x="702" y="270" width="170" height="120" rx="14" fill="#E5F7F6" stroke="#16A3A5" stroke-width="2"/>
+<text x="787.0" y="324.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Current</text>
+<text x="787.0" y="346.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">embedded index</text>
+<rect x="912" y="240" width="170" height="180" rx="14" fill="#FFF1DF" stroke="#F59E42" stroke-width="2"/>
+<text x="997.0" y="291.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Authorize</text>
+<text x="997.0" y="313.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">current chunks</text>
+<text x="997.0" y="335.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">for trusted</text>
+<text x="997.0" y="357.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">principal and</text>
+<text x="997.0" y="379.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">query</text>
+<rect x="1122" y="270" width="170" height="120" rx="14" fill="#EAF1FF" stroke="#2F6BFF" stroke-width="2"/>
+<text x="1207.0" y="324.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Sparse or dense</text>
+<text x="1207.0" y="346.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">retrieval</text>
+<rect x="1332" y="270" width="170" height="120" rx="14" fill="#EAF1FF" stroke="#2F6BFF" stroke-width="2"/>
+<text x="1417.0" y="335.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Fuse and rerank</text>
+<rect x="1542" y="270" width="170" height="120" rx="14" fill="#F0EEFF" stroke="#7667E8" stroke-width="2"/>
+<text x="1627.0" y="335.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Proposed claims</text>
+<rect x="1752" y="250" width="170" height="160" rx="14" fill="#FFF1DF" stroke="#F59E42" stroke-width="2"/>
+<text x="1837.0" y="302.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">Revalidate</text>
+<text x="1837.0" y="324.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">citations then</text>
+<text x="1837.0" y="346.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">answer or</text>
+<text x="1837.0" y="368.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" fill="#16324F">refuse</text>
+</svg>

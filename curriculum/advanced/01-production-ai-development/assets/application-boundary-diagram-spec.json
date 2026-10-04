@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "id": "application-boundary",
+  "title": "Trusted application boundary",
+  "purpose": "Show how trusted identity and validated input converge before retrieval, generation, and result validation.",
+  "output": {
+    "svg": "curriculum/advanced/01-production-ai-development/assets/application-boundary.svg",
+    "medium": "notebook",
+    "alt_text": "Untrusted input passes through strict validation while authenticated state becomes a trusted principal. Both enter the application service, which calls authorized retrieval and generation before trusted result validation produces an answer, refusal, or typed failure."
+  },
+  "canvas": {"width": 2000, "height": 760, "background": "#F7F9FC", "margin": 64, "grid": 8},
+  "layout": {"primary_flow": "left-to-right", "min_node_gap": 48, "min_layer_gap": 72, "node_padding": {"x": 24, "y": 16}},
+  "style": {
+    "font_family": "Inter, Arial, sans-serif",
+    "title_color": "#16324F",
+    "semantic_colors": {
+      "service": {"fill": "#EAF1FF", "stroke": "#2F6BFF"},
+      "agent": {"fill": "#F0EEFF", "stroke": "#7667E8"},
+      "data": {"fill": "#E5F7F6", "stroke": "#16A3A5"},
+      "action": {"fill": "#FFF1DF", "stroke": "#F59E42"},
+      "operations": {"fill": "#FFFFFF", "stroke": "#52606D"}
+    }
+  },
+  "groups": [],
+  "nodes": [
+    {"id": "payload", "label": "Untrusted payload", "type": "operations", "bounds": {"x": 72, "y": 230, "width": 190, "height": 100}, "ports": {"out": {"side": "right", "offset": 0.5}}},
+    {"id": "boundary", "label": "Strict boundary model", "type": "service", "bounds": {"x": 310, "y": 230, "width": 190, "height": 100}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "auth", "label": "Authenticated state", "type": "operations", "bounds": {"x": 72, "y": 470, "width": 190, "height": 100}, "ports": {"out": {"side": "right", "offset": 0.5}}},
+    {"id": "principal", "label": "Trusted principal", "type": "data", "bounds": {"x": 310, "y": 470, "width": 190, "height": 100}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "application", "label": "Application service", "type": "service", "bounds": {"x": 786, "y": 280, "width": 190, "height": 160}, "ports": {"boundary": {"side": "left", "offset": 0.3}, "principal": {"side": "left", "offset": 0.7}, "retrieval": {"side": "right", "offset": 0.3}, "generation": {"side": "right", "offset": 0.7}}},
+    {"id": "retriever", "label": "Authorized retriever", "type": "data", "bounds": {"x": 1024, "y": 220, "width": 190, "height": 110}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "generator", "label": "Generator", "type": "agent", "bounds": {"x": 1024, "y": 440, "width": 190, "height": 110}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "validator", "label": "Trusted result validator", "type": "action", "bounds": {"x": 1262, "y": 320, "width": 210, "height": 140}, "ports": {"retrieval": {"side": "left", "offset": 0.3}, "generation": {"side": "left", "offset": 0.7}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "outcome", "label": "Answer, refusal, or typed failure", "type": "service", "bounds": {"x": 1560, "y": 340, "width": 260, "height": 100}, "ports": {"in": {"side": "left", "offset": 0.5}}}
+  ],
+  "edges": [
+    {"id": "payload_boundary", "from": {"node": "payload", "port": "out"}, "to": {"node": "boundary", "port": "in"}, "kind": "primary", "route": [[262, 280], [310, 280]]},
+    {"id": "auth_principal", "from": {"node": "auth", "port": "out"}, "to": {"node": "principal", "port": "in"}, "kind": "primary", "route": [[262, 520], [310, 520]]},
+    {"id": "boundary_application", "from": {"node": "boundary", "port": "out"}, "to": {"node": "application", "port": "boundary"}, "kind": "primary", "route": [[500, 280], [650, 280], [650, 328], [786, 328]]},
+    {"id": "principal_application", "from": {"node": "principal", "port": "out"}, "to": {"node": "application", "port": "principal"}, "kind": "primary", "route": [[500, 520], [650, 520], [650, 392], [786, 392]]},
+    {"id": "application_retrieval", "from": {"node": "application", "port": "retrieval"}, "to": {"node": "retriever", "port": "in"}, "kind": "primary", "route": [[976, 328], [992, 328], [992, 275], [1024, 275]]},
+    {"id": "application_generation", "from": {"node": "application", "port": "generation"}, "to": {"node": "generator", "port": "in"}, "kind": "primary", "route": [[976, 392], [992, 392], [992, 495], [1024, 495]]},
+    {"id": "retrieval_validation", "from": {"node": "retriever", "port": "out"}, "to": {"node": "validator", "port": "retrieval"}, "kind": "primary", "route": [[1214, 275], [1238, 275], [1238, 362], [1262, 362]]},
+    {"id": "generation_validation", "from": {"node": "generator", "port": "out"}, "to": {"node": "validator", "port": "generation"}, "kind": "primary", "route": [[1214, 495], [1238, 495], [1238, 418], [1262, 418]]},
+    {"id": "validation_outcome", "from": {"node": "validator", "port": "out"}, "to": {"node": "outcome", "port": "in"}, "kind": "primary", "route": [[1472, 390], [1560, 390]]}
+  ],
+  "validation": {"no_overlaps": true, "route_around_nodes": true, "min_text_padding": 16, "min_connector_clearance": 12, "verify_port_attachment": true, "verify_contrast": true}
+}

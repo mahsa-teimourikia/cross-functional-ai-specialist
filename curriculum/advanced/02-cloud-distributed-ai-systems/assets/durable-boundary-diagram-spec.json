@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "id": "durable-boundary",
+  "title": "Durable distributed AI boundary",
+  "purpose": "Show bounded at-least-once work, conditional commit, reconciliation, and quarantine.",
+  "output": {
+    "svg": "curriculum/advanced/02-cloud-distributed-ai-systems/assets/durable-boundary.svg",
+    "medium": "notebook",
+    "alt_text": "An acceptance API durably enqueues work. A bounded worker calls a deterministic analyzer, conditionally commits operation and result state, reconciles unknown outcomes, and returns a terminal result. Classified failures follow a bounded retry and quarantine path."
+  },
+  "canvas": {"width": 2000, "height": 780, "background": "#F7F9FC", "margin": 64, "grid": 8},
+  "layout": {"primary_flow": "left-to-right", "min_node_gap": 56, "min_layer_gap": 80, "node_padding": {"x": 24, "y": 16}},
+  "style": {
+    "font_family": "Inter, Arial, sans-serif", "title_color": "#16324F",
+    "semantic_colors": {
+      "service": {"fill": "#EAF1FF", "stroke": "#2F6BFF"}, "agent": {"fill": "#F0EEFF", "stroke": "#7667E8"},
+      "data": {"fill": "#E5F7F6", "stroke": "#16A3A5"}, "action": {"fill": "#FFF1DF", "stroke": "#F59E42"},
+      "operations": {"fill": "#FFFFFF", "stroke": "#52606D"}
+    }
+  },
+  "groups": [],
+  "nodes": [
+    {"id": "accept", "label": "Acceptance API", "type": "service", "bounds": {"x": 72, "y": 230, "width": 190, "height": 110}, "ports": {"out": {"side": "right", "offset": 0.5}}},
+    {"id": "queue", "label": "Durable work queue", "type": "data", "bounds": {"x": 330, "y": 230, "width": 190, "height": 110}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}, "retry": {"side": "bottom", "offset": 0.5}}},
+    {"id": "worker", "label": "Bounded worker", "type": "service", "bounds": {"x": 588, "y": 230, "width": 190, "height": 110}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}, "failure": {"side": "bottom", "offset": 0.5}}},
+    {"id": "analyzer", "label": "Deterministic analyzer", "type": "agent", "bounds": {"x": 846, "y": 230, "width": 190, "height": 110}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "commit", "label": "Conditional operation and result commit", "type": "data", "bounds": {"x": 1104, "y": 220, "width": 210, "height": 130}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "reconcile", "label": "Reconcile unknown outcome", "type": "action", "bounds": {"x": 1382, "y": 230, "width": 190, "height": 110}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "result", "label": "Terminal result", "type": "service", "bounds": {"x": 1640, "y": 230, "width": 190, "height": 110}, "ports": {"in": {"side": "left", "offset": 0.5}}},
+    {"id": "retry", "label": "Bounded retry or quarantine", "type": "action", "bounds": {"x": 566, "y": 520, "width": 234, "height": 110}, "ports": {"in": {"side": "top", "offset": 0.5}, "out": {"side": "left", "offset": 0.5}}}
+  ],
+  "edges": [
+    {"id": "enqueue", "from": {"node": "accept", "port": "out"}, "to": {"node": "queue", "port": "in"}, "kind": "primary", "route": [[262, 285], [330, 285]]},
+    {"id": "delivery", "from": {"node": "queue", "port": "out"}, "to": {"node": "worker", "port": "in"}, "kind": "primary", "route": [[520, 285], [588, 285]]},
+    {"id": "analyze", "from": {"node": "worker", "port": "out"}, "to": {"node": "analyzer", "port": "in"}, "kind": "primary", "route": [[778, 285], [846, 285]]},
+    {"id": "commit", "from": {"node": "analyzer", "port": "out"}, "to": {"node": "commit", "port": "in"}, "kind": "primary", "route": [[1036, 285], [1104, 285]]},
+    {"id": "reconcile", "from": {"node": "commit", "port": "out"}, "to": {"node": "reconcile", "port": "in"}, "kind": "primary", "route": [[1314, 285], [1382, 285]]},
+    {"id": "complete", "from": {"node": "reconcile", "port": "out"}, "to": {"node": "result", "port": "in"}, "kind": "primary", "route": [[1572, 285], [1640, 285]]},
+    {"id": "classify_failure", "from": {"node": "worker", "port": "failure"}, "to": {"node": "retry", "port": "in"}, "kind": "secondary", "label": "classified failure", "route": [[683, 340], [683, 520]]},
+    {"id": "retry_delivery", "from": {"node": "retry", "port": "out"}, "to": {"node": "queue", "port": "retry"}, "kind": "secondary", "label": "within retry budget", "route": [[566, 575], [425, 575], [425, 340]]}
+  ],
+  "validation": {"no_overlaps": true, "route_around_nodes": true, "min_text_padding": 16, "min_connector_clearance": 12, "verify_port_attachment": true, "verify_contrast": true}
+}

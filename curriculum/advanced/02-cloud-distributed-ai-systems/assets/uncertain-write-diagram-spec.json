@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "id": "uncertain-write",
+  "title": "Why a lost response makes retries unsafe",
+  "purpose": "Trace an uncertain write from successful commit through response loss to a duplicate retry.",
+  "output": {
+    "svg": "curriculum/advanced/02-cloud-distributed-ai-systems/assets/uncertain-write.svg",
+    "medium": "notebook",
+    "alt_text": "A client sends a request to a service, which commits state. The response is lost, so the client retries without knowing the first write succeeded, creating a duplicate effect."
+  },
+  "canvas": {"width": 1600, "height": 620, "background": "#F7F9FC", "margin": 64, "grid": 8},
+  "layout": {"primary_flow": "left-to-right", "min_node_gap": 56, "min_layer_gap": 80, "node_padding": {"x": 24, "y": 16}},
+  "style": {
+    "font_family": "Inter, Arial, sans-serif", "title_color": "#16324F",
+    "semantic_colors": {
+      "service": {"fill": "#EAF1FF", "stroke": "#2F6BFF"}, "agent": {"fill": "#F0EEFF", "stroke": "#7667E8"},
+      "data": {"fill": "#E5F7F6", "stroke": "#16A3A5"}, "action": {"fill": "#FFF1DF", "stroke": "#F59E42"},
+      "operations": {"fill": "#FFFFFF", "stroke": "#52606D"}
+    }
+  },
+  "groups": [],
+  "nodes": [
+    {"id": "client", "label": "Client request", "type": "operations", "bounds": {"x": 72, "y": 250, "width": 190, "height": 100}, "ports": {"out": {"side": "right", "offset": 0.5}}},
+    {"id": "service", "label": "Service handles write", "type": "service", "bounds": {"x": 326, "y": 250, "width": 190, "height": 100}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "state", "label": "State committed", "type": "data", "bounds": {"x": 580, "y": 250, "width": 190, "height": 100}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "lost", "label": "Response lost", "type": "action", "bounds": {"x": 834, "y": 250, "width": 190, "height": 100}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "retry", "label": "Client retries", "type": "operations", "bounds": {"x": 1088, "y": 250, "width": 190, "height": 100}, "ports": {"in": {"side": "left", "offset": 0.5}, "out": {"side": "right", "offset": 0.5}}},
+    {"id": "duplicate", "label": "Duplicate external effect", "type": "action", "bounds": {"x": 1342, "y": 250, "width": 190, "height": 100}, "ports": {"in": {"side": "left", "offset": 0.5}}}
+  ],
+  "edges": [
+    {"id": "request", "from": {"node": "client", "port": "out"}, "to": {"node": "service", "port": "in"}, "kind": "primary", "route": [[262, 300], [326, 300]]},
+    {"id": "write", "from": {"node": "service", "port": "out"}, "to": {"node": "state", "port": "in"}, "kind": "primary", "route": [[516, 300], [580, 300]]},
+    {"id": "response_loss", "from": {"node": "state", "port": "out"}, "to": {"node": "lost", "port": "in"}, "kind": "secondary", "route": [[770, 300], [834, 300]]},
+    {"id": "timeout_retry", "from": {"node": "lost", "port": "out"}, "to": {"node": "retry", "port": "in"}, "kind": "secondary", "route": [[1024, 300], [1088, 300]]},
+    {"id": "duplicate_write", "from": {"node": "retry", "port": "out"}, "to": {"node": "duplicate", "port": "in"}, "kind": "primary", "route": [[1278, 300], [1342, 300]]}
+  ],
+  "validation": {"no_overlaps": true, "route_around_nodes": true, "min_text_padding": 16, "min_connector_clearance": 12, "verify_port_attachment": true, "verify_contrast": true}
+}

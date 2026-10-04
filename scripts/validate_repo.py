@@ -7,8 +7,12 @@ import re
 from pathlib import Path
 from typing import Any
 
+from render_diagrams import render as render_diagram
+from render_diagrams import validate as validate_diagram_layout
+
 ROOT = Path(__file__).parents[1]
 LINK = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
+IMAGE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 
 
 def load_json(path: Path) -> Any:
@@ -104,6 +108,15 @@ def validate_notebooks() -> None:
         source = "\n".join(
             "".join(cell.get("source", [])) for cell in notebook["cells"]
         )
+        assert "```mermaid" not in source and "```text" not in source, (
+            f"{path}: notebook diagrams must be rendered image assets"
+        )
+        for raw_target in IMAGE.findall(source):
+            target = (path.parent / raw_target.split("#", 1)[0]).resolve()
+            assert target.exists(), f"{path}: missing notebook image {target}"
+            assert target.suffix.lower() in {".svg", ".png"}, (
+                f"{path}: notebook visual must be a rendered SVG or PNG"
+            )
         assert not any(
             output.get("output_type") == "error"
             for cell in notebook["cells"]
@@ -111,6 +124,52 @@ def validate_notebooks() -> None:
         ), f"{path}: contains an executed error output"
         for marker in ("failure", "evaluate", "production", "authorization"):
             assert marker in source.lower(), f"{path}: missing {marker} teaching path"
+
+
+def validate_diagram_assets() -> None:
+    specs = sorted(ROOT.glob("curriculum/**/assets/*-diagram-spec.json"))
+    assert specs, "notebook diagrams require reproducible layout specifications"
+    rendered_diagrams: set[Path] = set()
+    for spec_path in specs:
+        spec = load_json(spec_path)
+        validate_diagram_layout(spec, spec_path)
+        required = {
+            "version",
+            "id",
+            "title",
+            "purpose",
+            "output",
+            "canvas",
+            "layout",
+            "style",
+            "nodes",
+            "edges",
+            "validation",
+        }
+        assert required <= spec.keys(), f"{spec_path}: incomplete diagram specification"
+        assert len(spec["output"]["alt_text"]) >= 60
+        svg_path = (ROOT / spec["output"]["svg"]).resolve()
+        assert svg_path not in rendered_diagrams, f"{spec_path}: duplicate rendered output"
+        rendered_diagrams.add(svg_path)
+        assert svg_path.exists(), f"{spec_path}: missing rendered SVG"
+        svg = svg_path.read_text(encoding="utf-8")
+        assert svg == render_diagram(spec), f"{svg_path}: render is stale"
+        for marker in ("<title id=", "<desc id=", "role=\"img\"", "viewBox="):
+            assert marker in svg, f"{svg_path}: missing accessible SVG marker {marker}"
+
+    referenced_diagrams: set[Path] = set()
+    for notebook_path in (ROOT / "curriculum").rglob("*.ipynb"):
+        notebook = load_json(notebook_path)
+        source = "\n".join(
+            "".join(cell.get("source", [])) for cell in notebook["cells"]
+        )
+        for raw_target in IMAGE.findall(source):
+            target = (notebook_path.parent / raw_target.split("#", 1)[0]).resolve()
+            if target.suffix.lower() == ".svg":
+                referenced_diagrams.add(target)
+    assert referenced_diagrams == rendered_diagrams, (
+        "each notebook SVG diagram must have exactly one specification and be referenced"
+    )
 
 
 def validate_markdown_links() -> None:
@@ -186,9 +245,13 @@ def main() -> None:
     validate_registry()
     validate_assessments()
     validate_notebooks()
+    validate_diagram_assets()
     validate_markdown_links()
     validate_web_assets()
-    print("Curriculum validation passed: registry, assessments, notebooks, links, and Hub assets.")
+    print(
+        "Curriculum validation passed: registry, assessments, notebooks, diagrams, links, "
+        "and Hub assets."
+    )
 
 
 if __name__ == "__main__":
